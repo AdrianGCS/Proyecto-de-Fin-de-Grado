@@ -11,20 +11,18 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import com.blikoon.qrcodescanner.QrCodeActivity;
 
 import java.sql.Connection;
-import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_QR_SCAN = 101;
-    private static final String url ="jdbc:mysql://192.168.1.12:3306/proyecto";
-    private static final String user = "Consultas";
-    private static final String pass = "Consultas";
+    private static final String url ="jdbc:mysql://localhost:3306/prueba";
+    private static final String user = "root";
+    private static final String pass = "1234";
     private TextView Datos;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,21 +70,13 @@ public class MainActivity extends AppCompatActivity {
                 Connection con = DriverManager.getConnection(url,user,pass);
 
                 Statement st = con.createStatement();
-                String sql ="SELECT * FROM `enfermo`";
+                String sql ="SELECT * FROM `prueba`";
 
-                final ResultSet rs = st.executeQuery("SELECT * FROM `enfermo`");//revisar esto , el servidor no lo ejecuta
+                final ResultSet rs = st.executeQuery("SELECT * FROM `prueba`");//revisar esto , el servidor no lo ejecuta
                 rs.next();
-                fName=rs.getNString(1);
+                fName=rs.getString(1);
                 //estas lineas son de prueba , nunca se llegan a ejecutar en teoria
-                if(fName==null){
-                    fName=rs.getNString(2);
-                    if(fName==null){
-                        fName=rs.getNString(3);
-                        if(fName==null){
-                            fName=rs.getNString("Error");
-                        }
-                    }
-                }
+
             }catch (Exception e){
                 e.printStackTrace();
             }
@@ -98,9 +88,7 @@ public class MainActivity extends AppCompatActivity {
 
             Datos.setText(fName);
             //Pruebas
-            if(Datos==null){
-                Datos.setText("Error");
-            }
+
             super.onPostExecute(result);
         }
     }
