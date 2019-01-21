@@ -3,6 +3,7 @@ package com.example.usuario.proyecto;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Camera;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(i, REQUEST_CODE_QR_SCAN);
     }
    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
+       
         if (resultCode != Activity.RESULT_OK) {
             Toast.makeText(getApplicationContext(), "No hay respuesta", Toast.LENGTH_SHORT).show();
             String resultado = data.getStringExtra("com.blikoon.qrcodescanner.error_decoding_image");
