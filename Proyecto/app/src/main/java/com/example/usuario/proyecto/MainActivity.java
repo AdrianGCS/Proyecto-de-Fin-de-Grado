@@ -22,7 +22,7 @@ import java.sql.Statement;
 public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_QR_SCAN = 101;
     private static final String url ="jdbc:mysql://85.56.88.205:3306/proyecto";
-    private static final String user = "Consultas";
+    private static final String user = "Consulta s";
     private static final String pass = "Consultas";
     private TextView Datos;
     @Override
