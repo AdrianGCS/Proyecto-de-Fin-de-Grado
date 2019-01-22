@@ -21,9 +21,9 @@ import java.sql.Statement;
 
 public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_QR_SCAN = 101;
-    private static final String url ="jdbc:mysql://85.56.88.205:3306/proyecto";
-    private static final String user = "Consultas";
-    private static final String pass = "Consultas";
+    private static final String url ="jdbc:mysql://localhost:3306/prueba";
+    private static final String user = "root";
+    private static final String pass = "1234";
     private TextView Datos;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,9 +71,9 @@ public class MainActivity extends AppCompatActivity {
                 Connection con = DriverManager.getConnection(url,user,pass);
 
                 Statement st = con.createStatement();
-                //String sql ="SELECT * FROM `nombre`";
+                String sql ="SELECT * FROM `prueba`";
 
-                final ResultSet rs = st.executeQuery("SELECT * FROM `enfermo`");//revisar esto , el servidor no lo ejecuta
+                final ResultSet rs = st.executeQuery("SELECT * FROM `prueba`");//revisar esto , el servidor no lo ejecuta
                 rs.next();
                 fName=rs.getString(1);
                 //estas lineas son de prueba , nunca se llegan a ejecutar en teoria
