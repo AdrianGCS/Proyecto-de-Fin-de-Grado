@@ -4,6 +4,7 @@ package com.example.usuario.proyecto;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Camera;
+import android.graphics.Picture;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,24 +13,24 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.blikoon.qrcodescanner.QrCodeActivity;
+
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class MainActivity extends AppCompatActivity {
-    private static final int REQUEST_CODE_QR_SCAN = 101;
+public class MainActivity extends AppCompatActivity implements  View.OnClickListener{
+Button btnTakePicture,btnScanBarcode;
     private static final String url ="jdbc:mysql://85.56.88.205:3306/proyecto";
-    private static final String user = "Consulta s";
+    private static final String user = "Consultas";
     private static final String pass = "Consultas";
     private TextView Datos;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+initViews();
         Datos = (TextView) findViewById(R.id.Datos);
         Button Conectar =(Button) findViewById(R.id.Conectar);
 
@@ -40,28 +41,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    public void onClick(View v) {
-        Intent i = new Intent(MainActivity.this, QrCodeActivity.class);
-        startActivityForResult(i, REQUEST_CODE_QR_SCAN);
-    }
-   protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-       
-        if (resultCode != Activity.RESULT_OK) {
-            Toast.makeText(getApplicationContext(), "No hay respuesta", Toast.LENGTH_SHORT).show();
-            String resultado = data.getStringExtra("com.blikoon.qrcodescanner.error_decoding_image");
-            if (resultado != null) {
-                Toast.makeText(getApplicationContext(), "Codigo QR desconocido", Toast.LENGTH_SHORT).show();
-            }
-            return;
+private void initViews(){
+        btnTakePicture=findViewById(R.id.btnTakePicture);
+        btnScanBarcode=findViewById(R.id.btnScanBarcode);
+        btnTakePicture.setOnClickListener(this);
+        btnScanBarcode.setOnClickListener(this);
+}
+public void onClick(View v){
+        switch (v.getId()){
+            case R.id.btnTakePicture:
+                startActivity(new Intent(MainActivity.this, ImagenQr.class));
+break;
+            case R.id.btnScanBarcode:
+                startActivity(new Intent(MainActivity.this,EscanerQr.class));
+                break;
         }
-        if (requestCode == REQUEST_CODE_QR_SCAN) {
-            if (data != null) {
-                String lectura = data.getStringExtra("com.blikoon.qrcodescanner.got_qr_scan_relult");
-                Toast.makeText(getApplicationContext(), "Leído: " + lectura, Toast.LENGTH_SHORT).show();
+}
 
-            }
-        }
-    }
     private class MyTask extends AsyncTask<Void, Void, Void>{
         private String fName="";
         @Override
