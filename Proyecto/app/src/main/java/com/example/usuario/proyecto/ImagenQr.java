@@ -15,6 +15,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.FileProvider;
 import android.util.Log;
+import com.google.android.gms.vision.barcode.BarcodeDetector;
 import android.util.SparseArray;
 import android.view.View;
 import android.widget.Button;
@@ -22,7 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.gms.vision.Frame;
 import com.google.android.gms.vision.barcode.Barcode;
-import com.google.android.gms.vision.barcode.BarcodeDetector;
+
 
 import java.io.File;
 import java.io.FileNotFoundException;
