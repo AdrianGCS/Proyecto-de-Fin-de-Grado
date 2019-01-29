@@ -68,7 +68,7 @@ public void onClick(View v){
                 Statement st = con.createStatement();
                 //String sql ="SELECT * FROM `nombre`";
 
-                final ResultSet rs = st.executeQuery("SELECT * FROM `enfermo`");//revisar esto , el servidor no lo ejecuta
+                final ResultSet rs = st.executeQuery("SELECT Nombre FROM `usuario` where ID=1");//revisar esto , el servidor no lo ejecuta
                 rs.next();
                 fName=rs.getString(1);
                 //estas lineas son de prueba , nunca se llegan a ejecutar en teoria
