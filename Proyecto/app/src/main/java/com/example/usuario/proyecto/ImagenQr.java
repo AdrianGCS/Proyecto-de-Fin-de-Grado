@@ -61,14 +61,14 @@ public class ImagenQr extends AppCompatActivity implements View.OnClickListener 
     }
 private void initViews(){
     txtResultBody = findViewById(R.id.txtResultsBody);
-    btnOpenCamera = findViewById(R.id.btnTakePicture);
+    btnOpenCamera = findViewById(R.id.btnScanBarcode);
     txtResultBody = findViewById(R.id.txtResultsBody);
     btnOpenCamera.setOnClickListener(this);
 }
     public void onClick(View v) {
 
         switch (v.getId()) {
-            case R.id.btnTakePicture:
+            case R.id.btnScanBarcode:
                 ActivityCompat.requestPermissions(ImagenQr.this, new
                         String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
                 break;
@@ -80,9 +80,9 @@ private void initViews(){
         switch (requestCode) {
             case REQUEST_CAMERA_PERMISSION:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
-                    takeBarcodePicture();
+                    btnScanBarcode();
                 } else {
-                    Toast.makeText(getApplicationContext(), "Permission Denied!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Permiso denegado", Toast.LENGTH_SHORT).show();
                 }
         }
     }
@@ -144,19 +144,19 @@ private void initViews(){
                         }
                     }
                     if (barcodes.size() == 0) {
-                        txtResultBody.setText("No barcode could be detected. Please try again.");
+                        txtResultBody.setText("No se encuantra qr intentelo de nuevo.");
                     }
                 } else {
-                    txtResultBody.setText("Detector initialisation failed");
+                    txtResultBody.setText("El detector ha fallado");
                 }
             } catch (Exception e) {
-                Toast.makeText(getApplicationContext(), "Failed to load Image", Toast.LENGTH_SHORT)
+                Toast.makeText(getApplicationContext(), "No puede cargar imagen", Toast.LENGTH_SHORT)
                         .show();
                 Log.e(TAG, e.toString());
             }
         }
     }
-    private void takeBarcodePicture() {
+    private void btnScanBarcode() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         File photo = new File(Environment.getExternalStorageDirectory(), "pic.jpg");
         imageUri = FileProvider.getUriForFile(ImagenQr.this,

@@ -21,7 +21,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class MainActivity extends AppCompatActivity implements  View.OnClickListener{
-Button btnTakePicture,btnScanBarcode;
+Button btnScanBarcode;
     private static final String url ="jdbc:mysql://85.56.88.205:3306/proyecto";
     private static final String user = "Consultas";
     private static final String pass = "Consultas";
@@ -42,17 +42,16 @@ initViews();
         });
     }
 private void initViews(){
-        btnTakePicture=findViewById(R.id.btnTakePicture);
+       // btnTakePicture=findViewById(R.id.btnTakePicture);
         btnScanBarcode=findViewById(R.id.btnScanBarcode);
-        btnTakePicture.setOnClickListener(this);
+        //btnTakePicture.setOnClickListener(this);
         btnScanBarcode.setOnClickListener(this);
 }
 public void onClick(View v){
         switch (v.getId()){
-            case R.id.btnTakePicture:
-                startActivity(new Intent(MainActivity.this, ImagenQr.class));
-break;
+
             case R.id.btnScanBarcode:
+                startActivity(new Intent(MainActivity.this, ImagenQr.class));
                 startActivity(new Intent(MainActivity.this,EscanerQr.class));
                 break;
         }

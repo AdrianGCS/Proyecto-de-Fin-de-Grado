@@ -59,7 +59,7 @@ public class EscanerQr extends AppCompatActivity {
     }
     private void initialiseDetectorsAndSources() {
 
-        Toast.makeText(getApplicationContext(), "Barcode scanner started", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "LECTOR EMPEZADO", Toast.LENGTH_SHORT).show();
 
         barcodeDetector = new BarcodeDetector.Builder(this)
                 .setBarcodeFormats(Barcode.ALL_FORMATS)
@@ -121,10 +121,10 @@ public void run() {
         intentData = barcodes.valueAt(0).email.address;
         txtBarcodeValue.setText(intentData);
         isEmail = true;
-        btnAction.setText("ADD CONTENT TO THE MAIL");
+        btnAction.setText("AÑADE");
         } else {
         isEmail = false;
-        btnAction.setText("LAUNCH URL");
+        btnAction.setText("Coge la URL");
         intentData = barcodes.valueAt(0).displayValue;
         txtBarcodeValue.setText(intentData);
 
