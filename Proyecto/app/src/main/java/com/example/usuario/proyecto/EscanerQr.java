@@ -48,7 +48,7 @@ public class EscanerQr extends AppCompatActivity {
                 if (intentData.length() > 0) {
 
                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(intentData)));
-
+//
                 }
 
 
