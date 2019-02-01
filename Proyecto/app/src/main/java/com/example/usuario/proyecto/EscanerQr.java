@@ -46,11 +46,9 @@ public class EscanerQr extends AppCompatActivity {
             public void onClick(View v) {
 
                 if (intentData.length() > 0) {
-                    if (isEmail)
-                        startActivity(new Intent(EscanerQr.this, ImagenQr.class).putExtra("email_address", intentData));
-                    else {
+
                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(intentData)));
-                    }
+
                 }
 
 

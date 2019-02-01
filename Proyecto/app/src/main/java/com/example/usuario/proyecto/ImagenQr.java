@@ -40,7 +40,6 @@ public class ImagenQr extends AppCompatActivity implements View.OnClickListener 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_imagen_qr);
         initViews();
 
         if (savedInstanceState != null) {
@@ -60,9 +59,7 @@ public class ImagenQr extends AppCompatActivity implements View.OnClickListener 
         }
     }
 private void initViews(){
-    txtResultBody = findViewById(R.id.txtResultsBody);
     btnOpenCamera = findViewById(R.id.btnScanBarcode);
-    txtResultBody = findViewById(R.id.txtResultsBody);
     btnOpenCamera.setOnClickListener(this);
 }
     public void onClick(View v) {
