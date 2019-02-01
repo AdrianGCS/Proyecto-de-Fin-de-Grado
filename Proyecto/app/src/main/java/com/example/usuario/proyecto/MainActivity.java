@@ -66,12 +66,11 @@ public void onClick(View v){
                 Connection con = DriverManager.getConnection(url,user,pass);
 
                 Statement st = con.createStatement();
-                //String sql ="SELECT * FROM `nombre`";
 
-                final ResultSet rs = st.executeQuery("SELECT Nombre FROM `usuario` where ID=1");//revisar esto , el servidor no lo ejecuta
+                final ResultSet rs = st.executeQuery("SELECT Nombre FROM `usuario` where ID=1");
                 rs.next();
                 fName=rs.getString(1);
-                //estas lineas son de prueba , nunca se llegan a ejecutar en teoria
+
 
             }catch (Exception e){
                 e.printStackTrace();
@@ -83,7 +82,6 @@ public void onClick(View v){
         protected void onPostExecute(Void result) {
 
             Datos.setText(fName);
-            //Pruebas
 
             super.onPostExecute(result);
         }
