@@ -15,17 +15,20 @@ public class Login extends AppCompatActivity {
 
         }
     public void onClick(View view){
-
         Intent intento=null;
         switch (view.getId()){
-            //esta no funciona
             case R.id.atras:
                 intento=new Intent(Login.this,MainActivity.class);
                 break;
             case R.id.entrar:
                 intento=new Intent(Login.this,Principal.class);
                 break;
+
         }
+        startActivity(intento);
+
+
     }
     }
+
 

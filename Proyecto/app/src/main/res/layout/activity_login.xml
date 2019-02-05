@@ -15,34 +15,48 @@
         android:background="#d0000000"
         android:gravity="center"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+        tools:layout_editor_absoluteY="30dp">
+
+        <Button
+            android:id="@+id/entrar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@android:color/holo_blue_bright"
+            android:text="ENTRAR"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.713"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.899"
+            android:onClick="onClick"/>
 
         <Button
             android:id="@+id/atras"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="onClick"
-            android:text="Atras"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.278"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.866" />
-
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
-            android:text="Entrar"
+            android:layout_marginBottom="8dp"
+            android:background="@android:color/holo_red_dark"
+            android:text="ATRAS"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.72"
+            app:layout_constraintHorizontal_bias="0.231"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.866" />
+            app:layout_constraintVertical_bias="0.899"
+            android:onClick="onClick"/>
+
 
         <EditText
             android:id="@+id/editText"
@@ -68,7 +82,7 @@
             app:layout_constraintHorizontal_bias="0.482"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.44" />
+            app:layout_constraintVertical_bias="0.464" />
 
         <EditText
             android:id="@+id/editText3"
@@ -98,12 +112,12 @@
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="260dp"
+            android:layout_marginTop="280dp"
             android:text="Correo"
             android:textColor="@android:color/white"
             android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="@+id/editText"
-            app:layout_constraintHorizontal_bias="0.516"
+            app:layout_constraintHorizontal_bias="0.427"
             app:layout_constraintStart_toStartOf="@+id/editText"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -154,7 +168,7 @@
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.095"
+            app:layout_constraintVertical_bias="0.126"
             app:srcCompat="@drawable/a" />
 
     </android.support.constraint.ConstraintLayout>

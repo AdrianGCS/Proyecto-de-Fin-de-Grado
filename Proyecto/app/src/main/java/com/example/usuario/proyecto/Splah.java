@@ -20,6 +20,6 @@ public class Splah extends AppCompatActivity {
           Intent intent = new Intent(Splah.this,MainActivity.class);
           startActivity(intent);
             }
-        },4000);
+        },2000);
     }
 }

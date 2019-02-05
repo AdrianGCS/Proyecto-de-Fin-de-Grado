@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 public class Principal extends AppCompatActivity {
 
@@ -19,15 +20,12 @@ public class Principal extends AppCompatActivity {
         */
         Intent intento=null;
         switch (view.getId()){
-            case R.id.log:
+            case R.id.atras:
                 intento=new Intent(Principal.this,Login.class);
                 break;
-            case R.id.anonimo:
-                break;
-            case R.id.registro:
-                intento=new Intent(Principal.this,Registro.class);
-                break;
-        }
 
+        }
+startActivity(intento);
     }
+
 }
