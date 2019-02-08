@@ -31,7 +31,8 @@
         <activity android:name=".Login" />
         <activity android:name=".EscanerQr" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".Splah">
+        <activity android:name=".Splah" android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
