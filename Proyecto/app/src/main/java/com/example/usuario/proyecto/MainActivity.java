@@ -42,12 +42,10 @@ initViews();
         });
     }
 private void initViews(){
-       // btnTakePicture=findViewById(R.id.btnTakePicture);
         btnScanBarcode=findViewById(R.id.btnScanBarcode);
         registro=findViewById(R.id.registro);
     otra=findViewById(R.id.otra);
     log=findViewById(R.id.log);
-        //btnTakePicture.setOnClickListener(this);
         btnScanBarcode.setOnClickListener(this);
         registro.setOnClickListener(this);
         log.setOnClickListener(this);
