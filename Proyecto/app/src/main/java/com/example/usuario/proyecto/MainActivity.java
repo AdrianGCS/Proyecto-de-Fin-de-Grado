@@ -66,25 +66,28 @@ public void onClick(View v){
             case R.id.otra:
                 startActivity(new Intent(MainActivity.this,GeneradorQR.class));
                 break;
+
+
         }
 }
 
-    private class MyTask extends AsyncTask<Void, Void, Void>{
-        private String fName="";
+    private class MyTask extends AsyncTask<Void, Void, Void> {
+        private String fName = "";
+
         @Override
         protected Void doInBackground(Void... arg0) {
             try {
                 Class.forName("com.mysql.jdbc.Driver");
-                Connection con = DriverManager.getConnection(url,user,pass);
+                Connection con = DriverManager.getConnection(url, user, pass);
 
                 Statement st = con.createStatement();
 
                 final ResultSet rs = st.executeQuery("SELECT Nombre FROM `usuario` where ID=1");
                 rs.next();
-                fName=rs.getString(1);
+                fName = rs.getString(1);
 
 
-            }catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             return null;
@@ -97,5 +100,8 @@ public void onClick(View v){
 
             super.onPostExecute(result);
         }
+
+
     }
+
 }
