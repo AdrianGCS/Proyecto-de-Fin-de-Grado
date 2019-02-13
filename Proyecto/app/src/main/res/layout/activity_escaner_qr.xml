@@ -4,7 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EscanerQr">
+    tools:context=".EscanerQr"
+    android:paddingBottom="45dp"
+    android:paddingRight="45dp"
+    android:paddingLeft="45dp"
+    android:paddingTop="45dp"
+    android:background="@android:color/holo_blue_light">
     <SurfaceView
         android:id="@+id/surfaceView"
         android:layout_width="match_parent"
