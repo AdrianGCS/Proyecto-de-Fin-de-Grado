@@ -16,6 +16,9 @@ public class Registro extends AppCompatActivity {
     public void onClick(View view){
         Intent intento=null;
         switch (view.getId()){
+            case R.id.atras:
+                intento=new Intent(Registro.this,MainActivity.class);
+                break;
             case R.id.entrar:
                 intento=new Intent(Registro.this,Principal.class);
                 break;
