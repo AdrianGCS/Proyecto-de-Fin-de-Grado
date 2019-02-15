@@ -98,7 +98,8 @@
             android:textColor="@color/common_google_signin_btn_text_dark_focused"
             android:typeface="normal"
             tools:layout_editor_absoluteX="85dp"
-            tools:layout_editor_absoluteY="374dp" />
+            tools:layout_editor_absoluteY="374dp"
+            tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/textView6"
