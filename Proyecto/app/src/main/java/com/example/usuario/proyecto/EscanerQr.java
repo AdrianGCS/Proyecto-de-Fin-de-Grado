@@ -67,7 +67,10 @@ public class EscanerQr extends AppCompatActivity {
         cameraSource = new CameraSource.Builder(this, barcodeDetector)
                 .setRequestedPreviewSize(1920, 1080)
                 .setAutoFocusEnabled(true)
+
                 .build();
+        
+
 
         surfaceView.getHolder().addCallback(new SurfaceHolder.Callback() {
             @Override

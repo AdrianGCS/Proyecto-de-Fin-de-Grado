@@ -51,7 +51,7 @@
         android:background="#FFFFFF"
         android:ems="10"
         android:hint="Nombre"
-        android:inputType="text"
+        android:inputType="textPersonName|text"
         android:selectAllOnFocus="true"
         android:textColor="@color/common_google_signin_btn_text_dark_focused"
         android:textStyle="bold"
@@ -79,7 +79,7 @@
         android:editable="false"
         android:ems="10"
         android:hint="Apellidos"
-        android:inputType="text"
+        android:inputType="textPersonName|text"
         android:selectAllOnFocus="true"
         android:textColor="@color/common_google_signin_btn_text_dark_focused"
         android:textStyle="bold"
@@ -135,14 +135,14 @@
         android:ems="10"
         android:hint="Contraseña"
         android:inputType="textPassword"
-        android:textColor="@color/common_google_signin_btn_text_dark_focused"
+        android:textColor="@android:color/white"
         android:typeface="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.451"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.767" />
+        app:layout_constraintVertical_bias="0.728" />
 
 
     <ImageView

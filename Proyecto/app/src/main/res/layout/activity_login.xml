@@ -19,8 +19,8 @@
 
         <Button
             android:id="@+id/entrar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="93dp"
+            android:layout_height="39dp"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
@@ -28,6 +28,8 @@
             android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
             android:background="@color/common_google_signin_btn_text_dark_default"
+            android:drawableLeft="@drawable/Comun"
+            android:drawablePadding="8dp"
             android:onClick="onClick"
             android:text="ENTRAR"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -39,8 +41,8 @@
 
         <Button
             android:id="@+id/atras"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="78dp"
+            android:layout_height="40dp"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
@@ -87,26 +89,16 @@
         <EditText
             android:id="@+id/editText3"
             style="@style/Widget.AppCompat.EditText"
-            android:layout_width="236dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="12dp"
-            android:layout_marginRight="12dp"
-            android:layout_marginBottom="8dp"
+            android:layout_width="237dp"
+            android:layout_height="28dp"
             android:background="#FFFFFF"
             android:ems="10"
             android:hint="Contraseña"
             android:inputType="textPassword"
             android:textColor="@color/common_google_signin_btn_text_dark_focused"
             android:typeface="normal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.477"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.627" />
+            tools:layout_editor_absoluteX="85dp"
+            tools:layout_editor_absoluteY="374dp" />
 
         <TextView
             android:id="@+id/textView6"
