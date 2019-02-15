@@ -19,45 +19,25 @@
 
         <Button
             android:id="@+id/entrar"
-            android:layout_width="93dp"
-            android:layout_height="39dp"
+            android:layout_width="251dp"
+            android:layout_height="53dp"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
+            android:accessibilityHeading="false"
             android:background="@color/common_google_signin_btn_text_dark_default"
-            android:drawableLeft="@drawable/Comun"
+            android:drawableLeft="@drawable/comun"
             android:drawablePadding="8dp"
             android:onClick="onClick"
             android:text="ENTRAR"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.736"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.899" />
-
-        <Button
-            android:id="@+id/atras"
-            android:layout_width="78dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
-            android:background="@color/common_google_signin_btn_text_dark_default"
-            android:onClick="onClick"
-            android:text="ATRAS"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.25"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.899" />
+            app:layout_constraintVertical_bias="0.837" />
 
 
         <EditText
@@ -70,13 +50,15 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
-            android:background="#FFFFFF"
+            android:background="#11000000"
             android:ems="10"
             android:hint="Correo"
+            android:drawableLeft="@mipmap/ic_mailc"
+            android:textColorHint="#FFFFFF"
             android:inputType="textEmailAddress"
             android:selectAllOnFocus="true"
-            android:textColor="@color/common_google_signin_btn_text_dark_focused"
-            android:textStyle="bold"
+            android:textAllCaps="false"
+            android:textColor="@color/common_google_signin_btn_text_dark_pressed"
             android:typeface="normal"
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -84,21 +66,27 @@
             app:layout_constraintHorizontal_bias="0.482"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.464" />
+            app:layout_constraintVertical_bias="0.464"
+
+            />
 
         <EditText
             android:id="@+id/editText3"
             style="@style/Widget.AppCompat.EditText"
             android:layout_width="237dp"
             android:layout_height="28dp"
-            android:background="#FFFFFF"
+            android:background="#11000000"
             android:ems="10"
             android:hint="Contraseña"
             android:inputType="textPassword"
             android:textColor="@color/common_google_signin_btn_text_dark_focused"
             android:typeface="normal"
             tools:layout_editor_absoluteX="85dp"
-            tools:layout_editor_absoluteY="374dp" />
+            tools:layout_editor_absoluteY="374dp"
+            android:drawableLeft="@mipmap/ic_password"
+            android:textColorHint="#FFFFFF"
+
+            />
 
         <TextView
             android:id="@+id/textView6"
@@ -115,7 +103,7 @@
             app:layout_constraintHorizontal_bias="0.477"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.74" />
+            app:layout_constraintVertical_bias="0.7" />
 
         <ImageView
             android:id="@+id/imageView2"
