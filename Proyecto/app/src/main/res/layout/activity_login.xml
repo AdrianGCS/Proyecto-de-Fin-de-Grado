@@ -28,8 +28,8 @@
             android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
             android:accessibilityHeading="false"
-            android:background="@color/common_google_signin_btn_text_dark_default"
-            android:drawableLeft="@drawable/comun"
+            android:background="@color/zxing_possible_result_points"
+            android:drawableLeft="@drawable/Comun"
             android:drawablePadding="8dp"
             android:onClick="onClick"
             android:text="ENTRAR"
@@ -86,7 +86,7 @@
             tools:layout_editor_absoluteX="78dp"
             tools:layout_editor_absoluteY="437dp"
 
-            />
+            tools:ignore="MissingConstraints" />
 
         <ImageView
             android:id="@+id/imageView2"
