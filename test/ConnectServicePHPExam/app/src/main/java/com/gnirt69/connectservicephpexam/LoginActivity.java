@@ -16,9 +16,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by NgocTri on 4/11/2016.
- */
+
 public class LoginActivity extends Activity {
     private EditText txtUsername;
     private EditText txtPassword;
@@ -61,7 +59,6 @@ public class LoginActivity extends Activity {
             txtPassword.setText(data.getStringExtra("password"));
         }
     }
-
     public class TaskLogin extends AsyncTask<String, Void, Integer> {
         @Override
         protected void onPreExecute() {
@@ -87,6 +84,7 @@ public class LoginActivity extends Activity {
                 return Common.RESULT_ERROR;
             }
         }
+
 
         @Override
         protected void onPostExecute(Integer result) {
