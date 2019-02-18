@@ -67,6 +67,8 @@ public class RegisterActivity extends Activity{
             postParam.put("action", "add");
             postParam.put("username", params[0]);
             postParam.put("password", params[1]);
+            //postParam.put("alpo", "1");//esto lo pasa pero como nulo
+            //llama al PHP
             try{
                 String jsonString = m_AccessServiceAPI.getJSONStringWithParam_POST(Common.SERVICE_API_URL, postParam);
                 JSONObject jsonObject = new JSONObject(jsonString);
