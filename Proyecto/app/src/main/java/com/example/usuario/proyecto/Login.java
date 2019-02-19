@@ -25,7 +25,7 @@ import java.util.Map;
 public class Login extends AppCompatActivity {
 private EditText correouser;
 private EditText passuser;
-private AccessibilityService miservicio;
+private AccessServiceAPI miservicio;
 private ProgressDialog dialogo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,7 @@ private ProgressDialog dialogo;
         setContentView(R.layout.activity_login);
         correouser=(EditText) findViewById(R.id.correo);
         passuser=(EditText)findViewById(R.id.contaseña);
-        miservicio=new AccessServiceApi();
+        miservicio=new AccessServiceAPI();
 
         }
     public void onClick(View view){
@@ -58,6 +58,7 @@ private ProgressDialog dialogo;
 
 
     }
+    @Override
     protected void result(int code,int resultado,Intent dato){
         super.result(code,resultado,dato);
         if(code==1){
