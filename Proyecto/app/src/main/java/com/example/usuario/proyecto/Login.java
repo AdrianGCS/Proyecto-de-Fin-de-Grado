@@ -47,6 +47,7 @@ private ProgressDialog dialogo;
                 }if("".equals(passuser.getText().toString())){
                 passuser.setError("Mete la contraseña");
                 return;
+
             }
             new TaskLogin().execute(correouser.getText().toString(),passuser.getText().toString());
                 break;
@@ -59,46 +60,54 @@ private ProgressDialog dialogo;
 
     }
     @Override
-    protected void result(int code,int resultado,Intent dato){
-        super.result(code,resultado,dato);
-        if(code==1){
-            correouser.setText(dato.getStringExtra("correo"));
-            passuser.setText(dato.getStringExtra("contraseña"));
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == 1) {
+            correouser.setText(data.getStringExtra("Correo"));
+            passuser.setText(data.getStringExtra("Contrasena"));
         }
     }
-    public class TaskLogin extends AsyncTask<String, Void, Integer>{
+    public class TaskLogin extends AsyncTask<String, Void, Integer> {
         @Override
-        protected void ejecute(){
-            super.ejecute();
-            dialogo=ProgressDialog.show(Login.this,"porfavor espere","en proceso",true);
+        protected void onPreExecute() {
+            super.onPreExecute();
+            //Open progress dialog during login
+            dialogo = ProgressDialog.show(Login.this, "Porfavor, Espere", "Procesando", true);
         }
-        protected Integer volver(String... params){
-            Map<String,String> param=new HashMap<>();
-            param.put("action","login");
-            param.put("correo",params[0]);
-            param.put("contraseña",params[1]);
-            JSONObject jsonResult;
+
+        @Override
+        protected Integer doInBackground(String... params) {
+            //Create data to pass in param
+            Map<String, String> param = new HashMap<>();
+            param.put("action", "login");
+            param.put("username", params[0]);
+            param.put("password", params[1]);
+
+            JSONObject jObjResult;
             try {
-                jsonResult =miservicio.convertJSONString2Obj(miservicio.getJSONStringWithParam_POST(Common.SERVICE_API_URL, param));
-                return jsonResult.getInt("result");
-            }catch (Exception e){
+
+                jObjResult = miservicio.convertJSONString2Obj(miservicio.getJSONStringWithParam_POST(Common.SERVICE_API_URL, param));
+                return jObjResult.getInt("Resultado");
+            } catch (Exception e) {
                 return Common.RESULT_ERROR;
             }
         }
-        protected void ejecute(Integer result){
-            super.ejecute(result);
-            dialogo.dismiss();
-            if(Common.RESULT_SUCCESS==result){
-                Toast.makeText(getApplicationContext(), "Login success", Toast.LENGTH_LONG).show();
+
+
+        @Override
+        protected void onPostExecute(Integer result) {
+            super.onPostExecute(result);
+           dialogo.dismiss();
+            if(Common.RESULT_SUCCESS == result) {
+                Toast.makeText(getApplicationContext(), "Login Correcto", Toast.LENGTH_LONG).show();
                 Intent i = new Intent(getApplicationContext(), Principal.class);
                 i.putExtra("correo", correouser.getText().toString());
                 startActivity(i);
-            }else{
-                Toast.makeText(getApplicationContext(), "Login fail", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(getApplicationContext(), "Login Mal", Toast.LENGTH_LONG).show();
             }
         }
     }
-
     }
 
 
