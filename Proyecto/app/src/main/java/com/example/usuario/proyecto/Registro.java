@@ -38,10 +38,7 @@ private EditText apellidos;
     }
 
     public void onClick(View view){
-        Intent intento=null;
-        switch (view.getId()){
-            case R.id.entrar:
-                intento=new Intent(Registro.this,MainActivity.class);
+
 
                 if("".equals(nombre.getText().toString())) {
                     nombre.setError("Username is required!");
@@ -57,15 +54,15 @@ private EditText apellidos;
                 }
                 if(contraseña.getText().toString().equals(confirmarcontraseña.getText().toString())) {
                     //exec task register
-                    new TaskRegister().execute(nombre.getText().toString(), contraseña.getText().toString());
+                    new TaskRegister().execute(nombre.getText().toString(), contraseña.getText().toString(),correo.getText().toString(),apellidos.getText().toString());
                 } else {
                     confirmarcontraseña.setError("Confirm password not match!");
                 }
-                break;
 
 
-        }
-        startActivity(intento);
+
+
+
 
     }
     public class TaskRegister extends AsyncTask<String, Void, Integer> {
