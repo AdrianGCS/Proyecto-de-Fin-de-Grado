@@ -31,7 +31,7 @@
         android:background="@color/zxing_viewfinder_laser"
         android:onClick="onClick"
         android:textColorHint="#FFFFFF"
-        android:drawableLeft="@drawable/Comun"
+        android:drawableLeft="@drawable/comun"
         android:text="ENTRAR"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

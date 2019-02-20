@@ -34,13 +34,13 @@ private EditText apellidos;
         apellidos=(EditText)findViewById(R.id.apellidos);
         contraseña=(EditText)findViewById(R.id.contaseña);
         confirmarcontraseña=(EditText)findViewById(R.id.confirmacontraseña);
-
+        miservicio = new AccessServiceAPI();
     }
 
     public void onClick(View view){
         Intent intento=null;
         switch (view.getId()){
-            case R.id.atras:
+            case R.id.entrar:
                 intento=new Intent(Registro.this,MainActivity.class);
 
                 if("".equals(nombre.getText().toString())) {
@@ -79,11 +79,11 @@ private EditText apellidos;
         protected Integer doInBackground(String... params) {
             Map<String, String> postParam = new HashMap<>();
             postParam.put("action", "add");
-            postParam.put("nombre", params[0]);
-            postParam.put("contraseña", params[1]);
-            postParam.put("correo", params[2]);
-            postParam.put("apellidos", params[3]);
-            postParam.put("confirmar contraseña", params[4]);
+            postParam.put("username", params[0]);
+            postParam.put("password", params[1]);
+            //postParam.put("correo", params[2]);
+            //postParam.put("apellidos", params[3]);
+            //postParam.put("confirmar contraseña", params[4]);
             postParam.put("alpo", "1");//esto lo pasa pero como nulo
             //llama al PHP
             try{
@@ -106,9 +106,9 @@ private EditText apellidos;
                 Intent i = new Intent();
                 i.putExtra("nombre", nombre.getText().toString());
                 i.putExtra("contraseña", contraseña.getText().toString());
-                i.putExtra("apellidos", apellidos.getText().toString());
-                i.putExtra("correo", correo.getText().toString());
-                i.putExtra("confirmar contraseña", confirmarcontraseña.getText().toString());
+               // i.putExtra("apellidos", apellidos.getText().toString());
+               // i.putExtra("correo", correo.getText().toString());
+               // i.putExtra("confirmar contraseña", confirmarcontraseña.getText().toString());
                 setResult(1, i);
                 finish();
             } else if(integer == Common.RESULT_USER_EXISTS) {

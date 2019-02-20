@@ -32,33 +32,24 @@ private ProgressDialog dialogo;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         correouser=(EditText) findViewById(R.id.correo);
-        passuser=(EditText)findViewById(R.id.contaseña);
+        passuser=(EditText)findViewById(R.id.password);
         miservicio=new AccessServiceAPI();
 
         }
     public void onClick(View view){
-        Intent intento=null;
-        switch (view.getId()){
-            case R.id.entrar:
-                intento=new Intent(Login.this,Principal.class);
                 if("".equals(correouser.getText().toString())){
                     correouser.setError("Mete el correo");
                     return;
-                }if("".equals(passuser.getText().toString())){
+                }
+
+                if("".equals(passuser.getText().toString())){
                 passuser.setError("Mete la contraseña");
                 return;
 
             }
             new TaskLogin().execute(correouser.getText().toString(),passuser.getText().toString());
-                break;
-            case R.id.registro:
-                intento=new Intent(Login.this,Registro.class);
-                break;
         }
-        startActivity(intento);
 
-
-    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
