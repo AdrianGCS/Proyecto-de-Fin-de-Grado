@@ -81,9 +81,9 @@ private EditText apellidos;
             postParam.put("action", "add");
             postParam.put("username", params[0]);
             postParam.put("password", params[1]);
-            //postParam.put("correo", params[2]);
-            //postParam.put("apellidos", params[3]);
-            //postParam.put("confirmar contraseña", params[4]);
+            postParam.put("mail", params[2]);
+            postParam.put("lastname", params[3]);
+           // postParam.put("confirmar contraseña", params[4]);
             postParam.put("alpo", "1");//esto lo pasa pero como nulo
             //llama al PHP
             try{
@@ -106,8 +106,8 @@ private EditText apellidos;
                 Intent i = new Intent();
                 i.putExtra("nombre", nombre.getText().toString());
                 i.putExtra("contraseña", contraseña.getText().toString());
-               // i.putExtra("apellidos", apellidos.getText().toString());
-               // i.putExtra("correo", correo.getText().toString());
+                i.putExtra("apellidos", apellidos.getText().toString());
+                i.putExtra("correo", correo.getText().toString());
                // i.putExtra("confirmar contraseña", confirmarcontraseña.getText().toString());
                 setResult(1, i);
                 finish();
