@@ -16,6 +16,7 @@ if(isset($action))
 {
 	$username = $_POST["username"];
 	$pwd = $_POST["password"];
+	$id = $_POST["alpo"];
 	
 	if(ACTION_ADD_USER == $action)
 	{
@@ -26,7 +27,7 @@ if(isset($action))
 		}
 		else
 		{
-			insertUser($cnn, $username, $pwd);
+			insertUser($cnn, $username, $pwd, $id);
 			$result = RESULT_SUCCESS;
 		}
 	}
@@ -47,12 +48,13 @@ if(isset($action))
 //Print result as json
 echo(json_encode(array('result' => $result)));
 
-function insertUser($cnn, $username, $pwd)
+function insertUser($cnn, $username, $pwd, $id)
 {
-	$query = "INSERT INTO CUENTA(ID_USUARIO , CORREO, CONTRASENIA) VALUES(1, ?, ?)";
+	$query = "INSERT INTO CUENTA(ID_USUARIO , CORREO, CONTRASENIA) VALUES(?, ?, ?)";
 	$stmt = $cnn->prepare($query);
-	$stmt->bindParam(1, $username);
-	$stmt->bindParam(2, $pwd);
+	$stmt->bindParam(1, $id);
+	$stmt->bindParam(2, $username);
+	$stmt->bindParam(3, $pwd);
 	$stmt->execute();
 }
 function isExistUser($cnn, $username)
