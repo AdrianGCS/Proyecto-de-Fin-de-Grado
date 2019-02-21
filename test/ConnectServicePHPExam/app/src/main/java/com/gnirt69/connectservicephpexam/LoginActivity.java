@@ -72,7 +72,7 @@ public class LoginActivity extends Activity {
             //Create data to pass in param
             Map<String, String> param = new HashMap<>();
             param.put("action", "login");
-            param.put("username", params[0]);
+            param.put("mail", params[0]);
             param.put("password", params[1]);
 
             JSONObject jObjResult;

@@ -10,9 +10,6 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -71,14 +68,14 @@ private ProgressDialog dialogo;
             //Create data to pass in param
             Map<String, String> param = new HashMap<>();
             param.put("action", "login");
-            param.put("username", params[0]);
+            param.put("mail", params[0]);
             param.put("password", params[1]);
 
             JSONObject jObjResult;
             try {
 
                 jObjResult = miservicio.convertJSONString2Obj(miservicio.getJSONStringWithParam_POST(Common.SERVICE_API_URL, param));
-                return jObjResult.getInt("Resultado");
+                return jObjResult.getInt("result");
             } catch (Exception e) {
                 return Common.RESULT_ERROR;
             }

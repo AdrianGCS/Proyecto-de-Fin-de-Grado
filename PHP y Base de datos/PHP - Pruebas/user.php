@@ -12,27 +12,30 @@ define("RESULT_USER_EXISTS", 2);
 $action = $_POST["action"];
 $result = RESULT_ERROR;
 
+
 if(isset($action))
 {
-	$username = $_POST["username"];
+	//$username = $_POST["username"];
+	$mail = $_POST["mail"];
 	$pwd = $_POST["password"];
-	$id = $_POST["alpo"];
 	
+	//$lastname = $_POST["lastname"];
+	//$id = $_POST["alpo"];
+
 	if(ACTION_ADD_USER == $action)
 	{
 		//Check exists user
-		if(isExistUser($cnn, $username))
+		if(isExistUser($cnn, $mail))
 		{
 			$result = RESULT_USER_EXISTS;
 		}
 		else
 		{
-			insertUser($cnn, $username, $pwd, $id);
+			insertUser($cnn, $mail, $pwd, $id);
 			$result = RESULT_SUCCESS;
 		}
 	}
-	else //Action login
-	{
+	else{
 		if(login($cnn, $username, $pwd))
 		{
 			$result = RESULT_SUCCESS;
@@ -48,20 +51,20 @@ if(isset($action))
 //Print result as json
 echo(json_encode(array('result' => $result)));
 
-function insertUser($cnn, $username, $pwd, $id)
+function insertUser($cnn, $mail, $pwd, $id)
 {
 	$query = "INSERT INTO CUENTA(ID_USUARIO , CORREO, CONTRASENIA) VALUES(?, ?, ?)";
 	$stmt = $cnn->prepare($query);
 	$stmt->bindParam(1, $id);
-	$stmt->bindParam(2, $username);
+	$stmt->bindParam(2, $mail);
 	$stmt->bindParam(3, $pwd);
 	$stmt->execute();
 }
-function isExistUser($cnn, $username)
+function isExistUser($cnn, $mail)
 {
 	$query = "SELECT * FROM CUENTA WHERE CORREO = ?";
 	$stmt = $cnn->prepare($query);
-	$stmt->bindParam(1, $username);
+	$stmt->bindParam(1, $mail);
 	$stmt->execute();
 	$rowcount = $stmt->rowCount();
 	//for debug
@@ -69,11 +72,11 @@ function isExistUser($cnn, $username)
 	return $rowcount;
 }
 
-function login($cnn, $username, $pwd)
+function login($cnn, $mail, $pwd)
 {
 	$query = "SELECT * FROM CUENTA WHERE CORREO = ? AND CONTRASENIA = ?";
 	$stmt = $cnn->prepare($query);
-	$stmt->bindParam(1, $username);
+	$stmt->bindParam(1, $mail);
 	$stmt->bindParam(2, $pwd);
 	$stmt->execute();
 	$rowcount = $stmt->rowCount();
