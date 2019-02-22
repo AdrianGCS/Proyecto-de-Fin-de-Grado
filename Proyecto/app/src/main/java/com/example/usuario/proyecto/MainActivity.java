@@ -31,15 +31,7 @@ Button btnScanBarcode,registro,log,otra;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 initViews();
-        Datos = (TextView) findViewById(R.id.Datos);
-        Button Conectar =(Button) findViewById(R.id.Conectar);
 
-        Conectar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new MyTask().execute();
-            }
-        });
     }
 private void initViews(){
         btnScanBarcode=findViewById(R.id.btnScanBarcode);
