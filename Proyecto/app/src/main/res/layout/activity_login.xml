@@ -2,11 +2,11 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Login"
-    android:id="@+id/constraintLayout"
-    android:background="@drawable/descarga">
+    android:background="@drawable/descarga"
+    tools:context=".Login">
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/linearLayout2"
@@ -29,7 +29,6 @@
             android:layout_marginBottom="8dp"
             android:accessibilityHeading="false"
             android:background="@color/zxing_possible_result_points"
-            android:drawableLeft="@mipmap/ic_launcher"
             android:drawablePadding="8dp"
             android:onClick="onClick"
             android:text="ENTRAR"
@@ -116,4 +115,17 @@
             app:srcCompat="@drawable/a" />
 
     </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="47dp" />
+
+    <android.support.constraint.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top" />
 </android.support.constraint.ConstraintLayout>
