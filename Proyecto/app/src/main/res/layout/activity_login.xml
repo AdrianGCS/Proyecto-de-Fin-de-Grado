@@ -29,7 +29,7 @@
             android:layout_marginBottom="8dp"
             android:accessibilityHeading="false"
             android:background="@color/zxing_possible_result_points"
-            android:drawableLeft="@drawable/comun"
+            android:drawableLeft="@mipmap/ic_launcher"
             android:drawablePadding="8dp"
             android:onClick="onClick"
             android:text="ENTRAR"

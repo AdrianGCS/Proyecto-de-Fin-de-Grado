@@ -135,7 +135,7 @@
         android:ems="10"
         android:hint="Contraseña"
         android:inputType="textPassword"
-        android:textColor="@android:color/white"
+        android:textColor="@color/common_google_signin_btn_text_dark_focused"
         android:typeface="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
