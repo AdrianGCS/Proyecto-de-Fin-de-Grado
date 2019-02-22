@@ -12,7 +12,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.maps.MapView;
+import com.mapbox.mapboxsdk.maps.MapboxMap;
+import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
+import com.mapbox.mapboxsdk.maps.Style;
 
 
 import java.sql.Connection;
@@ -22,10 +29,15 @@ import java.sql.Statement;
 
 public class MainActivity extends AppCompatActivity implements  View.OnClickListener{
 Button btnScanBarcode,registro,log,otra;
+    private MapView mapView;
     private static final String url ="jdbc:mysql://85.56.88.205:3306/proyecto";
     private static final String user = "Consultas";
     private static final String pass = "Consultas";
     private TextView Datos;
+
+    public MainActivity() {
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,5 +107,6 @@ public void onClick(View v){
 
 
     }
+    
 
 }
