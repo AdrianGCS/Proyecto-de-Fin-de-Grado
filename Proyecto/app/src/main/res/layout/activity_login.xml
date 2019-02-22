@@ -51,7 +51,7 @@
             android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
             android:background="#11000000"
-            android:drawableLeft="@mipmap/ic_mailc"
+            android:drawableLeft="@mipmap/ic_apellidos"
             android:ems="10"
             android:hint="Correo"
             android:inputType="textEmailAddress"
@@ -81,7 +81,7 @@
             android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
             android:background="#11000000"
-            android:drawableLeft="@mipmap/ic_password"
+            android:drawableLeft="@mipmap/ic_pass"
             android:ems="10"
 
             android:hint="Contraseña"
