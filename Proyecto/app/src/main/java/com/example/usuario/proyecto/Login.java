@@ -67,9 +67,13 @@ private ProgressDialog dialogo;
         protected Integer doInBackground(String... params) {
             //Create data to pass in param
             Map<String, String> param = new HashMap<>();
-            param.put("action", "login");
-            param.put("mail", params[0]);
+            param.put("action", "Login");
+            param.put("username", "0");
             param.put("password", params[1]);
+            param.put("mail", params[0]);
+            param.put("lastname", "0");
+
+            param.put("alpo", "1");//esto lo pasa pero como nulo
 
             JSONObject jObjResult;
             try {
