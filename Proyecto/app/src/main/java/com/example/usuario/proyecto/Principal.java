@@ -18,14 +18,7 @@ public class Principal extends AppCompatActivity {
         /*Intent intento= new Intent(Principal.this,Login.class);
         startActivity(intento);
         */
-        Intent intento=null;
-        switch (view.getId()){
-            case R.id.atras:
-                intento=new Intent(Principal.this,Login.class);
-                break;
 
-        }
-startActivity(intento);
     }
 
 }

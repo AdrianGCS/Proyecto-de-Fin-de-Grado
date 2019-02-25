@@ -47,9 +47,10 @@ public class EscanerQr extends AppCompatActivity {
 
                 if (intentData.length() > 0) {
 
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(intentData)));
+                        startActivity(new Intent(EscanerQr.this,Principal.class));
 
-
+                   // startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(intentData)));
+                    //esto es lo que lleva a la direccion de del qr
                 }
 
 
