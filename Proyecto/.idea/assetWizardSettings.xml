@@ -71,7 +71,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="color" value="ffbe2f" />
+                                                <entry key="color" value="95ffaf" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -82,7 +82,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/communication/ic_phonelink_lock_black_24dp.xml" />
+                                                <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/communication/ic_phone_black_24dp.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -105,7 +105,7 @@
                                     <map>
                                       <entry key="backgroundColor" value="000000" />
                                       <entry key="imageAsset" value="C:\Users\DAM\Documents\GitHub\Proyecto-de-Fin-de-Grado\Proyecto\app\src\main\res\drawable\ss.jpg" />
-                                      <entry key="outputName" value="ic_pass" />
+                                      <entry key="outputName" value="ic_telefono" />
                                     </map>
                                   </option>
                                 </PersistentState>

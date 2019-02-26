@@ -18,7 +18,24 @@ public class Principal extends AppCompatActivity {
         /*Intent intento= new Intent(Principal.this,Login.class);
         startActivity(intento);
         */
+            switch (view.getId()){
 
+                case R.id.llamada:
+                    startActivity(new Intent(Principal.this,LLamar.class));
+                    break;
+                /*case R.id.log:
+                    startActivity(new Intent(Principal.this,Login.class));
+                    break;
+                case R.id.registro:
+                    startActivity(new Intent(Principal.this,Registro.class));
+                    break;
+                case R.id.otra:
+                    startActivity(new Intent(Principal.this,GeneradorQR.class));
+                    break;
+
+*/
+            }
+        }
     }
 
-}
+

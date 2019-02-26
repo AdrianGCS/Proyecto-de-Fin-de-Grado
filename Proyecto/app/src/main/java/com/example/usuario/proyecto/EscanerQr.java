@@ -44,14 +44,14 @@ public class EscanerQr extends AppCompatActivity {
         btnAction = findViewById(R.id.btnAction);
         btnAction.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
-                if (intentData.length() > 0) {
+                startActivity(new Intent(EscanerQr.this,Principal.class));
+               /* if (intentData.length() > 0) {
 
                         startActivity(new Intent(EscanerQr.this,Principal.class));
 
                    // startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(intentData)));
                     //esto es lo que lleva a la direccion de del qr
-                }
+                }*/
 
 
             }
