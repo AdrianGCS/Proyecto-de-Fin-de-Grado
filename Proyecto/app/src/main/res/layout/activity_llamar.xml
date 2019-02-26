@@ -38,7 +38,7 @@
             app:layout_constraintVertical_bias="0.805" />
 
         <EditText
-            android:id="@+id/correo"
+            android:id="@+id/telefono"
             android:layout_width="237dp"
             android:layout_height="33dp"
             android:layout_marginStart="8dp"
