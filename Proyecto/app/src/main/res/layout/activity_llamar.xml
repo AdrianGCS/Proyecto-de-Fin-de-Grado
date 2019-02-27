@@ -29,7 +29,6 @@
             android:background="@color/design_default_color_primary_dark"
             android:drawablePadding="8dp"
             android:text="LLAMAR"
-            android:onClick="onClick"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.437"

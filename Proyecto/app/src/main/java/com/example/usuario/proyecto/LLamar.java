@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,32 +16,58 @@ import android.widget.EditText;
 public class LLamar extends AppCompatActivity {
     private EditText telefono;
 private Button boto;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_llamar);
-        telefono=(EditText)findViewById(R.id.telefono);
-boto=(Button) findViewById(R.id.llamar);
-boto.setOnClickListener(new View.OnClickListener() {
+        telefono = (EditText)findViewById(R.id.telefono);
+        boto = (Button)findViewById(R.id.llamar);
+        boto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callPhoneNumber();
+            }
+        });
+    }
     @Override
-    public void onClick(View v) {
-        Intent llama=new Intent(Intent.ACTION_CALL);
-        llama.setData(Uri.parse("#31#"+telefono.getText().toString()));
-        if (ActivityCompat.checkSelfPermission(LLamar.this,Manifest.permission.CALL_PHONE)!= PackageManager.PERMISSION_GRANTED){
-            return;
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults)
+    {
+        if(requestCode == 101)
+        {
+            if(grantResults[0] == PackageManager.PERMISSION_GRANTED)
+            {
+                callPhoneNumber();
+            }
         }
-        startActivity(llama);
     }
-});
-    }
-/*
-    public void onClick(View view) {
-            Intent llamada = new Intent(Intent.ACTION_CALL);
-            llamada.setData(Uri.parse("#31#"+telefono.getText().toString()));
-            //if (ActivityCompat.checkSelfPermission(LLamar.this, Manifest.permission.CALL_PHONE) ==
-              //      PackageManager.PERMISSION_GRANTED)
-                //return;
-            startActivity(llamada);
+    public void callPhoneNumber()
+    {
+        try
+        {
+            if(Build.VERSION.SDK_INT > 22)
+            {
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(  LLamar.this, new String[]{Manifest.permission.CALL_PHONE}, 101);
+                    return;
+                }
 
-    }*/
+                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                callIntent.setData(Uri.parse("tel:" + telefono.getText().toString()));
+                startActivity(callIntent);
+                finish();
+            }
+            else {
+                Intent callIntent = new Intent(Intent.ACTION_CALL);
+                callIntent.setData(Uri.parse("tel:" + telefono.getText().toString()));
+                startActivity(callIntent);
+                finish();
+            }
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+
 }
