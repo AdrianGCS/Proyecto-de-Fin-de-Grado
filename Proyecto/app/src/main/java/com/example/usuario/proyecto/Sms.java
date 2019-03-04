@@ -27,7 +27,7 @@ public class Sms extends AppCompatActivity {
         dale = (Button)findViewById(R.id.dale);
 
         telefono=(EditText)findViewById(R.id.telefono);
-        sms=(EditText)findViewById(R.id.mensaje);
+      
         if(ActivityCompat.checkSelfPermission(
                 this, Manifest.permission.SEND_SMS)
                 != PackageManager.PERMISSION_GRANTED&& ActivityCompat.checkSelfPermission(
