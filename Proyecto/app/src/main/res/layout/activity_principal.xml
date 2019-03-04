@@ -13,7 +13,7 @@
         android:background="#d0000000"
         android:gravity="center"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="0dp">
 
     </LinearLayout>
@@ -40,7 +40,7 @@
         app:layout_constraintVertical_bias="0.634" />
 
     <ImageButton
-        android:id="@+id/sms"
+        android:id="@+id/envio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -49,15 +49,16 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@android:color/holo_red_dark"
-        android:text="SMS"
-android:src="@drawable/sms"
+        android:background="@color/zxing_possible_result_points"
+        android:onClick="onClick"
+        android:src="@drawable/sms"
+        android:text="mensaje"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.426"
+        app:layout_constraintHorizontal_bias="0.428"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.395" />
+        app:layout_constraintVertical_bias="0.414" />
 
     <ImageButton
         android:id="@+id/localizacion"

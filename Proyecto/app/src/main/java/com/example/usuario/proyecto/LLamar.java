@@ -26,7 +26,7 @@ private Button boto;
         boto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callPhoneNumber();
+                llamartelefono();
             }
         });
     }
@@ -37,11 +37,11 @@ private Button boto;
         {
             if(grantResults[0] == PackageManager.PERMISSION_GRANTED)
             {
-                callPhoneNumber();
+                llamartelefono();
             }
         }
     }
-    public void callPhoneNumber()
+    public void llamartelefono()
     {
         try
         {
@@ -53,13 +53,13 @@ private Button boto;
                 }
 
                 Intent callIntent = new Intent(Intent.ACTION_CALL);
-                callIntent.setData(Uri.parse("tel:" + telefono.getText().toString()));
+                callIntent.setData(Uri.parse("tel:#31#" + telefono.getText().toString()));
                 startActivity(callIntent);
                 finish();
             }
             else {
                 Intent callIntent = new Intent(Intent.ACTION_CALL);
-                callIntent.setData(Uri.parse("tel:" + telefono.getText().toString()));
+                callIntent.setData(Uri.parse("tel:#31#" + telefono.getText().toString()));
                 startActivity(callIntent);
                 finish();
             }
