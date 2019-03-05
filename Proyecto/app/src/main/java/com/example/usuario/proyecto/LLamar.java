@@ -53,13 +53,13 @@ private Button boto;
                 }
 
                 Intent callIntent = new Intent(Intent.ACTION_CALL);
-                callIntent.setData(Uri.parse("tel:#31#" + telefono.getText().toString()));
+                callIntent.setData(Uri.parse("tel:" + telefono.getText().toString()));
                 startActivity(callIntent);
                 finish();
             }
             else {
                 Intent callIntent = new Intent(Intent.ACTION_CALL);
-                callIntent.setData(Uri.parse("tel:#31#" + telefono.getText().toString()));
+                callIntent.setData(Uri.parse("tel:" + telefono.getText().toString()));
                 startActivity(callIntent);
                 finish();
             }

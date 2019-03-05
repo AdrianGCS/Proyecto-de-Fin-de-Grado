@@ -1,5 +1,6 @@
 package com.example.usuario.proyecto;
 
+import android.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.Manifest;
@@ -27,7 +28,8 @@ public class Sms extends AppCompatActivity {
         dale = (Button)findViewById(R.id.dale);
 
         telefono=(EditText)findViewById(R.id.telefono);
-      
+        Toast.makeText(getApplicationContext(), "Enviar sms tiene cargo", Toast.LENGTH_LONG).show();
+
         if(ActivityCompat.checkSelfPermission(
                 this, Manifest.permission.SEND_SMS)
                 != PackageManager.PERMISSION_GRANTED&& ActivityCompat.checkSelfPermission(
@@ -39,6 +41,8 @@ public class Sms extends AppCompatActivity {
         };
         dale.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
+
                 enviarMensaje(telefono.getText().toString(),"Tu familiar necesita ayuda");
             }
         });
