@@ -20,7 +20,7 @@ if(isset($action))
 	$pwd = $_POST["password"];
 	
 	$lastname = $_POST["lastname"];
-	$id = $_POST["alpo"];
+	$id = 1 ;
 
 	if(ACTION_ADD_USER == $action)
 	{
@@ -31,7 +31,9 @@ if(isset($action))
 		}
 		else
 		{
-			insertUser($cnn, $mail, $pwd, $id);
+			insertUser($cnn, $username, $lastname);
+			insertCuenta($cnn, $mail, $pwd, $id);
+
 			$result = RESULT_SUCCESS;
 		}
 	}
@@ -49,7 +51,7 @@ if(isset($action))
 //Print result as json
 echo(json_encode(array('result' => $result)));
 
-function insertUser($cnn, $mail, $pwd, $id)
+function insertCuenta($cnn, $mail, $pwd, $id)
 {
 	$query = "INSERT INTO CUENTA(ID_USUARIO , CORREO, CONTRASENIA) VALUES(?, ?, ?)";
 	$stmt = $cnn->prepare($query);
@@ -57,6 +59,15 @@ function insertUser($cnn, $mail, $pwd, $id)
 	$stmt->bindParam(2, $mail);
 	$stmt->bindParam(3, $pwd);
 	$stmt->execute();
+}
+function insertUser($cnn, $username, $lastname)
+{
+	$query = "INSERT INTO USUARIO(NOMBRE, APELLIDO) VALUES(?, ?)";
+	$stmt = $cnn->prepare($query);
+	$stmt->bindParam(1, $username);
+	$stmt->bindParam(2, $lastname);
+	$stmt->execute();
+
 }
 function isExistUser($cnn, $mail)
 {
@@ -70,6 +81,20 @@ function isExistUser($cnn, $mail)
 	return $rowcount;
 }
 
+function sacarId($cnn, $username , $lastname)
+{
+	$query = "SELECT ID FROM USUARIO WHERE NOMBRE = ? AND APELLIDO = ?";
+	$stmt = $cnn->prepare($query);
+	$stmt->bindParam(1, $username );
+	$stmt->bindParam(2,  $lastname );
+	$stmt->execute();
+	$row = mysqli_fetch_array( $stmt );
+	return $row[1];
+
+
+
+	
+}
 function login($cnn, $mail, $pwd)
 {
 	$query = "SELECT * FROM CUENTA WHERE CORREO = ? AND CONTRASENIA = ?";
