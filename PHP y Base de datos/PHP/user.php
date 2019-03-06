@@ -20,7 +20,7 @@ if(isset($action))
 	$pwd = $_POST["password"];
 	
 	$lastname = $_POST["lastname"];
-	$id = 1 ;
+	$id;
 
 	if(ACTION_ADD_USER == $action)
 	{
@@ -31,9 +31,8 @@ if(isset($action))
 		}
 		else
 		{
-			insertUser($cnn, $username, $lastname);
+			$id=insertUser($cnn, $username, $lastname);
 			insertCuenta($cnn, $mail, $pwd, $id);
-
 			$result = RESULT_SUCCESS;
 		}
 	}
@@ -51,59 +50,48 @@ if(isset($action))
 //Print result as json
 echo(json_encode(array('result' => $result)));
 
+
 function insertCuenta($cnn, $mail, $pwd, $id)
 {
+
 	$query = "INSERT INTO CUENTA(ID_USUARIO , CORREO, CONTRASENIA) VALUES(?, ?, ?)";
 	$stmt = $cnn->prepare($query);
-	$stmt->bindParam(1, $id);
-	$stmt->bindParam(2, $mail);
-	$stmt->bindParam(3, $pwd);
+	$stmt->bind_param("iss", $id, $mail, $pwd);
 	$stmt->execute();
+
 }
 function insertUser($cnn, $username, $lastname)
 {
+
 	$query = "INSERT INTO USUARIO(NOMBRE, APELLIDO) VALUES(?, ?)";
 	$stmt = $cnn->prepare($query);
-	$stmt->bindParam(1, $username);
-	$stmt->bindParam(2, $lastname);
+	$stmt->bind_param("ss", $username, $lastname);
 	$stmt->execute();
+	return $cnn->insert_id;
+	
 
 }
 function isExistUser($cnn, $mail)
 {
 	$query = "SELECT * FROM CUENTA WHERE CORREO = ?";
 	$stmt = $cnn->prepare($query);
-	$stmt->bindParam(1, $mail);
+	$stmt->bind_param("s", $mail);
 	$stmt->execute();
-	$rowcount = $stmt->rowCount();
-	//for debug
-	//var_dump($rowcount);
+	$stmt->store_result();
+	$rowcount = $stmt->num_rows;
+
 	return $rowcount;
 }
 
-function sacarId($cnn, $username , $lastname)
-{
-	$query = "SELECT ID FROM USUARIO WHERE NOMBRE = ? AND APELLIDO = ?";
-	$stmt = $cnn->prepare($query);
-	$stmt->bindParam(1, $username );
-	$stmt->bindParam(2,  $lastname );
-	$stmt->execute();
-	$row = mysqli_fetch_array( $stmt );
-	return $row[1];
 
-
-
-	
-}
 function login($cnn, $mail, $pwd)
 {
 	$query = "SELECT * FROM CUENTA WHERE CORREO = ? AND CONTRASENIA = ?";
 	$stmt = $cnn->prepare($query);
-	$stmt->bindParam(1, $mail);
-	$stmt->bindParam(2, $pwd);
+	$stmt->bind_param("ss", $mail , $pwd);
 	$stmt->execute();
-	$rowcount = $stmt->rowCount();
-	//for debug
-	//var_dump($rowcount);
+	$stmt->store_result();
+	$rowcount =$stmt->num_rows;
 	return $rowcount;
+
 }

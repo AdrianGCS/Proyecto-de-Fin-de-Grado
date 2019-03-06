@@ -81,7 +81,6 @@ private EditText apellidos;
             postParam.put("mail", params[2]);
             postParam.put("lastname", params[3]);
            // postParam.put("confirmar contraseña", params[4]);
-            postParam.put("alpo", "1");//esto lo pasa pero como nulo
             //llama al PHP
             try{
                 String jsonString = miservicio.getJSONStringWithParam_POST(Common.SERVICE_API_URL, postParam);
