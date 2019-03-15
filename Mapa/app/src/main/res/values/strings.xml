@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Mapa</string>
+    <string name="access_token">pk.eyJ1Ijoic2VyZ2lvcmF5bzMxIiwiYSI6ImNqc2cyZ3B3YjAyNTA0M2tnZTltZW52enMifQ.ovXSirBKTDUSVc_8LvlC-A</string>
+    <string name="navegar">navegar</string>
+</resources>
