@@ -5,14 +5,14 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/descarga"
+    android:background="@drawable/fondo2"
     tools:context=".Login">
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#d0000000"
+        android:background="@drawable/fondo2"
         android:gravity="center"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp">
@@ -28,20 +28,19 @@
             android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
             android:accessibilityHeading="false"
-            android:background="@color/zxing_possible_result_points"
+            android:background="@android:color/holo_green_dark"
             android:drawablePadding="8dp"
             android:onClick="onClick"
             android:text="ENTRAR"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.437"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.805" />
+            app:layout_constraintVertical_bias="0.808" />
 
         <EditText
             android:id="@+id/correo"
-            android:layout_width="237dp"
+            android:layout_width="270dp"
             android:layout_height="33dp"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
@@ -49,7 +48,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
-            android:background="#11000000"
+            android:background="#10000001"
             android:drawableLeft="@mipmap/ic_apellidos"
             android:ems="10"
             android:hint="Correo"
@@ -71,15 +70,15 @@
         <EditText
             android:id="@+id/password"
             style="@style/Widget.AppCompat.EditText"
-            android:layout_width="237dp"
-            android:layout_height="28dp"
+            android:layout_width="271dp"
+            android:layout_height="27dp"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginBottom="8dp"
-            android:background="#11000000"
+            android:background="@10000001:drawable/screen_background_dark_transparent"
             android:drawableLeft="@mipmap/ic_pass"
             android:ems="10"
 
