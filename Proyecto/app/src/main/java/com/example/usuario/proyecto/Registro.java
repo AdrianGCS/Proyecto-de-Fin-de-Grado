@@ -12,6 +12,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 import org.json.JSONObject;
 
@@ -38,25 +41,36 @@ private EditText apellidos;
     }
 
     public void onClick(View view){
+        Pattern pattern = Pattern
+                .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
 
-
-                if("".equals(nombre.getText().toString())) {
-                    nombre.setError("Username is required!");
+        if("".equals(nombre.getText().toString())) {
+                    nombre.setError("Se requiere Nombre");
                     return;
                 }
                 if("".equals(contraseña.getText().toString())) {
-                    contraseña.setError("Password is required!");
+                    contraseña.setError("Se requiere contraseña");
+                    return;
+                }
+                if("".equals(correo.getText().toString())){
+                    correo.setError("Se requiere correo");
+                    return;
+                }
+                 Matcher mather = pattern.matcher(correo.getText());
+                if (mather.find()==false){
+                    correo.setError("Correo no valido ");
                     return;
                 }
                 if("".equals(confirmarcontraseña.getText().toString())) {
-                    confirmarcontraseña.setError("Confirm password is required!");
+                    confirmarcontraseña.setError("Confirme la contraseña");
                     return;
                 }
                 if(contraseña.getText().toString().equals(confirmarcontraseña.getText().toString())) {
                     //exec task register
                     new TaskRegister().execute(nombre.getText().toString(), contraseña.getText().toString(),correo.getText().toString(),apellidos.getText().toString());
                 } else {
-                    confirmarcontraseña.setError("Confirm password not match!");
+                    confirmarcontraseña.setError("La contraseñas no coinciden ");
                 }
 
 
@@ -80,7 +94,6 @@ private EditText apellidos;
             postParam.put("password", params[1]);
             postParam.put("mail", params[2]);
             postParam.put("lastname", params[3]);
-           // postParam.put("confirmar contraseña", params[4]);
             //llama al PHP
             try{
                 String jsonString = miservicio.getJSONStringWithParam_POST(Common.SERVICE_API_URL, postParam);
@@ -104,7 +117,6 @@ private EditText apellidos;
                 i.putExtra("contraseña", contraseña.getText().toString());
                 i.putExtra("apellidos", apellidos.getText().toString());
                 i.putExtra("correo", correo.getText().toString());
-               // i.putExtra("confirmar contraseña", confirmarcontraseña.getText().toString());
                 setResult(1, i);
                 finish();
             } else if(integer == Common.RESULT_USER_EXISTS) {
