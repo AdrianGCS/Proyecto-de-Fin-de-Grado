@@ -83,7 +83,7 @@ private EditText apellidos;
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            dialogo = ProgressDialog.show(Registro.this, "Please wait", "Registration processing...", true);
+            dialogo = ProgressDialog.show(Registro.this, "Espere un momento", "Procesando datos...", true);
         }
 
         @Override
@@ -111,7 +111,7 @@ private EditText apellidos;
             super.onPostExecute(integer);
             dialogo.dismiss();
             if(integer == Common.RESULT_SUCCESS) {
-                Toast.makeText(Registro.this, "Registration success", Toast.LENGTH_LONG).show();
+                Toast.makeText(Registro.this, "Registrado con exito", Toast.LENGTH_LONG).show();
                 Intent i = new Intent();
                 i.putExtra("nombre", nombre.getText().toString());
                 i.putExtra("contraseña", contraseña.getText().toString());
@@ -120,9 +120,9 @@ private EditText apellidos;
                 setResult(1, i);
                 finish();
             } else if(integer == Common.RESULT_USER_EXISTS) {
-                Toast.makeText(Registro.this, "Username is exists!", Toast.LENGTH_LONG).show();
+                Toast.makeText(Registro.this, "El usuario ya existe en la base de datos", Toast.LENGTH_LONG).show();
             } else {
-                Toast.makeText(Registro.this, "Registration fail!", Toast.LENGTH_LONG).show();
+                Toast.makeText(Registro.this, "Registro fallido", Toast.LENGTH_LONG).show();
             }
         }
     }
