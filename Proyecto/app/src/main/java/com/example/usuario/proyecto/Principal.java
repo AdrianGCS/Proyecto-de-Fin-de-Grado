@@ -27,7 +27,7 @@ public class Principal extends AppCompatActivity {
             case R.id.llamada:
                 startActivity(new Intent(this,LLamar.class));
                 break;
-            case R.id.mapa:
+            case R.id.localizacion:
                 startActivity(new Intent(this,Localizacion.class));
                 break;
 
