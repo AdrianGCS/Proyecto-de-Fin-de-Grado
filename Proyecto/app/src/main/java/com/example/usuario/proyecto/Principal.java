@@ -22,14 +22,14 @@ public class Principal extends AppCompatActivity {
 
             case R.id.envio:
                 startActivity(new Intent(this,Sms.class));
+
                 break;
             case R.id.llamada:
                 startActivity(new Intent(this,LLamar.class));
                 break;
-            case R.id.localizacion:
-                startActivity(new Intent(this,Registro.class));
+            case R.id.mapa:
+                startActivity(new Intent(this,Localizacion.class));
                 break;
-
 
                  }
         }

@@ -28,22 +28,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Sms"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".LLamar"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".GeneradorQR"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Principal"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Registro"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Login"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".EscanerQr"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".MainActivity"
-            android:screenOrientation="portrait"/>
+        <activity android:name=".Localizacion"></activity>
+        <activity
+            android:name=".Sms"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LLamar"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".GeneradorQR"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Principal"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Registro"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Login"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".EscanerQr"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Splah"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
