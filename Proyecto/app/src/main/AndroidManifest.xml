@@ -28,7 +28,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Localizacion"></activity>
+        <activity android:name=".UnirseEnfermo"></activity>
+        <activity android:name=".CreacionEnfermo" />
+        <activity android:name=".OpcionUser" />
+        <activity android:name=".Localizacion" />
         <activity
             android:name=".Sms"
             android:screenOrientation="portrait" />

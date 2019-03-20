@@ -1,19 +1,16 @@
 package com.example.usuario.proyecto;
 
-import android.accessibilityservice.AccessibilityService;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
-import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -92,13 +89,20 @@ private ProgressDialog dialogo;
            dialogo.dismiss();
             if(Common.RESULT_SUCCESS == result) {
                 Toast.makeText(getApplicationContext(), "Login Correcto", Toast.LENGTH_LONG).show();
-                Intent i = new Intent(getApplicationContext(), Principal.class);
+                Intent i = new Intent(getApplicationContext(), OpcionUser.class);
                 i.putExtra("correo", correouser.getText().toString());
                 startActivity(i);
             } else {
                 Toast.makeText(getApplicationContext(), "Login Mal", Toast.LENGTH_LONG).show();
             }
         }
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(Login.this, Login.class));
+
+        Toast.makeText(getApplicationContext(), "No puede ir atras", Toast.LENGTH_LONG).show();
     }
     }
 

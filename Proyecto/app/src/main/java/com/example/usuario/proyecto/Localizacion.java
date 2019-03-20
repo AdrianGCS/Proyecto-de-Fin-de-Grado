@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
 import com.mapbox.android.core.location.LocationEngine;
 import com.mapbox.android.core.location.LocationEngineListener;
 import com.mapbox.android.core.location.LocationEnginePriority;
@@ -40,56 +41,58 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-public class Localizacion extends AppCompatActivity implements OnMapReadyCallback, LocationEngineListener,PermissionsListener, MapboxMap.OnMapClickListener {
-     private MapView mapView;
-     private MapboxMap map;
-     private PermissionsManager permissionsManager;
-     private LocationEngine locationEngine;
-     private LocationLayerPlugin locationLayerPlugin;
-     private Location originLocation;
-     private Point originPosistion;
-     private Point destinoPosition;
-     private Marker destinomarker;
-     private Button boto;
-     private NavigationMapRoute navigationMapRoute;
-     private static final String TAG="Localizacion";
+
+public class Localizacion extends AppCompatActivity implements OnMapReadyCallback, LocationEngineListener, PermissionsListener, MapboxMap.OnMapClickListener {
+    private MapView mapView;
+    private MapboxMap map;
+    private PermissionsManager permissionsManager;
+    private LocationEngine locationEngine;
+    private LocationLayerPlugin locationLayerPlugin;
+    private Location originLocation;
+    private Point originPosistion;
+    private Point destinoPosition;
+    private Marker destinomarker;
+    private Button boto;
+    private NavigationMapRoute navigationMapRoute;
+    private static final String TAG = "Localizacion";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Mapbox.getInstance(this,getString(R.string.access_token));
+        Mapbox.getInstance(this, getString(R.string.access_token));
         setContentView(R.layout.activity_localizacion);
-        mapView=findViewById(R.id.mapav);
-        boto=findViewById(R.id.boton);
+        mapView = findViewById(R.id.mapav);
+        boto = findViewById(R.id.boton);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
 
         boto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NavigationLauncherOptions options= NavigationLauncherOptions.builder()
+                NavigationLauncherOptions options = NavigationLauncherOptions.builder()
                         .origin(originPosistion)
                         .destination(destinoPosition)
                         .shouldSimulateRoute(true)
                         .build();
                 NavigationLauncher.startNavigation(Localizacion.this, options);
-                
+
             }
         });
 
     }
+
     @Override
     @SuppressWarnings("MissingPermission")
     public void onConnected() {
-     locationEngine.requestLocationUpdates();
+        locationEngine.requestLocationUpdates();
     }
 
     @Override
     public void onLocationChanged(Location location) {
-if(location !=null){
-        originLocation=location;
-        setCamera(location);
-}
+        if (location != null) {
+            originLocation = location;
+            setCamera(location);
+        }
     }
 
     @Override
@@ -99,117 +102,120 @@ if(location !=null){
 
     @Override
     public void onPermissionResult(boolean granted) {
-    if(granted){
-        enableLocation();
-    }
+        if (granted) {
+            enableLocation();
+        }
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-       permissionsManager.onRequestPermissionsResult(requestCode,permissions,grantResults);
+        permissionsManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
     }
 
     @Override
     public void onMapReady(MapboxMap mapboxMap) {
-        map =mapboxMap;
+        map = mapboxMap;
         map.addOnMapClickListener(this);
         enableLocation();
     }
-    private void enableLocation(){
-        if(PermissionsManager.areLocationPermissionsGranted(this)){
+
+    private void enableLocation() {
+        if (PermissionsManager.areLocationPermissionsGranted(this)) {
             inicializa();
             inicializalo();
-        }else{
-            permissionsManager=new PermissionsManager(this);
+        } else {
+            permissionsManager = new PermissionsManager(this);
             permissionsManager.requestLocationPermissions(this);
 
         }
     }
-@SuppressWarnings("MissingPermission")
-    private void inicializa(){
-        locationEngine= new LocationEngineProvider(this).obtainBestLocationEngineAvailable();
-    locationEngine.setPriority(LocationEnginePriority.HIGH_ACCURACY);
-    locationEngine.activate();
 
-    Location lastLocation=locationEngine.getLastLocation();
-    if(lastLocation !=null){
-        originLocation=lastLocation;
-        setCamera(lastLocation);
-        }else{
-        locationEngine.addLocationEngineListener(this);
-    }
-    }
     @SuppressWarnings("MissingPermission")
-    private void inicializalo(){
-locationLayerPlugin=new LocationLayerPlugin(mapView,map,locationEngine);
-locationLayerPlugin.setLocationLayerEnabled(true);
-locationLayerPlugin.setCameraMode(CameraMode.TRACKING);
-locationLayerPlugin.setRenderMode(RenderMode.NORMAL);
+    private void inicializa() {
+        locationEngine = new LocationEngineProvider(this).obtainBestLocationEngineAvailable();
+        locationEngine.setPriority(LocationEnginePriority.HIGH_ACCURACY);
+        locationEngine.activate();
+
+        Location lastLocation = locationEngine.getLastLocation();
+        if (lastLocation != null) {
+            originLocation = lastLocation;
+            setCamera(lastLocation);
+        } else {
+            locationEngine.addLocationEngineListener(this);
+        }
     }
 
-    private void setCamera(Location location){
-        map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(),location.getLongitude()),13.0));
+    @SuppressWarnings("MissingPermission")
+    private void inicializalo() {
+        locationLayerPlugin = new LocationLayerPlugin(mapView, map, locationEngine);
+        locationLayerPlugin.setLocationLayerEnabled(true);
+        locationLayerPlugin.setCameraMode(CameraMode.TRACKING);
+        locationLayerPlugin.setRenderMode(RenderMode.NORMAL);
+    }
+
+    private void setCamera(Location location) {
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude(), location.getLongitude()), 13.0));
 
     }
 
     @Override
     public void onMapClick(@NonNull LatLng point) {
-        if(destinomarker !=null){
+        if (destinomarker != null) {
             map.removeMarker(destinomarker);
         }
-    destinomarker=map.addMarker(new MarkerOptions().position(point));
+        destinomarker = map.addMarker(new MarkerOptions().position(point));
 
-    destinoPosition=Point.fromLngLat(point.getLongitude(),point.getLatitude());
-    originPosistion=Point.fromLngLat(originLocation.getLongitude(),originLocation.getLatitude());
-    getRoute(originPosistion,destinoPosition);
-    boto.setEnabled(true);
-    boto.setBackgroundResource(R.color.mapboxBlue);
+        destinoPosition = Point.fromLngLat(point.getLongitude(), point.getLatitude());
+        originPosistion = Point.fromLngLat(originLocation.getLongitude(), originLocation.getLatitude());
+        getRoute(originPosistion, destinoPosition);
+        boto.setEnabled(true);
+        boto.setBackgroundResource(R.color.mapboxBlue);
     }
 
-    private void getRoute(Point origen,Point destino){
-NavigationRoute.builder()
-        .accessToken(Mapbox.getAccessToken())
-        .origin(origen)
-        .destination(destino)
-        .build()
-        .getRoute(new Callback<DirectionsResponse>() {
-            @Override
-            public void onResponse(Call<DirectionsResponse> call, Response<DirectionsResponse> response) {
-                if(response.body() ==null){
-                    Log.e(TAG,"NO RUTA");
-                    return;
-                }else if(response.body().routes().size() ==0){
-                    Log.e(TAG,"NO RUTA ");
-                    return;
-                }
-                DirectionsRoute currentRoute=response.body().routes().get(0);
-                if(navigationMapRoute !=null){
-                    navigationMapRoute.removeRoute();
-                }else{
-                    navigationMapRoute =new NavigationMapRoute(null,mapView,map);
-                }
+    private void getRoute(Point origen, Point destino) {
+        NavigationRoute.builder()
+                .accessToken(Mapbox.getAccessToken())
+                .origin(origen)
+                .destination(destino)
+                .build()
+                .getRoute(new Callback<DirectionsResponse>() {
+                    @Override
+                    public void onResponse(Call<DirectionsResponse> call, Response<DirectionsResponse> response) {
+                        if (response.body() == null) {
+                            Log.e(TAG, "NO RUTA");
+                            return;
+                        } else if (response.body().routes().size() == 0) {
+                            Log.e(TAG, "NO RUTA ");
+                            return;
+                        }
+                        DirectionsRoute currentRoute = response.body().routes().get(0);
+                        if (navigationMapRoute != null) {
+                            navigationMapRoute.removeRoute();
+                        } else {
+                            navigationMapRoute = new NavigationMapRoute(null, mapView, map);
+                        }
 
-                navigationMapRoute.addRoute(currentRoute);
+                        navigationMapRoute.addRoute(currentRoute);
 
 
-            }
+                    }
 
-            @Override
-            public void onFailure(Call<DirectionsResponse> call, Throwable t) {
-                Log.e(TAG,"ERROR"+t.getMessage());
-            }
-        });
+                    @Override
+                    public void onFailure(Call<DirectionsResponse> call, Throwable t) {
+                        Log.e(TAG, "ERROR" + t.getMessage());
+                    }
+                });
     }
 
     @Override
     @SuppressWarnings("MissingPermission")
     protected void onStart() {
         super.onStart();
-        if(locationEngine !=null){
+        if (locationEngine != null) {
             locationEngine.requestLocationUpdates();
         }
-        if(locationLayerPlugin !=null){
+        if (locationLayerPlugin != null) {
             locationLayerPlugin.onStart();
         }
 
@@ -231,10 +237,10 @@ NavigationRoute.builder()
     @Override
     protected void onStop() {
         super.onStop();
-        if(locationEngine !=null){
+        if (locationEngine != null) {
             locationEngine.removeLocationUpdates();
         }
-        if(locationLayerPlugin !=null){
+        if (locationLayerPlugin != null) {
             locationLayerPlugin.onStop();
         }
         mapView.onStop();
@@ -255,10 +261,10 @@ NavigationRoute.builder()
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if(locationEngine !=null){
+        if (locationEngine != null) {
             locationEngine.deactivate();
         }
-        if(locationLayerPlugin !=null){
+        if (locationLayerPlugin != null) {
             locationLayerPlugin.onStop();
         }
         mapView.onDestroy();

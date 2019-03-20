@@ -112,7 +112,7 @@ private EditText apellidos;
             dialogo.dismiss();
             if(integer == Common.RESULT_SUCCESS) {
                 Toast.makeText(Registro.this, "Registrado con exito", Toast.LENGTH_LONG).show();
-                Intent i = new Intent();
+                Intent i = new Intent(getApplicationContext(), Login.class);
                 i.putExtra("nombre", nombre.getText().toString());
                 i.putExtra("contraseña", contraseña.getText().toString());
                 i.putExtra("apellidos", apellidos.getText().toString());
