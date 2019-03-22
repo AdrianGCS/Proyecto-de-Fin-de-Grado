@@ -72,7 +72,7 @@ public class Localizacion extends AppCompatActivity implements OnMapReadyCallbac
                 NavigationLauncherOptions options = NavigationLauncherOptions.builder()
                         .origin(originPosistion)
                         .destination(destinoPosition)
-                        .shouldSimulateRoute(true)
+                        .shouldSimulateRoute(false)
                         .build();
                 NavigationLauncher.startNavigation(Localizacion.this, options);
 

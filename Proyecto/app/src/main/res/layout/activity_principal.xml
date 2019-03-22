@@ -13,12 +13,12 @@
         android:background="@android:drawable/screen_background_dark_transparent"
         android:gravity="center"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteX="72dp"
         tools:layout_editor_absoluteY="0dp">
 
     </LinearLayout>
 
-    <ImageButton
+    <Button
         android:id="@+id/llamada"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -38,10 +38,10 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.703" />
 
-    <ImageButton
+    <Button
         android:id="@+id/envio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="97dp"
+        android:layout_height="56dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -50,7 +50,6 @@
         android:layout_marginBottom="8dp"
         android:background="@color/zxing_possible_result_points"
         android:onClick="onClick"
-        android:src="@drawable/sms"
         android:text="mensaje"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -61,7 +60,7 @@
 
     <!-- no me va esto no lo entiendo-->
 
-    <ImageButton
+    <Button
         android:id="@+id/loca"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
