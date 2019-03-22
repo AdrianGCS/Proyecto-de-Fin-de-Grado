@@ -22,14 +22,13 @@
 
     <application
 
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="ALZHEIMER POR MADRID"
         android:resizeableActivity="true"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true">
-        --android:theme="@style/AppTheme">
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
         <activity android:name=".UnirseEnfermo"/>
         <activity android:name=".CreacionEnfermo" />
         <activity android:name=".OpcionUser" />
