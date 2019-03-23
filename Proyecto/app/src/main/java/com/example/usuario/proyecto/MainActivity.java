@@ -60,6 +60,7 @@ public void onClick(View v){
 
             case R.id.btnScanBarcode:
                 startActivity(new Intent(MainActivity.this,EscanerQr.class));
+
                 break;
             case R.id.log:
                 startActivity(new Intent(MainActivity.this,Login.class));

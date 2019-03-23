@@ -20,14 +20,14 @@
         android:layout_marginBottom="8dp"
         android:background="@color/zxing_viewfinder_laser"
         android:onClick="onClick"
-        android:textColorHint="#FFFFFF"
         android:text="CREAR"
+        android:textColorHint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.459"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.892" />
+        app:layout_constraintVertical_bias="0.892"/>
 
 
     <EditText
@@ -129,7 +129,7 @@
         android:drawableLeft="@mipmap/ic_telefono"
         android:ems="10"
         android:hint="Telefono de Contacto"
-        android:inputType="text"
+        android:inputType="phone"
         android:selectAllOnFocus="true"
         android:textColor="@color/zxing_status_text"
         android:textColorHint="#fff"
@@ -161,7 +161,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.014"
-        app:srcCompat="@drawable/a" />
+        app:srcCompat="@drawable/ss" />
 
 
 </android.support.constraint.ConstraintLayout>
