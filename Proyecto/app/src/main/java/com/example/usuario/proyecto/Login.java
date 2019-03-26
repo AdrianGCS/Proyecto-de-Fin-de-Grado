@@ -100,14 +100,6 @@ public class Login extends AppCompatActivity {
             }
         }
     }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        startActivity(new Intent(Login.this, Login.class));
-
-        Toast.makeText(getApplicationContext(), "No puede ir atras", Toast.LENGTH_LONG).show();
-    }
 }
 
 
