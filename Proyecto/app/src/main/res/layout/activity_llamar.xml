@@ -53,7 +53,7 @@
             android:inputType="phone"
             android:selectAllOnFocus="true"
             android:textAllCaps="false"
-            android:textColor="@color/common_google_signin_btn_text_dark_pressed"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
             android:textColorHint="#000000"
             android:typeface="normal"
             android:visibility="visible"
