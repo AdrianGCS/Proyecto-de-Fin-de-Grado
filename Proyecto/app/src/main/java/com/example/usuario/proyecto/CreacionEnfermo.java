@@ -50,10 +50,11 @@ private int a;
         telefono = findViewById(R.id.telefono);
         miser = new AccessServiceAPI();
         boto = findViewById(R.id.entrar);
+        calle= findViewById(R.id.direccion);
     }
 
     public void onClick(View view) {
-        Pattern pattern = Pattern.compile("^(?:(?:\\+|00)?34)?[89]\\d{8}$");
+      //  Pattern pattern = Pattern.compile("^(?:(?:\\+|00)?34)?[89]\\d{8}$");
         if ("".equals(nombre.getText().toString())) {
             nombre.setError("Introduce el nombre");
             return;
@@ -66,11 +67,11 @@ private int a;
             telefono.setError("Introduce el telefono");
             return;
         }
-        Matcher mather = pattern.matcher(telefono.getText());
-        if (mather.find() == false) {
+        //Matcher mather = pattern.matcher(telefono.getText());
+       /* if (mather.find() == false) {
             telefono.setError("Introduce telefono valido");
             return;
-        }
+        }*/
         new TaskRegister().execute(nombre.getText().toString(), apellidos.getText().toString(), telefono.getText().toString(),calle.getText().toString());
 
     }
