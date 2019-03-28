@@ -40,7 +40,7 @@ public class CreacionEnfermo extends AppCompatActivity {
     private Dialog midialogo;
     private Button boto;
     ImageView qr;
-
+private int a;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +71,7 @@ public class CreacionEnfermo extends AppCompatActivity {
             telefono.setError("Introduce telefono valido");
             return;
         }
-        new TaskRegister().execute(nombre.getText().toString(), apellidos.getText().toString(), telefono.getText().toString());
+        new TaskRegister().execute(nombre.getText().toString(), apellidos.getText().toString(), telefono.getText().toString(),calle.getText().toString());
 
     }
 
@@ -87,16 +87,19 @@ public class CreacionEnfermo extends AppCompatActivity {
         @Override
         protected Integer doInBackground(String... params) {
             Map<String, String> postParam = new HashMap<>();
-            postParam.put("action", "add");
+            postParam.put("action", "enfermo");
             postParam.put("username", params[0]);
             postParam.put("phone", params[1]);
-            //postParam.put("adress", params[2]); opcional ya que es la direccion
+            postParam.put("adress", params[2]);
             postParam.put("lastname", params[3]);
+            //postParam.put("qr", params[4]);
             //llama al PHP
             try {
                 String jsonString = miser.getJSONStringWithParam_POST(Common.SERVICE_API_URL, postParam);
                 JSONObject jsonObject = new JSONObject(jsonString);
+               // a=jsonObject.getInt("id");
                 return jsonObject.getInt("result");
+
             } catch (Exception e) {
                 e.printStackTrace();
                 return Common.RESULT_ERROR;
@@ -126,7 +129,7 @@ public class CreacionEnfermo extends AppCompatActivity {
         }
     }
 
-    /*private void tomar() {
+/*    private void tomar() {
         boto.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -149,8 +152,8 @@ public class CreacionEnfermo extends AppCompatActivity {
             }
         });
     }
-
-    public void nume() {
+*/
+    /*public void nume() {
         char[] chars = "0123456789abcdefghijklmnopqrstuvwxyz".toCharArray();
         int s = chars.length;
 

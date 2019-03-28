@@ -26,7 +26,10 @@ public class GeneradorQR extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_generador_qr);
-        inicializa();
+        texto = (EditText) findViewById(R.id.texto);
+        convertir = (Button) findViewById(R.id.convertir);
+        qr = (ImageView) findViewById(R.id.qr);
+        texto2 = (EditText) findViewById(R.id.texto2);
         tomar();
     }
 
@@ -34,22 +37,7 @@ public class GeneradorQR extends AppCompatActivity {
         convertir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-                char[] chars = "0123456789abcdefghijklmnopqrstuvwxyz".toCharArray();
-                int s = chars.length;
-
-                Random random = new Random();
-                StringBuffer buffer = new StringBuffer();
-                for (int i = 0; i < 5; i++) {
-                    buffer.append(chars[random.nextInt(chars.length)]);
-
-                }
-                String c= buffer.toString();
-
-
-
-                String a = texto.getText().toString() + "/" + texto2.getText().toString()+"/"+c.toString();
+                String a = texto.getText().toString() + "/" + texto2.getText().toString()+"/";
                 MultiFormatWriter formaescribir = new MultiFormatWriter();
                 try {
                     BitMatrix codigo = formaescribir.encode(a, BarcodeFormat.QR_CODE, 164, 196);
@@ -64,12 +52,6 @@ public class GeneradorQR extends AppCompatActivity {
         });
     }
 
-    private void inicializa() {
-        texto = (EditText) findViewById(R.id.texto);
-        convertir = (Button) findViewById(R.id.convertir);
-        qr = (ImageView) findViewById(R.id.qr);
-        texto2 = (EditText) findViewById(R.id.texto2);
-    }
 
 
 }
