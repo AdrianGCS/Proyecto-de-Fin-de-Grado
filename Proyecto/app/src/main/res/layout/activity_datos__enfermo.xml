@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@drawable/fondo2"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/qr"
+        android:layout_width="183dp"
+        android:layout_height="103dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.448"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.779" />
+
+    <EditText
+            android:id="@+id/Name"
+            android:layout_width="164dp"
+            android:layout_height="44dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Name"
+            android:textColor="@color/mapbox_navigation_view_color_accent_dark"
+            tools:layout_editor_absoluteX="203dp"
+            tools:layout_editor_absoluteY="37dp"
+            tools:text="Nombre"
+            tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/apellidos"
+        android:layout_width="164dp"
+        android:layout_height="44dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Apellidos"
+        android:textColor="@color/mapbox_navigation_view_color_accent_dark"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="201dp"
+        tools:layout_editor_absoluteY="109dp"
+        tools:text="Apellidos" />
+
+    <EditText
+        android:id="@+id/telefono"
+        android:layout_width="164dp"
+        android:layout_height="44dp"
+        android:ems="10"
+        android:inputType="phone"
+        android:text="Telefono"
+        android:textColor="@color/mapbox_navigation_view_color_accent_dark"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="37dp"
+        tools:layout_editor_absoluteY="318dp"
+        tools:text="Telefono" />
+
+    <EditText
+        android:id="@+id/direccion"
+        android:layout_width="164dp"
+        android:layout_height="44dp"
+        android:ems="10"
+        android:inputType="phone"
+        android:text="Direccion"
+        android:textColor="@color/mapbox_navigation_view_color_accent_dark"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="37dp"
+        tools:layout_editor_absoluteY="404dp"
+        tools:text="Direccion" />
+
+    <Button
+            android:id="@+id/button2"
+            android:layout_width="162dp"
+            android:layout_height="48dp"
+            android:text="Salir"
+            tools:layout_editor_absoluteX="124dp"
+            tools:layout_editor_absoluteY="635dp"
+            tools:ignore="MissingConstraints" />
+
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="144dp"
+        android:layout_height="149dp"
+        tools:layout_editor_absoluteX="45dp"
+        tools:layout_editor_absoluteY="38dp"
+        tools:srcCompat="@tools:sample/avatars"
+        tools:ignore="MissingConstraints" />
+
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="221dp"
+        android:layout_height="20dp"
+        android:text="Datos Personales"
+        android:textColor="@color/common_google_signin_btn_text_dark_pressed"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="45dp"
+        tools:layout_editor_absoluteY="263dp" />
+
+
+</android.support.constraint.ConstraintLayout>

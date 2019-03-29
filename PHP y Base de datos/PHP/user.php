@@ -4,6 +4,7 @@ include("PDOConnection.php");
 //Define some value
 define("ACTION_ADD_USER", "add");
 define("ACTION_LOGIN", "login");
+define("ACTION_ENFERMO", "enfermo");
 define("RESULT_SUCCESS", 0);
 define("RESULT_ERROR", 1);
 define("RESULT_USER_EXISTS", 2);
@@ -18,9 +19,8 @@ if(isset($action))
 	$username = $_POST["username"];
 	$mail = $_POST["mail"];
 	$pwd = $_POST["password"];
-	
 	$lastname = $_POST["lastname"];
-	$id;
+	$id = 0;
 
 	if(ACTION_ADD_USER == $action)
 	{
@@ -37,18 +37,39 @@ if(isset($action))
 		}
 	}
 	else{
-		if(login($cnn, $mail, $pwd))
+		if(ACTION_ENFERMO == $action)
 		{
-			$result = RESULT_SUCCESS;
-		}
-		else
-		{
-			$result = RESULT_ERROR;
+				$phone = $_POST["phone"];
+				$adress = $_POST["adress"];
+				$id=insertEnfermo($cnn, $id, $username ,$lastname, $phone, $adress );
+				$result = RESULT_SUCCESS;
+			}
+		else{
+
+			if(login($cnn, $mail, $pwd))
+			{
+				$result = RESULT_SUCCESS;
+			}
+			else
+			{
+				$result = RESULT_ERROR;
+			}
 		}
 	}
 }
 //Print result as json
-echo(json_encode(array('result' => $result)));
+echo(json_encode(array('result' => $result , 'id' => $id)));
+
+function insertEnfermo($cnn, $id, $username ,$lastname, $phone, $adress )
+{
+
+	$query = "INSERT INTO CUENTA(ID_USUARIO , NOMBRE, APELLIDO, TELEFONO_CONTACTO, DIRECCION) VALUES(?, ?, ?, ?, ?)";
+	$stmt = $cnn->prepare($query);
+	$stmt->bind_param("issis", $id, $username ,$lastname, $phone, $adress );
+	$stmt->execute();
+	return $cnn->insert_id;
+
+}
 
 
 function insertCuenta($cnn, $mail, $pwd, $id)

@@ -21,7 +21,6 @@
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <application
-
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="ALZHEIMER POR MADRID"
@@ -29,7 +28,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UnirseEnfermo"/>
+        <activity android:name=".Datos_Enfermo"></activity>
+        <activity android:name=".UnirseEnfermo" />
         <activity android:name=".CreacionEnfermo" />
         <activity android:name=".OpcionUser" />
         <activity android:name=".Localizacion" />
@@ -66,9 +66,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
-
     </application>
 
 </manifest>
