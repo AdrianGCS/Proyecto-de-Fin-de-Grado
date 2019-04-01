@@ -20,16 +20,13 @@ public class GeneradorQR extends AppCompatActivity {
     EditText texto;
     EditText texto2;
     Button convertir;
-    ImageView qr;
+    ImageView foto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_generador_qr);
-        texto = (EditText) findViewById(R.id.texto);
-        convertir = (Button) findViewById(R.id.convertir);
-        qr = (ImageView) findViewById(R.id.qr);
-        texto2 = (EditText) findViewById(R.id.texto2);
+        inicializa();
         tomar();
     }
 
@@ -37,13 +34,17 @@ public class GeneradorQR extends AppCompatActivity {
         convertir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String a = texto.getText().toString() + "/" + texto2.getText().toString()+"/";
+                darle();
+            }
+
+            private void darle() {
+                String a = texto.getText().toString() + "/" + texto2.getText().toString() + "/";
                 MultiFormatWriter formaescribir = new MultiFormatWriter();
                 try {
                     BitMatrix codigo = formaescribir.encode(a, BarcodeFormat.QR_CODE, 164, 196);
                     BarcodeEncoder codigoqr = new BarcodeEncoder();
                     Bitmap bit = codigoqr.createBitmap(codigo);
-                    qr.setImageBitmap(bit);
+                    foto.setImageBitmap(bit);
 
                 } catch (WriterException e) {
                     e.printStackTrace();
@@ -54,4 +55,19 @@ public class GeneradorQR extends AppCompatActivity {
 
 
 
+    private void inicializa() {
+        texto = (EditText) findViewById(R.id.texto);
+        convertir = (Button) findViewById(R.id.convertir);
+        foto= (ImageView) findViewById(R.id.qr2);
+        texto = (EditText) findViewById(R.id.texto);
+        convertir = (Button) findViewById(R.id.convertir);
+        foto = (ImageView) findViewById(R.id.qr2);
+        texto2 = (EditText) findViewById(R.id.texto2);
+    }
 }
+
+
+
+
+
+
