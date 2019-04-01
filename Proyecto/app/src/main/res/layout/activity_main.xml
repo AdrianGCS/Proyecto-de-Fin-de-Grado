@@ -106,13 +106,5 @@
         app:layout_constraintVertical_bias="0.07"
         app:srcCompat="@drawable/ss" />
 
-    <TextView
-        android:id="@+id/imiei"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="282dp"
-        tools:layout_editor_absoluteY="530dp" />
-
 
 </android.support.constraint.ConstraintLayout>
