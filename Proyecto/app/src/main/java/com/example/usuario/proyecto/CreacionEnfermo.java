@@ -40,7 +40,7 @@ public class CreacionEnfermo extends AppCompatActivity {
     private Dialog midialogo;
     private Button boto;
     ImageView qr;
-private int a;
+    private String a;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,15 +90,26 @@ private int a;
             Map<String, String> postParam = new HashMap<>();
             postParam.put("action", "enfermo");
             postParam.put("username", params[0]);
-            postParam.put("phone", params[1]);
-            postParam.put("adress", params[2]);
-            postParam.put("lastname", params[3]);
+            postParam.put("phone", params[2]);
+            postParam.put("adress", params[3]);
+            postParam.put("lastname", params[1]);
             //postParam.put("qr", params[4]);
             //llama al PHP
             try {
                 String jsonString = miser.getJSONStringWithParam_POST(Common.SERVICE_API_URL, postParam);
                 JSONObject jsonObject = new JSONObject(jsonString);
-               // a=jsonObject.getInt("id");
+               a=jsonObject.getString("Encriptado");
+                MultiFormatWriter formaescribir = new MultiFormatWriter();
+                try {
+                    BitMatrix codigo = formaescribir.encode(a, BarcodeFormat.QR_CODE, 164, 196);
+                    BarcodeEncoder codigoqr = new BarcodeEncoder();
+                    Bitmap bit = codigoqr.createBitmap(codigo);
+                    qr.setImageBitmap(bit);
+
+                } catch (WriterException e) {
+                    e.printStackTrace();
+                }
+
                 return jsonObject.getInt("result");
 
             } catch (Exception e) {
