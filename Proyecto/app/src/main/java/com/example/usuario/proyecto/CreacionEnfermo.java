@@ -40,7 +40,7 @@ public class CreacionEnfermo extends AppCompatActivity {
     private Dialog midialogo;
     private Button boto;
     ImageView qr;
-private int a;
+    private String a;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +51,7 @@ private int a;
         miser = new AccessServiceAPI();
         boto = findViewById(R.id.entrar);
         calle= findViewById(R.id.direccion);
+        qr=findViewById(R.id.qr3);
     }
 
     public void onClick(View view) {
@@ -90,22 +91,25 @@ private int a;
             Map<String, String> postParam = new HashMap<>();
             postParam.put("action", "enfermo");
             postParam.put("username", params[0]);
-            postParam.put("phone", params[1]);
-            postParam.put("adress", params[2]);
-            postParam.put("lastname", params[3]);
+            postParam.put("phone", params[2]);
+            postParam.put("adress", params[3]);
+            postParam.put("lastname", params[1]);
             //postParam.put("qr", params[4]);
             //llama al PHP
-            try {
-                String jsonString = miser.getJSONStringWithParam_POST(Common.SERVICE_API_URL, postParam);
-                JSONObject jsonObject = new JSONObject(jsonString);
-               // a=jsonObject.getInt("id");
-                return jsonObject.getInt("result");
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                return Common.RESULT_ERROR;
-            }
-
+           // if(!a.toString().equals("8")) {
+                try {
+                    String jsonString = miser.getJSONStringWithParam_POST(Common.SERVICE_API_URL, postParam);
+                    JSONObject jsonObject = new JSONObject(jsonString);
+                   a = jsonObject.getString("Encriptado");
+                    darle(a);
+                    return jsonObject.getInt("result");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    return Common.RESULT_ERROR;
+                }
+            /*}else{
+                return 1;
+            }*/
 
         }
 
@@ -115,7 +119,7 @@ private int a;
             midialogo.dismiss();
             if (integer == Common.RESULT_SUCCESS) {
                 Toast.makeText(CreacionEnfermo.this, "Registrado con exito", Toast.LENGTH_LONG).show();
-                Intent i = new Intent(getApplicationContext(), Login.class);
+                Intent i =new Intent(getApplicationContext(), CreacionEnfermo.class);
                 i.putExtra("nombre", nombre.getText().toString());
                 i.putExtra("apellidos", apellidos.getText().toString());
                 i.putExtra("telefono", telefono.getText().toString());
@@ -130,16 +134,10 @@ private int a;
         }
     }
 
-/*    private void tomar() {
-        boto.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                darle();
-            }
 
-            private void darle() {
-                String a = nombre.getText().toString() + "/" + apellidos.getText().toString() + "/";
+            private void darle(String c) {
+                //c = nombre.getText().toString() + "/" + apellidos.getText().toString() + "/";
                 MultiFormatWriter formaescribir = new MultiFormatWriter();
                 try {
                     BitMatrix codigo = formaescribir.encode(a, BarcodeFormat.QR_CODE, 164, 196);
@@ -151,19 +149,6 @@ private int a;
                     e.printStackTrace();
                 }
             }
-        });
-    }
-*/
-    /*public void nume() {
-        char[] chars = "0123456789abcdefghijklmnopqrstuvwxyz".toCharArray();
-        int s = chars.length;
 
-        Random random = new Random();
-        StringBuffer buffer = new StringBuffer();
-        for (int i = 0; i < 5; i++) {
-            buffer.append(chars[random.nextInt(chars.length)]);
 
-        }
-        buffer.toString();
-    }*/
 }
