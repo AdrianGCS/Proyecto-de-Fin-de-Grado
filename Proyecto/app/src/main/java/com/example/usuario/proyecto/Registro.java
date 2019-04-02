@@ -38,6 +38,7 @@ private EditText apellidos;
         contraseña=(EditText)findViewById(R.id.contaseña);
         confirmarcontraseña=(EditText)findViewById(R.id.confirmacontraseña);
         miservicio = new AccessServiceAPI();
+
     }
 
     public void onClick(View view){
@@ -98,6 +99,7 @@ private EditText apellidos;
             try{
                 String jsonString = miservicio.getJSONStringWithParam_POST(Common.SERVICE_API_URL, postParam);
                 JSONObject jsonObject = new JSONObject(jsonString);
+                int ID = jsonObject.getInt("id");
                 return jsonObject.getInt("result");
             }catch (Exception e) {
                 e.printStackTrace();
