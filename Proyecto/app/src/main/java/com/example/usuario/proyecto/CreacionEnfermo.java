@@ -1,5 +1,6 @@
 package com.example.usuario.proyecto;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
+import android.app.Activity;
 
 import java.lang.String;
 
@@ -39,8 +41,9 @@ public class CreacionEnfermo extends AppCompatActivity {
     private AccessServiceAPI miser;
     private Dialog midialogo;
     private Button boto;
-   private ImageView qr;
+    private ImageView qr;
     private String a;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,12 +53,12 @@ public class CreacionEnfermo extends AppCompatActivity {
         telefono = findViewById(R.id.telefono);
         miser = new AccessServiceAPI();
         boto = findViewById(R.id.entrar);
-        calle= findViewById(R.id.direccion);
-        qr=findViewById(R.id.qr3);
+        calle = findViewById(R.id.direccion);
+        qr = findViewById(R.id.qr3);
     }
 
     public void onClick(View view) {
-      //  Pattern pattern = Pattern.compile("^(?:(?:\\+|00)?34)?[89]\\d{8}$");
+        //  Pattern pattern = Pattern.compile("^(?:(?:\\+|00)?34)?[89]\\d{8}$");
         if ("".equals(nombre.getText().toString())) {
             nombre.setError("Introduce el nombre");
             return;
@@ -73,7 +76,7 @@ public class CreacionEnfermo extends AppCompatActivity {
             telefono.setError("Introduce telefono valido");
             return;
         }*/
-        new TaskRegister().execute(nombre.getText().toString(), apellidos.getText().toString(), telefono.getText().toString(),calle.getText().toString());
+        new TaskRegister().execute(nombre.getText().toString(), apellidos.getText().toString(), telefono.getText().toString(), calle.getText().toString());
 
     }
 
@@ -97,26 +100,27 @@ public class CreacionEnfermo extends AppCompatActivity {
             //postParam.put("qr", params[4]);
             //llama al PHP
 
-                try {
-                    String jsonString = miser.getJSONStringWithParam_POST(Common.SERVICE_API_URL, postParam);
-                    JSONObject jsonObject = new JSONObject(jsonString);
-                   a = jsonObject.getString("Encriptado");
+            try {
+                String jsonString = miser.getJSONStringWithParam_POST(Common.SERVICE_API_URL, postParam);
+                JSONObject jsonObject = new JSONObject(jsonString);
+                a = jsonObject.getString("Encriptado");
 
-                    if(!a.equals("8")) {
+                if (!a.equals("8")) {
                     darle(a);
                     return jsonObject.getInt("result");
 
-                    }else{
-                        return 1;
-                    }
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    return Common.RESULT_ERROR;
+                } else {
+                    return 1;
                 }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                return Common.RESULT_ERROR;
+            }
 
 
         }
+
 
         @Override
         protected void onPostExecute(Integer integer) {
@@ -124,36 +128,39 @@ public class CreacionEnfermo extends AppCompatActivity {
             midialogo.dismiss();
             if (integer == Common.RESULT_SUCCESS) {
                 Toast.makeText(CreacionEnfermo.this, "Registrado con exito", Toast.LENGTH_LONG).show();
-                Intent i =new Intent(getApplicationContext(), CreacionEnfermo.class);
+                Intent i = new Intent(getApplicationContext(), Datos_Enfermo.class);
                 i.putExtra("nombre", nombre.getText().toString());
                 i.putExtra("apellidos", apellidos.getText().toString());
                 i.putExtra("telefono", telefono.getText().toString());
                 i.putExtra("direccion", calle.getText().toString());
                 setResult(1, i);
+                pasar();
                 finish();
+
             } else if (integer == Common.RESULT_USER_EXISTS) {
                 Toast.makeText(CreacionEnfermo.this, "El usuario ya existe en la base de datos", Toast.LENGTH_LONG).show();
-            } else {
+            } else{
                 Toast.makeText(CreacionEnfermo.this, "Registro fallido", Toast.LENGTH_LONG).show();
             }
         }
     }
 
 
+    private void darle(String c) {
+        //c = nombre.getText().toString() + "/" + apellidos.getText().toString() + "/";
+        MultiFormatWriter formaescribir = new MultiFormatWriter();
+        try {
+            BitMatrix codigo = formaescribir.encode(a, BarcodeFormat.QR_CODE, 164, 196);
+            BarcodeEncoder codigoqr = new BarcodeEncoder();
+            Bitmap bit = codigoqr.createBitmap(codigo);
+            //qr.setImageBitmap(bit);
 
-            private void darle(String c) {
-                //c = nombre.getText().toString() + "/" + apellidos.getText().toString() + "/";
-                MultiFormatWriter formaescribir = new MultiFormatWriter();
-                try {
-                    BitMatrix codigo = formaescribir.encode(a, BarcodeFormat.QR_CODE, 164, 196);
-                    BarcodeEncoder codigoqr = new BarcodeEncoder();
-                    Bitmap bit = codigoqr.createBitmap(codigo);
-                    qr.setImageBitmap(bit);
+        } catch (WriterException e) {
+            e.printStackTrace();
+        }
+    }
 
-                } catch (WriterException e) {
-                    e.printStackTrace();
-                }
-            }
-
-
+    private void pasar() {
+        startActivity(new Intent(this, Datos_Enfermo.class));
+    }
 }
