@@ -39,7 +39,7 @@ public class CreacionEnfermo extends AppCompatActivity {
     private AccessServiceAPI miser;
     private Dialog midialogo;
     private Button boto;
-    ImageView qr;
+   private ImageView qr;
     private String a;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,20 +96,25 @@ public class CreacionEnfermo extends AppCompatActivity {
             postParam.put("lastname", params[1]);
             //postParam.put("qr", params[4]);
             //llama al PHP
-           // if(!a.toString().equals("8")) {
+
                 try {
                     String jsonString = miser.getJSONStringWithParam_POST(Common.SERVICE_API_URL, postParam);
                     JSONObject jsonObject = new JSONObject(jsonString);
                    a = jsonObject.getString("Encriptado");
+
+                    if(!a.equals("8")) {
                     darle(a);
                     return jsonObject.getInt("result");
+
+                    }else{
+                        return 1;
+                    }
+
                 } catch (Exception e) {
                     e.printStackTrace();
                     return Common.RESULT_ERROR;
                 }
-            /*}else{
-                return 1;
-            }*/
+
 
         }
 
