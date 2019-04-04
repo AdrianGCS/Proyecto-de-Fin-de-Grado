@@ -77,6 +77,7 @@ public class Login extends AppCompatActivity {
             try {
 
                 jObjResult = miservicio.convertJSONString2Obj(miservicio.getJSONStringWithParam_POST(Common.SERVICE_API_URL, param));
+                int x=jObjResult.getInt("id");
                 return jObjResult.getInt("result");
             } catch (Exception e) {
                 return Common.RESULT_ERROR;
