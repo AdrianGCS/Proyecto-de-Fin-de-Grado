@@ -30,17 +30,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MenuUser"
-            android:screenOrientation="portrait" />/>
+            android:screenOrientation="portrait" />
         <activity android:name=".Datos_Enfermo"
-            android:screenOrientation="portrait" />/>
+            android:screenOrientation="portrait" />
         <activity android:name=".UnirseEnfermo"
-            android:screenOrientation="portrait" />/>
+            android:screenOrientation="portrait" />
         <activity android:name=".CreacionEnfermo"
-            android:screenOrientation="portrait" />/>
+            android:screenOrientation="portrait" />
         <activity android:name=".OpcionUser"
-            android:screenOrientation="portrait" />/>
+            android:screenOrientation="portrait"
+        />
         <activity android:name=".Localizacion"
-            android:screenOrientation="portrait" />/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Sms"
             android:screenOrientation="portrait" />

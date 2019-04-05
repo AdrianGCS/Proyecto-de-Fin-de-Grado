@@ -21,7 +21,7 @@ public class Login extends AppCompatActivity {
     private EditText passuser;
     private AccessServiceAPI miservicio;
     private ProgressDialog dialogo;
-
+    public static int x;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,7 +77,7 @@ public class Login extends AppCompatActivity {
             try {
 
                 jObjResult = miservicio.convertJSONString2Obj(miservicio.getJSONStringWithParam_POST(Common.SERVICE_API_URL, param));
-                int x=jObjResult.getInt("id");
+                 x=jObjResult.getInt("id");
                 return jObjResult.getInt("result");
             } catch (Exception e) {
                 return Common.RESULT_ERROR;
