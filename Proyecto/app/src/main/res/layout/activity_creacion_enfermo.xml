@@ -154,6 +154,7 @@
         android:textStyle="bold"
         android:typeface="normal"
         android:visibility="visible"
+        android:maxLength="9"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.353"

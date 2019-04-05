@@ -3,9 +3,12 @@ package com.example.usuario.proyecto;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.app.WallpaperManager;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -43,7 +46,7 @@ public class CreacionEnfermo extends AppCompatActivity {
     private Button boto;
     private ImageView qr;
     private String a;
-
+     public static Bitmap bitmap;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +58,7 @@ public class CreacionEnfermo extends AppCompatActivity {
         boto = findViewById(R.id.entrar);
         calle = findViewById(R.id.direccion);
         qr = findViewById(R.id.qr3);
+
     }
 
     public void onClick(View view) {
@@ -69,6 +73,10 @@ public class CreacionEnfermo extends AppCompatActivity {
         }
         if ("".equals(telefono.getText().toString())) {
             telefono.setError("Introduce el telefono");
+            return;
+        }
+        if(telefono.getText().length()<9){
+            telefono.setError("Introduce un numero de telefono correcto");
             return;
         }
         //Matcher mather = pattern.matcher(telefono.getText());
@@ -129,12 +137,14 @@ public class CreacionEnfermo extends AppCompatActivity {
             if (integer == Common.RESULT_SUCCESS) {
                 Toast.makeText(CreacionEnfermo.this, "Registrado con exito", Toast.LENGTH_LONG).show();
                 Intent i = new Intent(getApplicationContext(), Datos_Enfermo.class);
-                i.putExtra("nombre", nombre.getText().toString());
-                i.putExtra("apellidos", apellidos.getText().toString());
-                i.putExtra("telefono", telefono.getText().toString());
-                i.putExtra("direccion", calle.getText().toString());
+                i.putExtra("nombre", nombre.getText()+"");
+                i.putExtra("apellidos", apellidos.getText()+"");
+                i.putExtra("telefono", telefono.getText()+"");
+                i.putExtra("direccion", calle.getText()+"");
+                i.putExtra("BitmapImage",  bitmap);
                 setResult(1, i);
-                pasar();
+                startActivity(i);
+
                 finish();
 
             } else if (integer == Common.RESULT_USER_EXISTS) {
@@ -146,21 +156,18 @@ public class CreacionEnfermo extends AppCompatActivity {
     }
 
 
-    private void darle(String c) {
+    public void darle(String c) {
         //c = nombre.getText().toString() + "/" + apellidos.getText().toString() + "/";
         MultiFormatWriter formaescribir = new MultiFormatWriter();
         try {
             BitMatrix codigo = formaescribir.encode(a, BarcodeFormat.QR_CODE, 164, 196);
             BarcodeEncoder codigoqr = new BarcodeEncoder();
-            Bitmap bit = codigoqr.createBitmap(codigo);
-            //qr.setImageBitmap(bit);
-
+            bitmap = codigoqr.createBitmap(codigo);
+        // qr.setImageBitmap(bit);
         } catch (WriterException e) {
             e.printStackTrace();
         }
     }
 
-    private void pasar() {
-        startActivity(new Intent(this, Datos_Enfermo.class));
-    }
+
 }

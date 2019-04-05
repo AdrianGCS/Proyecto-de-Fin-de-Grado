@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/descarga"
     tools:context=".LLamar">
+
     <android.support.constraint.ConstraintLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
@@ -15,6 +16,7 @@
         android:gravity="center"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp">
+
         <Button
             android:id="@+id/llamar"
             android:layout_width="239dp"
@@ -38,6 +40,7 @@
 
         <EditText
             android:id="@+id/telefono"
+            android:maxLength="9"
             android:layout_width="237dp"
             android:layout_height="33dp"
             android:layout_marginStart="8dp"
@@ -64,7 +67,6 @@
             app:layout_constraintTop_toTopOf="parent"
 
             app:layout_constraintVertical_bias="0.571" />
-
 
 
         <ImageView

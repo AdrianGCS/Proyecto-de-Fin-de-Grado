@@ -52,6 +52,7 @@
             android:drawableLeft="@mipmap/ic_telefono"
             android:ems="10"
             android:hint="Telefono"
+            android:maxLength="9"
             android:inputType="phone"
             android:selectAllOnFocus="true"
             android:textAllCaps="false"
