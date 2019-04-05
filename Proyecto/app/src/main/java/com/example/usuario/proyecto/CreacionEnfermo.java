@@ -79,6 +79,10 @@ public class CreacionEnfermo extends AppCompatActivity {
             telefono.setError("Introduce un numero de telefono correcto");
             return;
         }
+        if(!telefono.getText().equals("7") ||!telefono.getText().equals("6") ||!telefono.getText().equals("9") ){
+            telefono.setError("Introduce un numero de telefono correcto");
+            return;
+        }
         //Matcher mather = pattern.matcher(telefono.getText());
        /* if (mather.find() == false) {
             telefono.setError("Introduce telefono valido");
