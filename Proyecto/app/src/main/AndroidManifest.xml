@@ -15,7 +15,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.SEND_SMS" />
-
+<uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
@@ -29,18 +29,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MenuUser"
+        <activity android:name=".Condiciones"></activity>
+        <activity
+            android:name=".MenuUser"
             android:screenOrientation="portrait" />
-        <activity android:name=".Datos_Enfermo"
+        <activity
+            android:name=".Datos_Enfermo"
             android:screenOrientation="portrait" />
-        <activity android:name=".UnirseEnfermo"
+        <activity
+            android:name=".UnirseEnfermo"
             android:screenOrientation="portrait" />
-        <activity android:name=".CreacionEnfermo"
+        <activity
+            android:name=".CreacionEnfermo"
             android:screenOrientation="portrait" />
-        <activity android:name=".OpcionUser"
-            android:screenOrientation="portrait"
-        />
-        <activity android:name=".Localizacion"
+        <activity
+            android:name=".OpcionUser"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Localizacion"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Sms"
@@ -66,7 +72,6 @@
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".Splah"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">

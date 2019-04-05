@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
 Button btnScanBarcode,registro,log,otra;
     private MapView mapView;
     private TextView Datos;
+    
     public MainActivity() {
     }
 
