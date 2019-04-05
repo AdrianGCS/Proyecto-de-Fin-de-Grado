@@ -71,8 +71,6 @@ public class Login extends AppCompatActivity {
             param.put("password", params[1]);
             param.put("mail", params[0]);
 
-            param.put("alpo", "1");//esto lo pasa pero como nulo
-
             JSONObject jObjResult;
             try {
 

@@ -30,11 +30,7 @@ import java.sql.Statement;
 public class MainActivity extends AppCompatActivity implements  View.OnClickListener{
 Button btnScanBarcode,registro,log,otra;
     private MapView mapView;
-    private static final String url ="jdbc:mysql://85.56.88.205:3306/proyecto";
-    private static final String user = "Consultas";
-    private static final String pass = "Consultas";
     private TextView Datos;
-
     public MainActivity() {
     }
 
@@ -76,39 +72,7 @@ public void onClick(View v){
         }
 }
 
-    private class MyTask extends AsyncTask<Void, Void, Void> {
-        private String fName = "";
 
-        @Override
-        protected Void doInBackground(Void... arg0) {
-            try {
-                Class.forName("com.mysql.jdbc.Driver");
-                Connection con = DriverManager.getConnection(url, user, pass);
-
-                Statement st = con.createStatement();
-
-                final ResultSet rs = st.executeQuery("SELECT Nombre FROM `usuario` where ID=1");
-                rs.next();
-                fName = rs.getString(1);
-
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-
-            Datos.setText(fName);
-
-            super.onPostExecute(result);
-        }
 
 
     }
-
-    
-
-}
