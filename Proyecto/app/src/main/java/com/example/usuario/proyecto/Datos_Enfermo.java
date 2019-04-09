@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Datos_Enfermo extends AppCompatActivity {
     private Button boto;
@@ -45,6 +46,14 @@ public class Datos_Enfermo extends AppCompatActivity {
         Intent id=getIntent();
         Bitmap bitmap=(Bitmap) getIntent().getParcelableExtra("BitmapImage");
         image.setImageBitmap(bitmap);
+
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        startActivity(new Intent(this,MainActivity.class));
+
 
     }
 }

@@ -22,7 +22,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.779" />
+        app:layout_constraintVertical_bias="0.799" />
 
     <TextView
         android:id="@+id/nombre"
@@ -60,7 +60,7 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Nombre"
-        android:textColor="@color/mapbox_navigation_view_color_accent_dark"
+        android:textColor="@color/mapbox_navigation_route_layer_congestion_red"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.709"
@@ -106,7 +106,7 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Apellidos"
-        android:textColor="@color/mapbox_navigation_view_color_accent_dark"
+        android:textColor="@color/colorAccent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.738"
@@ -152,7 +152,7 @@
         android:ems="10"
         android:inputType="phone"
         android:text="Telefono"
-        android:textColor="@color/mapbox_navigation_view_color_accent_dark"
+        android:textColor="@color/mapbox_navigation_route_layer_congestion_yellow"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.118"
@@ -173,7 +173,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:ems="10"
-        android:inputType="phone"
+        android:inputType="text"
         android:text="Direccion"
         android:textColor="@color/mapbox_navigation_view_color_accent_dark"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -196,9 +196,9 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:ems="10"
-        android:inputType="phone"
+        android:inputType="textPostalAddress"
         android:text="Direccion"
-        android:textColor="@color/mapbox_navigation_view_color_accent_dark"
+        android:textColor="@color/common_google_signin_btn_text_dark_focused"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.112"
@@ -231,9 +231,9 @@
 
 
     <ImageView
-        android:id="@+id/qrdato"
-        android:layout_width="144dp"
-        android:layout_height="149dp"
+        android:id="@+id/imageView2"
+        android:layout_width="122dp"
+        android:layout_height="159dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -242,12 +242,11 @@
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.031"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.065"
-        tools:ignore="MissingConstraints"
-        tools:srcCompat="@drawable/avatar" />
+        app:layout_constraintVertical_bias="0.035"
+        app:srcCompat="@drawable/avatar" />
 
 
     <TextView
@@ -261,7 +260,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:text="Datos Personales"
-        android:textColor="@color/common_google_signin_btn_text_dark_pressed"
+        android:textColor="@color/mapbox_navigation_route_layer_congestion_red"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.408"

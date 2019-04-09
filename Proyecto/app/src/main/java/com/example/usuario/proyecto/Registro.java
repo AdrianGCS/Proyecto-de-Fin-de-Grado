@@ -120,6 +120,7 @@ private EditText apellidos;
                 i.putExtra("apellidos", apellidos.getText().toString());
                 i.putExtra("correo", correo.getText().toString());
                 setResult(1, i);
+                startActivity(i);
                 finish();
             } else if(integer == Common.RESULT_USER_EXISTS) {
                 Toast.makeText(Registro.this, "El usuario ya existe en la base de datos", Toast.LENGTH_LONG).show();

@@ -32,7 +32,7 @@ import java.util.Map;
 
 public class EscanerQr extends AppCompatActivity {
     SurfaceView surfaceView;
-    TextView txtBarcodeValue;
+    TextView texto;
     private BarcodeDetector barcodeDetector;
     private CameraSource cameraSource;
     private static final int REQUEST_CAMERA_PERMISSION = 201;
@@ -51,26 +51,26 @@ public class EscanerQr extends AppCompatActivity {
     }
 
     private void initViews() {
-        txtBarcodeValue = findViewById(R.id.txtBarcodeValue);
+        texto = findViewById(R.id.txtBarcodeValue);
         surfaceView = findViewById(R.id.surfaceView);
         btnAction = findViewById(R.id.btnAction);
         btnAction.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //startActivity(new Intent(EscanerQr.this, Principal.class));
-               if ("".equals(txtBarcodeValue.toString())) {
-                   txtBarcodeValue.setError("no es un qr");
-                   return;
+                if ("".equals(texto.toString())) {
+                    texto.setError("no es un qr");
+                    return;
 
-                        //startActivity(new Intent(EscanerQr.this,Principal.class));
+                    //startActivity(new Intent(EscanerQr.this,Principal.class));
 
-                   // startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(intentData)));
+                    // startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(intentData)));
                     //esto es lo que lleva a la direccion de del qr
                 }
-                new TaskRegister().execute(txtBarcodeValue.getText().toString());
+                new TaskRegister().execute(texto.getText().toString());
 
             }
         });
-       //startActivity(new Intent(EscanerQr.this,Principal.class));
+        //startActivity(new Intent(EscanerQr.this,Principal.class));
     }
 
     private void initialiseDetectorsAndSources() {
@@ -129,22 +129,22 @@ public class EscanerQr extends AppCompatActivity {
                 if (barcodes.size() != 0) {
 
 
-                    txtBarcodeValue.post(new Runnable() {
+                    texto.post(new Runnable() {
 
                         @Override
                         public void run() {
 
                             if (barcodes.valueAt(0).email != null) {
-                                txtBarcodeValue.removeCallbacks(null);
+                                texto.removeCallbacks(null);
                                 intentData = barcodes.valueAt(0).email.address;
-                                txtBarcodeValue.setText(intentData);
+                                texto.setText(intentData);
                                 isEmail = true;
                                 btnAction.setText("AÑADE");
                             } else {
                                 isEmail = false;
                                 btnAction.setText("Coge la URL");
                                 intentData = barcodes.valueAt(0).displayValue;
-                                txtBarcodeValue.setText(intentData);
+                                texto.setText(intentData);
 
                             }
                         }
@@ -167,6 +167,7 @@ public class EscanerQr extends AppCompatActivity {
         super.onResume();
         initialiseDetectorsAndSources();
     }
+
     public class TaskRegister extends AsyncTask<String, Void, Integer> {
 
         @Override
@@ -203,7 +204,18 @@ public class EscanerQr extends AppCompatActivity {
 
         }
 
+        protected void onPostExecute(Integer integer) {
+            super.onPostExecute(integer);
+            midialogo.dismiss();
+            if (integer == Common.RESULT_SUCCESS) {
+                Toast.makeText(EscanerQr.this, "Registrado con exito", Toast.LENGTH_LONG).show();
+                Intent i = new Intent(getApplicationContext(), Datos_Enfermo.class);
+                i.putExtra("qr", texto.getText() + "");
+                startActivity(i);
+                finish();
+
+            }
+        }
 
     }
-
 }
