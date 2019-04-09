@@ -46,6 +46,7 @@ public class EscanerQr extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_escaner_qr);
+        miser = new AccessServiceAPI();
         initViews();
     }
 
@@ -55,7 +56,7 @@ public class EscanerQr extends AppCompatActivity {
         btnAction = findViewById(R.id.btnAction);
         btnAction.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(EscanerQr.this, Principal.class));
+                //startActivity(new Intent(EscanerQr.this, Principal.class));
                if ("".equals(txtBarcodeValue.toString())) {
                    txtBarcodeValue.setError("no es un qr");
                    return;
@@ -69,7 +70,7 @@ public class EscanerQr extends AppCompatActivity {
 
             }
         });
-        startActivity(new Intent(EscanerQr.this,Principal.class));
+       //startActivity(new Intent(EscanerQr.this,Principal.class));
     }
 
     private void initialiseDetectorsAndSources() {

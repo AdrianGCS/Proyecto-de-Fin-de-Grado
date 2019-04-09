@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.provider.Settings.Secure;
 
 public class Splah extends AppCompatActivity {
 
@@ -22,7 +23,6 @@ public class Splah extends AppCompatActivity {
                         getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
 
                 int validacion = prefs.getInt("Estado",0);
-
 
                if(validacion == 0) {
                    Intent intent = new Intent(Splah.this, Condiciones.class);
