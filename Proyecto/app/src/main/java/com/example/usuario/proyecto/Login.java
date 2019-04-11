@@ -91,12 +91,13 @@ public class Login extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Login Correcto", Toast.LENGTH_LONG).show();
                 Intent i = new Intent(getApplicationContext(), MenuUser.class);
                 i.putExtra("correo", correouser.getText().toString());
-                startActivity(i);
+         startActivity(i);
             } else {
                 Toast.makeText(getApplicationContext(), "Login Mal", Toast.LENGTH_LONG).show();
             }
         }
     }
+
 }
 
 

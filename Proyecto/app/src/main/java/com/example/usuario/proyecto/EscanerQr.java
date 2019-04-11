@@ -68,7 +68,7 @@ public class EscanerQr extends AppCompatActivity {
                     // startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(intentData)));
                     //esto es lo que lleva a la direccion de del qr
                 }
-                new TaskRegister().execute(texto.getText().toString());
+                new TaskRegister().execute(texto.getText().toString(), imei.toString());
 
             }
         });
@@ -185,7 +185,7 @@ public class EscanerQr extends AppCompatActivity {
             Map<String, String> postParam = new HashMap<>();
             postParam.put("action", "qr");
             postParam.put("qr", params[0]);
-           // postParam.put("imi", params[1]);
+            postParam.put("imi", params[1]);
             //postParam.put("qr", params[4]);
             //llama al PHP
 
@@ -193,9 +193,9 @@ public class EscanerQr extends AppCompatActivity {
                 String jsonString = miser.getJSONStringWithParam_POST(Common.SERVICE_API_URL, postParam);
                 JSONObject jsonObject = new JSONObject(jsonString);
                 intentData = jsonObject.getString("Encriptado");
-                //imei = jsonObject.getString("imei");
+                imei = jsonObject.getString("imei");
                 if (!intentData.equals("8")) {
-                    //obtenerImei(imei);
+                    obtenerImei(imei);
                     return jsonObject.getInt("result");
 
                 } else {
@@ -214,25 +214,24 @@ public class EscanerQr extends AppCompatActivity {
             super.onPostExecute(integer);
             midialogo.dismiss();
             if (integer == Common.RESULT_SUCCESS) {
-                Toast.makeText(EscanerQr.this, "Registrado con exito", Toast.LENGTH_LONG).show();
+                Toast.makeText(EscanerQr.this, "Leido  con exito", Toast.LENGTH_LONG).show();
                 Intent i = new Intent(getApplicationContext(), Principal.class);
                 i.putExtra("qr", texto.getText() + "");
-                //i.putExtra("imei", imei);
+                i.putExtra("imei", imei);
                 setResult(1, i);
                 startActivity(i);
                 finish();
 
-            } else if (integer == Common.RESULT_USER_EXISTS) {
-                Toast.makeText(EscanerQr.this, "El usuario ya existe en la base de datos", Toast.LENGTH_LONG).show();
-            } else {
-                Toast.makeText(EscanerQr.this, "Registro fallido", Toast.LENGTH_LONG).show();
+            }else {
+                Toast.makeText(EscanerQr.this, "Leido fallido", Toast.LENGTH_LONG).show();
             }
         }
 
 
     }
 
-   /* public void obtenerImei(String v) {
+
+    public void obtenerImei(String v) {
         telephonyManager = (TelephonyManager) getSystemService(this.TELEPHONY_SERVICE);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE}, 101);
@@ -241,6 +240,31 @@ public class EscanerQr extends AppCompatActivity {
         TelephonyManager telephonyManager;
         telephonyManager = (TelephonyManager) getSystemService(this.TELEPHONY_SERVICE);
         imei = telephonyManager.getDeviceId();
-    }*/
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case 101:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE}, 101);
+                        return;
+                    }
+                    imei = telephonyManager.getDeviceId();
+                    // te.setText(a.toString());
+                    //Toast.makeText(MainActivity.this,a,Toast.LENGTH_LONG).show();
+
+                } else {
+                    Toast.makeText(EscanerQr.this, "Without permission we check", Toast.LENGTH_LONG).show();
+                }
+                break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+        TelephonyManager telephonyManager;
+        telephonyManager = (TelephonyManager) getSystemService(this.TELEPHONY_SERVICE);
+        imei = telephonyManager.getDeviceId();
+    }
 
 }
