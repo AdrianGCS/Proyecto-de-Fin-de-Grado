@@ -2,6 +2,7 @@ package com.example.usuario.proyecto;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
@@ -39,13 +40,16 @@ public class EscanerQr extends AppCompatActivity {
     private BarcodeDetector barcodeDetector;
     private CameraSource cameraSource;
     private static final int REQUEST_CAMERA_PERMISSION = 201;
+    TelephonyManager telephonyManager;
+    private static final int REQUEST_READ_PHONE_STATE = 101;
+    public static String imei = "";
     Button btnAction;
     public static String intentData = "";
-    public static String imei = "";
+
     boolean isEmail = false;
     private Dialog midialogo;
     private AccessServiceAPI miser;
-    TelephonyManager telephonyManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +57,7 @@ public class EscanerQr extends AppCompatActivity {
         setContentView(R.layout.activity_escaner_qr);
         miser = new AccessServiceAPI();
         initViews();
+        telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
     }
 
     private void initViews() {
@@ -68,7 +73,7 @@ public class EscanerQr extends AppCompatActivity {
                     // startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(intentData)));
                     //esto es lo que lleva a la direccion de del qr
                 }
-                new TaskRegister().execute(texto.getText().toString(), imei.toString());
+                new TaskRegister().execute(texto.getText().toString());
 
             }
         });
@@ -96,9 +101,12 @@ public class EscanerQr extends AppCompatActivity {
                 try {
                     if (ActivityCompat.checkSelfPermission(EscanerQr.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
                         cameraSource.start(surfaceView.getHolder());
+
                     } else {
                         ActivityCompat.requestPermissions(EscanerQr.this, new
                                 String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
+                        ActivityCompat.requestPermissions(EscanerQr.this, new
+                                String[]{Manifest.permission.READ_PHONE_STATE}, REQUEST_READ_PHONE_STATE);
                     }
 
                 } catch (IOException e) {
@@ -193,9 +201,9 @@ public class EscanerQr extends AppCompatActivity {
                 String jsonString = miser.getJSONStringWithParam_POST(Common.SERVICE_API_URL, postParam);
                 JSONObject jsonObject = new JSONObject(jsonString);
                 intentData = jsonObject.getString("Encriptado");
-                imei = jsonObject.getString("imei");
-                if (!intentData.equals("8")) {
-                    obtenerImei(imei);
+                //imei = jsonObject.getString("imei");
+                if (intentData.equals("8")) {
+                    //obtenerImei(imei);
                     return jsonObject.getInt("result");
 
                 } else {
@@ -217,20 +225,19 @@ public class EscanerQr extends AppCompatActivity {
                 Toast.makeText(EscanerQr.this, "Leido  con exito", Toast.LENGTH_LONG).show();
                 Intent i = new Intent(getApplicationContext(), Principal.class);
                 i.putExtra("qr", texto.getText() + "");
-                i.putExtra("imei", imei);
+                //i.putExtra("imei", imei);
                 setResult(1, i);
                 startActivity(i);
                 finish();
 
-            }else {
+            } else {
                 Toast.makeText(EscanerQr.this, "Leido fallido", Toast.LENGTH_LONG).show();
             }
         }
 
 
     }
-
-
+/*
     public void obtenerImei(String v) {
         telephonyManager = (TelephonyManager) getSystemService(this.TELEPHONY_SERVICE);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
@@ -252,11 +259,11 @@ public class EscanerQr extends AppCompatActivity {
                         return;
                     }
                     imei = telephonyManager.getDeviceId();
-                    // te.setText(a.toString());
+
                     //Toast.makeText(MainActivity.this,a,Toast.LENGTH_LONG).show();
 
                 } else {
-                    Toast.makeText(EscanerQr.this, "Without permission we check", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Without permission we check", Toast.LENGTH_LONG).show();
                 }
                 break;
             default:
@@ -266,5 +273,6 @@ public class EscanerQr extends AppCompatActivity {
         telephonyManager = (TelephonyManager) getSystemService(this.TELEPHONY_SERVICE);
         imei = telephonyManager.getDeviceId();
     }
+*/
 
 }

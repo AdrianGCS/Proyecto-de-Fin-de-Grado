@@ -36,8 +36,7 @@ import java.sql.Statement;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     Button btnScanBarcode, registro, log, otra;
     private MapView mapView;
-    private TextView Datos;
-    TelephonyManager manager;
+    private TextView datos;
 
     public MainActivity() {
     }
@@ -47,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initViews();
-        manager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+
     }
 
     private void initViews() {
@@ -66,7 +65,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.btnScanBarcode:
                 startActivity(new Intent(MainActivity.this, EscanerQr.class));
-                cogerimei();
                 break;
             case R.id.log:
                 startActivity(new Intent(MainActivity.this, Login.class));
@@ -78,24 +76,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(new Intent(MainActivity.this, GeneradorQR.class));
                 break;
 
-
         }
     }
 
-    public void cogerimei() {
-        StringBuilder builder = new StringBuilder();
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        builder.append(manager.getDeviceId());
-    }
 
 
 }
