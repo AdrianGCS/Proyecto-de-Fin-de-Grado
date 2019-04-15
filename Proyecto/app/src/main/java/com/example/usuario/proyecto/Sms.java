@@ -20,7 +20,7 @@ public class Sms extends AppCompatActivity {
     Button dale;
     EditText telefono;
     EditText sms;
-
+    public static String n;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +46,12 @@ public class Sms extends AppCompatActivity {
                 enviarMensaje(telefono.getText().toString(),"Tu familiar necesita ayuda");
             }
         });
+    }
+    public void cogerDatos() {
+
+        n = getIntent().getStringExtra("nombre");
+        telefono.setText(n);
+
     }
     private void enviarMensaje (String numero, String mensaje){
         try {

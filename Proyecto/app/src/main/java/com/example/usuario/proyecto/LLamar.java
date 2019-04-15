@@ -41,7 +41,7 @@ public static String n;
             }
         }
     }
-    private void cogerDatos() {
+    public void cogerDatos() {
 
          n = getIntent().getStringExtra("nombre");
         telefono.setText(n);
