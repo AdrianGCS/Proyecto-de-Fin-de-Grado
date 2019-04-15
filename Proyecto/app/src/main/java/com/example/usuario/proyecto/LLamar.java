@@ -17,8 +17,6 @@ import android.widget.EditText;
 public class LLamar extends AppCompatActivity {
     private EditText telefono;
     private Button boto;
-    Bundle datos;
-public static String n;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,12 +39,7 @@ public static String n;
             }
         }
     }
-    public void cogerDatos() {
 
-         n = getIntent().getStringExtra("nombre");
-        telefono.setText(n);
-
-    }
     public void llamartelefono() {
         try {
             if (Build.VERSION.SDK_INT > 22) {

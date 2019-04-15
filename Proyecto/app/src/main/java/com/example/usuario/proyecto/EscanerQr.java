@@ -66,7 +66,7 @@ public class EscanerQr extends AppCompatActivity {
         btnAction = findViewById(R.id.btnAction);
         btnAction.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(EscanerQr.this, Principal.class));
+                //startActivity(new Intent(EscanerQr.this, Principal.class));
                 if ("".equals(texto.toString())) {
                     texto.setError("no es un qr");
                     return;
@@ -191,7 +191,7 @@ public class EscanerQr extends AppCompatActivity {
             Map<String, String> postParam = new HashMap<>();
             postParam.put("action", "qr");
             postParam.put("qr", params[0]);
-            postParam.put("imi", params[1]);
+            //postParam.put("imi", params[1]);
             //postParam.put("qr", params[4]);
             //llama al PHP
 

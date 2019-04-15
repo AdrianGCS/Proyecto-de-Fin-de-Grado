@@ -17,16 +17,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Principal extends AppCompatActivity {
-    private AccessServiceAPI miser;
-    private Dialog midialogo;
-    private String a;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
-        miser = new AccessServiceAPI();
-        new TaskRegister().execute(a.toString());
+
 
     }
 
@@ -50,65 +46,7 @@ public class Principal extends AppCompatActivity {
         }
     }
 
-    public class TaskRegister extends AsyncTask<String, Void, Integer> {
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            midialogo = ProgressDialog.show(Principal.this, "Espere un momento", "Procesando datos...", true);
-
-        }
-
-        @Override
-        protected Integer doInBackground(String... params) {
-            Map<String, String> postParam = new HashMap<>();
-            postParam.put("action", "enfermo");
-            postParam.put("phone", params[0]);
-
-            //postParam.put("qr", params[4]);
-            //llama al PHP
-
-            try {
-                String jsonString = miser.getJSONStringWithParam_POST(Common.SERVICE_API_URL, postParam);
-                JSONObject jsonObject = new JSONObject(jsonString);
-                a = jsonObject.getString("Encriptado");
-
-                if (!a.equals("8")) {
-                    return jsonObject.getInt("result");
-
-                } else {
-                    return 1;
-                }
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                return Common.RESULT_ERROR;
-            }
-
-
-        }
-
-
-        @Override
-        protected void onPostExecute(Integer integer) {
-            super.onPostExecute(integer);
-            midialogo.dismiss();
-            if (integer == Common.RESULT_SUCCESS) {
-                Toast.makeText(Principal.this, "Registrado con exito", Toast.LENGTH_LONG).show();
-                Intent i = new Intent(getApplicationContext(), Datos_Enfermo.class);
-                i.putExtra("telefono", a.toString() + "");
-                setResult(1, i);
-                startActivity(i);
-
-                finish();
-
-            } else if (integer == Common.RESULT_USER_EXISTS) {
-                Toast.makeText(Principal.this, "El usuario ya existe en la base de datos", Toast.LENGTH_LONG).show();
-            } else {
-                Toast.makeText(Principal.this, "Registro fallido", Toast.LENGTH_LONG).show();
-            }
-        }
-    }
 }
 
 
