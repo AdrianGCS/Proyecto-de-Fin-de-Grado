@@ -24,10 +24,10 @@
         android:textColorHint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.459"
+        app:layout_constraintHorizontal_bias="0.458"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.892" />
+        app:layout_constraintVertical_bias="0.941" />
 
 
     <EditText
@@ -88,6 +88,34 @@
 
 
     <EditText
+        android:id="@+id/codigo"
+        android:layout_width="245dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/mapbox_navigation_view_color_accent_text"
+        android:drawableLeft="@mipmap/ic_union"
+        android:ems="10"
+        android:hint="Codigo Union"
+        android:inputType="text"
+        android:selectAllOnFocus="true"
+        android:textColor="@color/zxing_status_text"
+        android:textColorHint="#fff"
+        android:textStyle="bold"
+        android:typeface="normal"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.346"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.8" />
+
+    <EditText
         android:id="@+id/telefono"
         android:layout_width="248dp"
         android:layout_height="41dp"
@@ -96,13 +124,13 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:maxLength="9"
         android:layout_marginBottom="8dp"
         android:background="@color/mapbox_navigation_view_color_accent_text"
         android:drawableLeft="@mipmap/ic_telefono"
         android:ems="10"
         android:hint="Telefono de Contacto"
         android:inputType="phone"
+        android:maxLength="9"
         android:selectAllOnFocus="true"
         android:textColor="@color/zxing_status_text"
         android:textColorHint="#fff"
@@ -114,7 +142,7 @@
         app:layout_constraintHorizontal_bias="0.353"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.703" />
+        app:layout_constraintVertical_bias="0.682" />
 
 
 

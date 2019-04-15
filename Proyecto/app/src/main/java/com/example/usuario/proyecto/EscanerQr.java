@@ -66,7 +66,7 @@ public class EscanerQr extends AppCompatActivity {
         btnAction = findViewById(R.id.btnAction);
         btnAction.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                //startActivity(new Intent(EscanerQr.this, Principal.class));
+                startActivity(new Intent(EscanerQr.this, Principal.class));
                 if ("".equals(texto.toString())) {
                     texto.setError("no es un qr");
                     return;
@@ -105,8 +105,6 @@ public class EscanerQr extends AppCompatActivity {
                     } else {
                         ActivityCompat.requestPermissions(EscanerQr.this, new
                                 String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
-                        ActivityCompat.requestPermissions(EscanerQr.this, new
-                                String[]{Manifest.permission.READ_PHONE_STATE}, REQUEST_READ_PHONE_STATE);
                     }
 
                 } catch (IOException e) {
@@ -179,7 +177,7 @@ public class EscanerQr extends AppCompatActivity {
     }
 
 
-    public class TaskRegister extends AsyncTask<String, Void, Integer> {
+   public class TaskRegister extends AsyncTask<String, Void, Integer> {
 
         @Override
         protected void onPreExecute() {
@@ -237,42 +235,5 @@ public class EscanerQr extends AppCompatActivity {
 
 
     }
-/*
-    public void obtenerImei(String v) {
-        telephonyManager = (TelephonyManager) getSystemService(this.TELEPHONY_SERVICE);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE}, 101);
-            return;
-        }
-        TelephonyManager telephonyManager;
-        telephonyManager = (TelephonyManager) getSystemService(this.TELEPHONY_SERVICE);
-        imei = telephonyManager.getDeviceId();
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        switch (requestCode) {
-            case 101:
-                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-                        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE}, 101);
-                        return;
-                    }
-                    imei = telephonyManager.getDeviceId();
-
-                    //Toast.makeText(MainActivity.this,a,Toast.LENGTH_LONG).show();
-
-                } else {
-                    Toast.makeText(this, "Without permission we check", Toast.LENGTH_LONG).show();
-                }
-                break;
-            default:
-                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
-        TelephonyManager telephonyManager;
-        telephonyManager = (TelephonyManager) getSystemService(this.TELEPHONY_SERVICE);
-        imei = telephonyManager.getDeviceId();
-    }
-*/
 
 }
