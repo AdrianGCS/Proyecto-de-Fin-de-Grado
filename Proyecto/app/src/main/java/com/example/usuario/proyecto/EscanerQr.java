@@ -42,7 +42,6 @@ public class EscanerQr extends AppCompatActivity {
     private static final int REQUEST_CAMERA_PERMISSION = 201;
     TelephonyManager telephonyManager;
     private static final int REQUEST_READ_PHONE_STATE = 101;
-    public static String imei = "";
     Button btnAction;
     public static String intentData = "";
 
@@ -102,7 +101,7 @@ public class EscanerQr extends AppCompatActivity {
 
                     if(ActivityCompat.checkSelfPermission(EscanerQr.this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED){
                         ActivityCompat.requestPermissions(EscanerQr.this, new
-                                String[]{Manifest.permission.READ_PHONE_STATE}, REQUEST_CAMERA_PERMISSION);
+                                String[]{Manifest.permission.READ_PHONE_STATE}, REQUEST_READ_PHONE_STATE);
                     }
                     else {
                         if (ActivityCompat.checkSelfPermission(EscanerQr.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
@@ -195,11 +194,11 @@ public class EscanerQr extends AppCompatActivity {
 
         @Override
         protected Integer doInBackground(String... params) {
-           String x = Imei();
+            String Imei = Imei();
             Map<String, String> postParam = new HashMap<>();
             postParam.put("action", "qr");
             postParam.put("qr", params[0]);
-            //postParam.put("imi", params[1]);
+            postParam.put("imei", Imei);
             //postParam.put("qr", params[4]);
             //llama al PHP
 
@@ -207,9 +206,7 @@ public class EscanerQr extends AppCompatActivity {
                 String jsonString = miser.getJSONStringWithParam_POST(Common.SERVICE_API_URL, postParam);
                 JSONObject jsonObject = new JSONObject(jsonString);
                 intentData = jsonObject.getString("Encriptado");
-                //imei = jsonObject.getString("imei");
                 if (intentData.equals("8")) {
-                    //obtenerImei(imei);
                     return jsonObject.getInt("result");
 
                 } else {
