@@ -10,8 +10,8 @@
 
     <ImageView
         android:id="@+id/qr_enfermo"
-        android:layout_width="183dp"
-        android:layout_height="103dp"
+        android:layout_width="121dp"
+        android:layout_height="135dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"

@@ -44,7 +44,7 @@ public class EscanerQr extends AppCompatActivity {
     private static final int REQUEST_READ_PHONE_STATE = 101;
     Button btnAction;
     public static String intentData = "";
-
+    public static String telefono = "727703600";
     boolean isEmail = false;
     private Dialog midialogo;
     private AccessServiceAPI miser;
@@ -199,6 +199,7 @@ public class EscanerQr extends AppCompatActivity {
             postParam.put("action", "qr");
             postParam.put("qr", params[0]);
             postParam.put("imei", Imei);
+
             //postParam.put("qr", params[4]);
             //llama al PHP
 
@@ -206,6 +207,7 @@ public class EscanerQr extends AppCompatActivity {
                 String jsonString = miser.getJSONStringWithParam_POST(Common.SERVICE_API_URL, postParam);
                 JSONObject jsonObject = new JSONObject(jsonString);
                 intentData = jsonObject.getString("Encriptado");
+                //telefono=jsonObject.getString("Encriptado");
                 if (intentData.equals("8")) {
                     return jsonObject.getInt("result");
 
@@ -228,7 +230,7 @@ public class EscanerQr extends AppCompatActivity {
                 Toast.makeText(EscanerQr.this, "Leido  con exito", Toast.LENGTH_LONG).show();
                 Intent i = new Intent(getApplicationContext(), Principal.class);
                 i.putExtra("qr", texto.getText() + "");
-                //i.putExtra("imei", imei);
+                i.putExtra("telefono", telefono);
                 setResult(1, i);
                 startActivity(i);
                 finish();
