@@ -199,21 +199,16 @@ public class EscanerQr extends AppCompatActivity {
             postParam.put("action", "qr");
             postParam.put("qr", params[0]);
             postParam.put("imei", Imei);
-
             //postParam.put("qr", params[4]);
             //llama al PHP
 
             try {
                 String jsonString = miser.getJSONStringWithParam_POST(Common.SERVICE_API_URL, postParam);
                 JSONObject jsonObject = new JSONObject(jsonString);
-                intentData = jsonObject.getString("Encriptado");
-                //telefono=jsonObject.getString("Encriptado");
-                if (intentData.equals("8")) {
-                    return jsonObject.getInt("result");
+                String telefono = jsonObject.getString("Telefono");
+                String id_enfermo = jsonObject.getString("id");
 
-                } else {
-                    return 1;
-                }
+                return jsonObject.getInt("result");
 
             } catch (Exception e) {
                 e.printStackTrace();

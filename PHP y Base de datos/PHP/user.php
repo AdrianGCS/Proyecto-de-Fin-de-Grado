@@ -12,10 +12,12 @@ define("RESULT_USER_EXISTS", 2);
 
 $action = $_POST["action"];
 $result = RESULT_ERROR;
-$Encript= 8;
 
+$Encript= 8;
 $id = 2;
 $idEnfermo = 0;
+$imei = 0;
+$telefono = 0;
 
 switch ($action) {
 
@@ -85,13 +87,40 @@ switch ($action) {
 
 		case "qr":
 			$qr = $_POST["qr"];
-			$Encript= openssl_decrypt($qr, 'aes128', 'Seguridad',0,'1234567812345678');
+			$qr= openssl_decrypt($qr, 'aes128', 'Seguridad',0,'1234567812345678');
+			$array = explode("/", $qr , 4);
+
+			$id = $array[0];
+			//nombre= array[1]
+			//apellido= array[2]
+			$telefono = $array[3];
+
+			if ( isExistEnfermo($cnn, $array[0], $array[1], $array[2], $array[3])) {
+				$imei= $_POST["imei"];
+				insertAnonimo($cnn, $id, $imei);
+				$result = RESULT_SUCCESS;
+			}
+			else
+			{
+				$result = RESULT_ERROR;
+			}
 			break;
 
 }
 
 //Print result as json
-echo(json_encode(array('result' => $result , 'id' => $id , 'Encriptado' => $Encript)));
+echo(json_encode(array('result' => $result , 'id' => $id , 'Encriptado' => $Encript, 'Telefono' => $telefono)));
+
+function insertAnonimo($cnn, $id, $imei)
+{
+
+	$query = "INSERT INTO ANONIMO(IMEI_EXTERNO ,ID_ENFERMO) VALUES(?, ?)";
+	$stmt = $cnn->prepare($query);
+	$stmt->bind_param("si", $imei, $id, );
+	$stmt->execute();
+
+}
+
 
 function insertEnfermo($cnn, $id, $username ,$lastname, $phone, $adress )
 {
@@ -138,6 +167,17 @@ function isExistUser($cnn, $mail)
 	return $rowcount;
 }
 
+function isExistEnfermo($cnn, $id, $username ,$lastname, $phone)
+{
+	$query = "SELECT * FROM ENFERMO WHERE ID =? AND NOMBRE = ? AND APELLIDO = ? AND TELEFONO_CONTACTO = ? ";
+	$stmt = $cnn->prepare($query);
+	$stmt->bind_param("issi", $id, $username ,$lastname, $phone);
+	$stmt->execute();
+	$stmt->store_result();
+	$rowcount = $stmt->num_rows;
+
+	return $rowcount;
+}
 
 function login($cnn, $mail, $pwd)
 {
