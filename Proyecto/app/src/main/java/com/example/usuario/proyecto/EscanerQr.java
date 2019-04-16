@@ -99,12 +99,19 @@ public class EscanerQr extends AppCompatActivity {
             @Override
             public void surfaceCreated(SurfaceHolder holder) {
                 try {
-                    if (ActivityCompat.checkSelfPermission(EscanerQr.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-                        cameraSource.start(surfaceView.getHolder());
 
-                    } else {
+                    if(ActivityCompat.checkSelfPermission(EscanerQr.this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED){
                         ActivityCompat.requestPermissions(EscanerQr.this, new
-                                String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
+                                String[]{Manifest.permission.READ_PHONE_STATE}, REQUEST_CAMERA_PERMISSION);
+                    }
+                    else {
+                        if (ActivityCompat.checkSelfPermission(EscanerQr.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+                            cameraSource.start(surfaceView.getHolder());
+
+                        } else {
+                            ActivityCompat.requestPermissions(EscanerQr.this, new
+                                    String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
+                        }
                     }
 
                 } catch (IOException e) {
@@ -177,7 +184,7 @@ public class EscanerQr extends AppCompatActivity {
     }
 
 
-   public class TaskRegister extends AsyncTask<String, Void, Integer> {
+    public class TaskRegister extends AsyncTask<String, Void, Integer> {
 
         @Override
         protected void onPreExecute() {
@@ -188,6 +195,7 @@ public class EscanerQr extends AppCompatActivity {
 
         @Override
         protected Integer doInBackground(String... params) {
+           String x = Imei();
             Map<String, String> postParam = new HashMap<>();
             postParam.put("action", "qr");
             postParam.put("qr", params[0]);
@@ -233,6 +241,30 @@ public class EscanerQr extends AppCompatActivity {
             }
         }
 
+        private String Imei() {
+            TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+            String imei = "";
+
+
+            if (android.os.Build.VERSION.SDK_INT >= 26) {
+                if (ActivityCompat.checkSelfPermission(EscanerQr.this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+                    // TODO: Consider calling
+                    //    ActivityCompat#requestPermissions
+                    // here to request the missing permissions, and then overriding
+                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                    //                                          int[] grantResults)
+                    // to handle the case where the user grants the permission. See the documentation
+                    // for ActivityCompat#requestPermissions for more details.
+                    return "Error";
+                }
+                imei = telephonyManager.getImei();
+            }
+            else
+            {
+                imei=telephonyManager.getDeviceId();
+            }
+            return imei;
+        }
 
     }
 
