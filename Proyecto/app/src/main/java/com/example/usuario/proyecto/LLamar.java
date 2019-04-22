@@ -13,24 +13,19 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 public class LLamar extends AppCompatActivity {
-    TextView tls;
+    private EditText telefono;
     private Button boto;
-    public static String phone = "";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_llamar);
-        tls = findViewById(R.id.fono);
+        telefono = (EditText) findViewById(R.id.telefono);
         boto = (Button) findViewById(R.id.llamar);
-        cogerDatos();
         boto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 llamartelefono();
             }
         });
@@ -45,12 +40,6 @@ public class LLamar extends AppCompatActivity {
         }
     }
 
-    public void cogerDatos() {
-        phone = getIntent().getStringExtra("tel");
-        tls.setText(phone);
-
-    }
-
     public void llamartelefono() {
         try {
             if (Build.VERSION.SDK_INT > 22) {
@@ -60,26 +49,18 @@ public class LLamar extends AppCompatActivity {
                 }
 
                 Intent callIntent = new Intent(Intent.ACTION_CALL);
-                callIntent.setData(Uri.parse("tel:" + phone));
+                callIntent.setData(Uri.parse("tel:" + telefono.getText().toString()));
                 startActivity(callIntent);
                 finish();
             } else {
                 Intent callIntent = new Intent(Intent.ACTION_CALL);
-                callIntent.setData(Uri.parse("tel:" + phone));
+                callIntent.setData(Uri.parse("tel:" + telefono.getText().toString()));
                 startActivity(callIntent);
                 finish();
             }
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-    }
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-
-        startActivity(new Intent(this, MainActivity.class));
-
-
     }
 
 }

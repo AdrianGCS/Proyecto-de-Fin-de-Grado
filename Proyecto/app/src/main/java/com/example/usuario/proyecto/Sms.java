@@ -1,7 +1,6 @@
 package com.example.usuario.proyecto;
 
 import android.app.AlertDialog;
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.Manifest;
@@ -13,73 +12,57 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-
 public class Sms extends AppCompatActivity {
-    private static final int MY_PERMISSIONS_REQUEST_SEND_SMS = 0;
+    private static final int MY_PERMISSIONS_REQUEST_SEND_SMS =0 ;
     Button dale;
-    TextView telefono;
-
+    EditText telefono;
+    EditText sms;
     public static String n;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sms);
-        dale = (Button) findViewById(R.id.dale);
-        cogerDatos();
-        telefono = findViewById(R.id.ono);
+        dale = (Button)findViewById(R.id.dale);
+
+        telefono=(EditText)findViewById(R.id.telefono);
         Toast.makeText(getApplicationContext(), "Enviar sms tiene cargo", Toast.LENGTH_LONG).show();
 
-        if (ActivityCompat.checkSelfPermission(
+        if(ActivityCompat.checkSelfPermission(
                 this, Manifest.permission.SEND_SMS)
-                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                this, Manifest
-                        .permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]
-                    {Manifest.permission.SEND_SMS,}, 1000);
-        } else {
-        }
-        ;
+                != PackageManager.PERMISSION_GRANTED&& ActivityCompat.checkSelfPermission(
+                this,Manifest
+                        .permission.SEND_SMS)!= PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this,new String[]
+                    { Manifest.permission.SEND_SMS,},1000);
+        }else{
+        };
         dale.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                cogerDatos();
-                enviarMensaje(n, "Tu familiar necesita ayuda");
+
+                enviarMensaje(telefono.getText().toString(),"Tu familiar necesita ayuda");
             }
         });
     }
-
     public void cogerDatos() {
 
-        n = getIntent().getStringExtra("tel");
+        n = getIntent().getStringExtra("nombre");
         telefono.setText(n);
 
     }
-
-    private void enviarMensaje(String n, String mensaje) {
+    private void enviarMensaje (String numero, String mensaje){
         try {
-            n = getIntent().getStringExtra("tel");
-            telefono.setText(n);
             SmsManager sms = SmsManager.getDefault();
-            sms.sendTextMessage(n, null, mensaje, null, null);
+            sms.sendTextMessage(numero,null,mensaje,null,null);
             Toast.makeText(getApplicationContext(), "Mensaje Enviado.", Toast.LENGTH_LONG).show();
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             Toast.makeText(getApplicationContext(), "Mensaje no enviado, datos incorrectos.", Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-
-        startActivity(new Intent(this, MainActivity.class));
-
-
     }
 }
 

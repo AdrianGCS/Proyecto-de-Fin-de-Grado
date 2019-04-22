@@ -12,10 +12,9 @@ import android.widget.Toast;
 
 public class Datos_Enfermo extends AppCompatActivity {
     private Button boto;
-    private TextView nombre, apellidos, telefono, direccion, codigoe;
+    private TextView nombre, apellidos, telefono, direccion;
     Bundle datos;
-    private ImageView image;
-
+ private ImageView image;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,8 +24,7 @@ public class Datos_Enfermo extends AppCompatActivity {
         apellidos = findViewById(R.id.apellidos);
         telefono = findViewById(R.id.telefono);
         direccion = findViewById(R.id.direccion);
-        image = findViewById(R.id.qr_enfermo);
-        codigoe = findViewById(R.id.codigo);
+        image=findViewById(R.id.qr_enfermo);
         cogerDatos();
     }
 
@@ -45,19 +43,16 @@ public class Datos_Enfermo extends AppCompatActivity {
         telefono.setText(t);
         String d = getIntent().getStringExtra("direccion");
         direccion.setText(d);
-        Intent id = getIntent();
-        Bitmap bitmap = (Bitmap) getIntent().getParcelableExtra("BitmapImage");
+        Intent id=getIntent();
+        Bitmap bitmap=(Bitmap) getIntent().getParcelableExtra("BitmapImage");
         image.setImageBitmap(bitmap);
-        String co = getIntent().getStringExtra("Codigo");
-        codigoe.setText(co);
 
     }
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
 
-        startActivity(new Intent(this, MainActivity.class));
+        startActivity(new Intent(this,MainActivity.class));
 
 
     }

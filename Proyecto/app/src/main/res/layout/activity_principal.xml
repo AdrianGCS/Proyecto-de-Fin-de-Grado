@@ -13,7 +13,7 @@
         android:background="@android:drawable/screen_background_dark_transparent"
         android:gravity="center"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="86dp"
+        tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp">
 
 
@@ -33,16 +33,14 @@
         android:inputType="textPersonName"
         android:text="telefono"
         android:textColor="@color/zxing_status_text"
-        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.988"
+        app:layout_constraintVertical_bias="0.499"
         tools:ignore="MissingConstraints"
         tools:text="Nombre" />
-
     <Button
         android:id="@+id/llamada"
         android:layout_width="105dp"
@@ -59,10 +57,10 @@
         android:text="LLAMADA"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintHorizontal_bias="0.117"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.696" />
+        app:layout_constraintVertical_bias="0.702" />
 
     <Button
         android:id="@+id/envio"
@@ -79,10 +77,10 @@
         android:text="mensaje"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.537"
+        app:layout_constraintHorizontal_bias="0.87"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.528" />
+        app:layout_constraintVertical_bias="0.683" />
 
 
     <!-- no me va esto no lo entiendo-->
@@ -103,7 +101,6 @@
         android:text="LOCALIZACION"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.543"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.884" />
