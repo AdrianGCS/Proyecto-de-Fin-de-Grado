@@ -44,7 +44,7 @@ public class EscanerQr extends AppCompatActivity {
     private static final int REQUEST_READ_PHONE_STATE = 101;
     Button btnAction;
     public static String intentData = "";
-    public static String telefono = "727703600";
+    public static String telefono = "";
     boolean isEmail = false;
     private Dialog midialogo;
     private AccessServiceAPI miser;
@@ -205,7 +205,7 @@ public class EscanerQr extends AppCompatActivity {
             try {
                 String jsonString = miser.getJSONStringWithParam_POST(Common.SERVICE_API_URL, postParam);
                 JSONObject jsonObject = new JSONObject(jsonString);
-                String telefono = jsonObject.getString("Telefono");
+                 telefono = jsonObject.getString("Telefono");
                 String id_enfermo = jsonObject.getString("id");
 
                 return jsonObject.getInt("result");
