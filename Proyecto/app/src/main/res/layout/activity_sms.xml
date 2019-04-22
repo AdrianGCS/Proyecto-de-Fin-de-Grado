@@ -14,8 +14,8 @@
         android:layout_height="match_parent"
         android:background="#d0000000"
         android:gravity="center"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="96dp">
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="16dp">
 
         <Button
             android:id="@+id/dale"
@@ -52,11 +52,11 @@
             android:drawableLeft="@mipmap/ic_telefono"
             android:ems="10"
             android:hint="Telefono"
-            android:maxLength="9"
             android:inputType="phone"
+            android:maxLength="9"
             android:selectAllOnFocus="true"
             android:textAllCaps="false"
-            android:textColor="@color/common_google_signin_btn_text_dark_pressed"
+            android:textColor="#000000"
             android:textColorHint="#000000"
             android:typeface="normal"
             android:visibility="visible"
@@ -67,8 +67,6 @@
             app:layout_constraintTop_toTopOf="parent"
 
             app:layout_constraintVertical_bias="0.526" />
-
-
 
 
         <ImageView

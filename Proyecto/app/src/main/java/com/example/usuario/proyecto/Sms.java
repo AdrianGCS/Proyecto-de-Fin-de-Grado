@@ -30,8 +30,9 @@ public class Sms extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sms);
         dale = (Button) findViewById(R.id.dale);
-        cogerDatos();
         telefono = findViewById(R.id.ono);
+        cogerDatos();
+
         Toast.makeText(getApplicationContext(), "Enviar sms tiene cargo", Toast.LENGTH_LONG).show();
 
         if (ActivityCompat.checkSelfPermission(
