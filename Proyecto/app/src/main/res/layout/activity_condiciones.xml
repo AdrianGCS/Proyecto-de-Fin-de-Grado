@@ -2,25 +2,113 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/fondo2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Condiciones">
 
     <Button
         android:id="@+id/acceptar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="153dp"
+        android:layout_height="55dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        android:text="Button"
+        android:onClick="onClick"
+        android:text="Aceptar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.099"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.963" />
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="485dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Términos y Condiciones de Uso\n
+\n
+    INFORMACIÓN RELEVANTE \n
+    \n
+    Es requisito necesario para la utilización de nuestra aplicación, que lea y acepte los siguientes Términos y Condiciones que a continuación se redactan. El uso de nuestros servicios implica que usted ha leído y aceptado los Términos y Condiciones de Uso en el presente documento. Todas los servicios  que son ofrecidos por nuestra aplicación pudieran ser creadas, cobradas por  terceros y en tal caso estarían sujetas a sus propios Términos y Condiciones. En algunos casos, para adquirir un servicio, será necesario el registro por parte del usuario, con ingreso de datos personales fidedignos y definición de una contraseña.\n
+    El usuario puede elegir y cambiar la clave para su acceso de administración de la cuenta en cualquier momento, en caso de que se haya registrado alzheimerpormadrid no asume la responsabilidad en caso de que entregue dicha clave a terceros.\n
+    La aplicación podrá usar algunos de sus datos para que diversas funciones de la aplicación se ejecuten correctamente, entre estos datos se incluyen:\n
+\n
+    -Teléfono\n
+    -Imail\n
+\n
+    Al aceptar estas condiciones nos permite utilizar los datos anteriormente mencionados, dichos datos serán sólo utilizados por la aplicación y a priori no será compartida con terceros salvo por posible necesidad de judicial.\n
+\n
+    LICENCIA:\n
+\n
+    alzheimerpormadrid  a través de su aplicación concede una licencia de uso , mas no de distribución para que los usuarios utilicen  los servicios que son ofrecidos en esta aplicación acuerdo a los Términos y Condiciones que se describen en este documento.\n
+    Esta licencia le da potestad para usar nuestra aplicación en sus dispositivos siempre que sea de uso exclusivo de la persona que compró dicha licencia , si un tercero consiguiera la aplicación gracias a la licencia de un comprador , dicha licencia podrá ser revocada.\n
+    \n
+    USO NO AUTORIZADO:\n
+\n
+    En caso de que aplique usted no puede colocar uno de nuestros productos, modificado  en un CD, sitio web o ningún otro medio y ofrecerlos para la redistribución o la reventa de ningún tipo.\n
+\n
+    PROPIEDAD\n
+\n
+    Usted no puede declarar propiedad intelectual o exclusiva a ninguno de nuestros productos, modificado o sin modificar. Todos los productos son propiedad  de los proveedores del contenido. En caso de que no se especifique lo contrario, nuestros productos se proporcionan  sin ningún tipo de garantía, expresa o implícita. En ningún esta compañía será  responsables de ningún daño incluyendo, pero no limitado a, daños directos, indirectos, especiales, fortuitos o consecuentes u otras pérdidas resultantes del uso o de la imposibilidad de utilizar nuestros productos.\n
+\n
+    PRIVACIDAD\n
+
+    La aplicación alzheimerpormadrid garantiza que la información personal que usted envía cuenta con la seguridad necesaria. Los datos ingresados por usuario o en el caso de requerir una validación de la información no serán entregados a terceros, salvo que deba ser revelada en cumplimiento a una orden judicial o requerimientos legales.\n
+    alzheimerpormadrid reserva los derechos de cambiar o de modificar estos términos sin previo aviso.\n
+    "
+            android:textColor="@color/common_google_signin_btn_text_dark_pressed"
+            android:textSize="12sp"
+            android:typeface="serif"
+            android:visibility="visible"
+            app:fontFamily="sans-serif-condensed-light"
+            app:layout_constraintBottom_toBottomOf="@+id/scrollView2"
+            app:layout_constraintEnd_toEndOf="@+id/scrollView2"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/scrollView2"
+            app:layout_constraintTop_toTopOf="@+id/scrollView2"
+            app:layout_constraintVertical_bias="0.0" />
+    </ScrollView>
+
+    <Button
+        android:id="@+id/Salir"
+        android:layout_width="153dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
         android:onClick="onClick"
-        />
+        android:text="Salir"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.851"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/scrollView2"
+        app:layout_constraintVertical_bias="0.963" />
+
 </android.support.constraint.ConstraintLayout>
