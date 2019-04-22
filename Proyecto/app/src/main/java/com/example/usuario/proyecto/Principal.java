@@ -21,6 +21,7 @@ import java.util.Map;
 public class Principal extends AppCompatActivity {
     Bundle datos;
     public static String telefono = "";
+    public static String fone = "";
     TextView phon;
 
     @Override
@@ -28,7 +29,8 @@ public class Principal extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
         phon = findViewById(R.id.tele);
-       cogerDatos();
+
+        cogerDatos();
 
     }
 
@@ -40,10 +42,11 @@ public class Principal extends AppCompatActivity {
 
             case R.id.envio:
                 startActivity(new Intent(this, Sms.class));
-
+                enviarDatoss();
                 break;
             case R.id.llamada:
                 startActivity(new Intent(this, LLamar.class));
+                enviarDatos();
                 break;
             case R.id.loca:
                 startActivity(new Intent(this, Localizacion.class));
@@ -54,12 +57,27 @@ public class Principal extends AppCompatActivity {
 
     private void cogerDatos() {
         String t = getIntent().getStringExtra("telefono");
-        telefono=t;
+        telefono = t;
         phon.setText(telefono);
-
 
     }
 
+    private void enviarDatos() {
+        fone = telefono;
+        Intent i = new Intent(getApplicationContext(), LLamar.class);
+        i.putExtra("tel", telefono);
+        startActivity(i);
+        finish();
+    }
+
+    private void enviarDatoss() {
+
+        fone = telefono;
+        Intent i = new Intent(getApplicationContext(), Sms.class);
+        i.putExtra("tel", telefono);
+        startActivity(i);
+        finish();
+    }
 }
 
 
