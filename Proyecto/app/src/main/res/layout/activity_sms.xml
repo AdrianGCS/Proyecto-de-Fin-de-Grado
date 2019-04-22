@@ -39,6 +39,64 @@
             app:layout_constraintVertical_bias="0.861" />
 
         <TextView
+            android:id="@+id/longitud"
+            android:layout_width="237dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/common_google_signin_btn_text_dark_default"
+            android:drawableLeft="@mipmap/ic_telefono"
+            android:ems="10"
+            android:hint="Telefono"
+            android:inputType="text"
+            android:selectAllOnFocus="true"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:textColorHint="#000000"
+            android:typeface="normal"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.367"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
+            app:layout_constraintVertical_bias="0.615" />
+
+        <TextView
+            android:id="@+id/latitud"
+            android:layout_width="237dp"
+            android:layout_height="33dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/common_google_signin_btn_text_dark_default"
+            android:drawableLeft="@mipmap/ic_telefono"
+            android:ems="10"
+            android:hint="Telefono"
+            android:inputType="text"
+            android:selectAllOnFocus="true"
+            android:textAllCaps="false"
+            android:textColor="#000000"
+            android:textColorHint="#000000"
+            android:typeface="normal"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.354"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
+            />
+
+        <TextView
             android:id="@+id/ono"
             android:layout_width="237dp"
             android:layout_height="33dp"
@@ -62,11 +120,11 @@
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.367"
+            app:layout_constraintHorizontal_bias="0.354"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
 
-            app:layout_constraintVertical_bias="0.526" />
+            app:layout_constraintVertical_bias="0.705" />
 
 
         <ImageView
