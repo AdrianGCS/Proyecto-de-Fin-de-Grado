@@ -22,14 +22,16 @@ public class Principal extends AppCompatActivity {
     Bundle datos;
     public static String telefono = "";
     public static String fone = "";
-    TextView phon;
+    TextView phon, hy;
+    public static String ids = "";
+    public static String imei = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
         phon = findViewById(R.id.tele);
-
+        hy = findViewById(R.id.idss);
         cogerDatos();
 
     }
@@ -59,6 +61,10 @@ public class Principal extends AppCompatActivity {
         String t = getIntent().getStringExtra("telefono");
         telefono = t;
         phon.setText(telefono);
+        String id = getIntent().getStringExtra("id_enfermo");
+        ids = id;
+        hy.setText(ids);
+       imei=getIntent().getStringExtra("imei");
 
     }
 
@@ -75,6 +81,8 @@ public class Principal extends AppCompatActivity {
         fone = telefono;
         Intent i = new Intent(getApplicationContext(), Sms.class);
         i.putExtra("tel", telefono);
+        i.putExtra("id_enfermo",ids);
+        i.putExtra("imei",imei);
         startActivity(i);
         finish();
     }

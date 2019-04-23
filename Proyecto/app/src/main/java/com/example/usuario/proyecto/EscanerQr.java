@@ -48,7 +48,8 @@ public class EscanerQr extends AppCompatActivity {
     boolean isEmail = false;
     private Dialog midialogo;
     private AccessServiceAPI miser;
-
+    public static String id_enfermo;
+    public static String imei;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -206,7 +207,7 @@ public class EscanerQr extends AppCompatActivity {
                 String jsonString = miser.getJSONStringWithParam_POST(Common.SERVICE_API_URL, postParam);
                 JSONObject jsonObject = new JSONObject(jsonString);
                  telefono = jsonObject.getString("Telefono");
-                String id_enfermo = jsonObject.getString("id");
+                 id_enfermo = jsonObject.getString("id");
 
                 return jsonObject.getInt("result");
 
@@ -226,6 +227,9 @@ public class EscanerQr extends AppCompatActivity {
                 Intent i = new Intent(getApplicationContext(), Principal.class);
                 i.putExtra("qr", texto.getText() + "");
                 i.putExtra("telefono", telefono);
+                i.putExtra("id_enfermo", id_enfermo);
+                i.putExtra("id_enfermo", id_enfermo);
+                i.putExtra("imei", imei);
                 setResult(1, i);
                 startActivity(i);
                 finish();
@@ -237,7 +241,7 @@ public class EscanerQr extends AppCompatActivity {
 
         private String Imei() {
             TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
-            String imei = "";
+             imei = "";
 
 
             if (android.os.Build.VERSION.SDK_INT >= 26) {
