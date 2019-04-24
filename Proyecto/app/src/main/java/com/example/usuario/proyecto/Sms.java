@@ -222,7 +222,7 @@ public class Sms extends AppCompatActivity {
         @Override
         protected Integer doInBackground(String... params) {
             Map<String, String> postParam = new HashMap<>();
-            postParam.put("action", "enfermo");
+            postParam.put("action", "Local");
             postParam.put("id_enfermo", params[0]);
             postParam.put("length", params[1]);
             postParam.put("altitude", params[2]);
