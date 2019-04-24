@@ -23,13 +23,20 @@
         android:id="@+id/boton"
         android:layout_width="269dp"
         android:layout_height="57dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
-        android:layout_marginBottom="60dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="68dp"
+        android:layout_marginRight="68dp"
+        android:layout_marginBottom="92dp"
         android:enabled="false"
         android:text="@string/navegar"
         mapbox:layout_constraintBottom_toBottomOf="@+id/mapav"
-        mapbox:layout_constraintEnd_toEndOf="parent" />
+        mapbox:layout_constraintEnd_toEndOf="parent"
+        mapbox:layout_constraintHorizontal_bias="0.954"
+        mapbox:layout_constraintStart_toStartOf="parent"
+        mapbox:layout_constraintTop_toTopOf="parent"
+        mapbox:layout_constraintVertical_bias="1.0" />
 
 
 </android.support.constraint.ConstraintLayout>

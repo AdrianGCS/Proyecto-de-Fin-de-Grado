@@ -32,13 +32,12 @@
             android:drawablePadding="8dp"
             android:onClick="onClick"
             android:text="Editar Permisos"
+            android:textColor="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.358"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.806"
-            android:textColor="#FFFFFF"/>
+            app:layout_constraintVertical_bias="0.806" />
 
         <Button
             android:id="@+id/datos"
@@ -55,13 +54,12 @@
             android:drawablePadding="8dp"
             android:onClick="onClick"
             android:text="Editar Datos"
+            android:textColor="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.358"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.324"
-            android:textColor="#FFFFFF"/>
+            app:layout_constraintVertical_bias="0.324" />
 
         <Button
             android:id="@+id/historial"
@@ -78,13 +76,12 @@
             android:drawablePadding="8dp"
             android:onClick="onClick"
             android:text="Mostrar historial"
+            android:textColor="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.358"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.558"
-            android:textColor="#FFFFFF"/>
+            app:layout_constraintVertical_bias="0.557" />
 
 
     </android.support.constraint.ConstraintLayout>

@@ -52,12 +52,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initViews() {
         btnScanBarcode = findViewById(R.id.btnScanBarcode);
         registro = findViewById(R.id.registro);
-        otra = findViewById(R.id.otra);
         log = findViewById(R.id.log);
         btnScanBarcode.setOnClickListener(this);
         registro.setOnClickListener(this);
         log.setOnClickListener(this);
-        otra.setOnClickListener(this);
     }
 
     public void onClick(View v) {
@@ -72,9 +70,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.registro:
                 startActivity(new Intent(MainActivity.this, Registro.class));
                 break;
-            case R.id.otra:
-                startActivity(new Intent(MainActivity.this, GeneradorQR.class));
-                break;
+
 
         }
     }

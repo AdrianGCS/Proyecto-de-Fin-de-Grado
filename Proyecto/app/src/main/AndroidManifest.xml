@@ -55,9 +55,6 @@
             android:name=".LLamar"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".GeneradorQR"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".Principal"
             android:screenOrientation="portrait" />
         <activity

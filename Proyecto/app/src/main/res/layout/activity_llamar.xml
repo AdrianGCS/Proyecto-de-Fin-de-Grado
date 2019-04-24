@@ -19,7 +19,7 @@
 
         <Button
             android:id="@+id/llamar"
-            android:layout_width="239dp"
+            android:layout_width="220dp"
             android:layout_height="53dp"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
@@ -33,14 +33,13 @@
             android:text="LLAMAR"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.437"
+            app:layout_constraintHorizontal_bias="0.57"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.805" />
+            app:layout_constraintVertical_bias="0.797" />
 
         <TextView
             android:id="@+id/fono"
-            android:maxLength="9"
             android:layout_width="237dp"
             android:layout_height="33dp"
             android:layout_marginStart="8dp"
@@ -54,6 +53,7 @@
             android:ems="10"
             android:hint="Telefono"
             android:inputType="phone"
+            android:maxLength="9"
             android:selectAllOnFocus="true"
             android:textAllCaps="false"
             android:textColor="@color/common_google_signin_btn_text_dark_focused"
@@ -62,10 +62,10 @@
             android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.367"
+            app:layout_constraintHorizontal_bias="0.563"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
 
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.571" />
 
 

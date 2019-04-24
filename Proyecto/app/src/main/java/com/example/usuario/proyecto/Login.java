@@ -1,6 +1,8 @@
 package com.example.usuario.proyecto;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,6 +31,12 @@ public class Login extends AppCompatActivity {
         correouser = (EditText) findViewById(R.id.correo);
         passuser = (EditText) findViewById(R.id.password);
         miservicio = new AccessServiceAPI();
+
+        SharedPreferences prefs =
+                getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
+
+        String validacion = prefs.getString("Correo","Inserte el correo");
+        correouser.setText(validacion);
 
     }
 
@@ -88,6 +96,14 @@ public class Login extends AppCompatActivity {
             super.onPostExecute(result);
             dialogo.dismiss();
             if (Common.RESULT_SUCCESS == result) {
+
+                SharedPreferences prefs =
+                        getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor=prefs.edit();
+                editor.putString("Correo",correouser.getText().toString());
+
+                editor.commit();
+
                 Toast.makeText(getApplicationContext(), "Login Correcto", Toast.LENGTH_LONG).show();
                 Intent i = new Intent(getApplicationContext(), MenuUser.class);
                 i.putExtra("correo", correouser.getText().toString());
