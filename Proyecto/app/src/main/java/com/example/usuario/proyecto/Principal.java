@@ -22,7 +22,7 @@ public class Principal extends AppCompatActivity {
     Bundle datos;
     public static String telefono = "";
     public static String fone = "";
-    TextView phon, hy;
+    TextView phon, hy,u;
     public static String ids = "";
     public static String imei = "";
 
@@ -32,6 +32,7 @@ public class Principal extends AppCompatActivity {
         setContentView(R.layout.activity_principal);
         phon = findViewById(R.id.tele);
         hy = findViewById(R.id.idss);
+        u=findViewById(R.id.imeiee);
         cogerDatos();
 
     }
@@ -61,22 +62,26 @@ public class Principal extends AppCompatActivity {
         telefono = getIntent().getStringExtra("telefono");
         ids = getIntent().getStringExtra("id_enfermo");
         imei = getIntent().getStringExtra("imei");
-
+        hy.setText(ids);
+        phon.setText(telefono);
+        u.setText(imei);
     }
 
     private void enviarDatos() {
-        fone = telefono;
+
         Intent i = new Intent(getApplicationContext(), LLamar.class);
-        i.putExtra("tel", telefono);
+        i.putExtra("telefono", telefono);
+        i.putExtra("id_enfermo", ids);
+        i.putExtra("imei", imei);
         startActivity(i);
         finish();
     }
 
     private void enviarDatoss() {
 
-        fone = telefono;
+
         Intent i = new Intent(getApplicationContext(), Sms.class);
-        i.putExtra("tel", telefono);
+        i.putExtra("telefono", telefono);
         i.putExtra("id_enfermo", ids);
         i.putExtra("imei", imei);
         startActivity(i);

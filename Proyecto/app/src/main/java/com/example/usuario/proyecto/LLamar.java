@@ -19,6 +19,8 @@ public class LLamar extends AppCompatActivity {
     TextView tls;
     private Button boto;
     public static String phone = "";
+    public static String ideess = "";
+    public static String imie = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +48,10 @@ public class LLamar extends AppCompatActivity {
     }
 
     public void cogerDatos() {
-        phone = getIntent().getStringExtra("tel");
+        phone = getIntent().getStringExtra("telefono");
         tls.setText(phone);
-
+        ideess = getIntent().getStringExtra("id_enfermo");
+        imie = getIntent().getStringExtra("imei");
     }
 
     public void llamartelefono() {
@@ -73,11 +76,16 @@ public class LLamar extends AppCompatActivity {
             ex.printStackTrace();
         }
     }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-
-        startActivity(new Intent(this, MainActivity.class));
+        Intent i = new Intent(getApplicationContext(), Principal.class);
+        i.putExtra("telefono", phone);
+        i.putExtra("id_enfermo", ideess);
+        i.putExtra("imei", imie);
+        startActivity(i);
+        // finish();
 
 
     }

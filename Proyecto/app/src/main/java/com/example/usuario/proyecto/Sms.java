@@ -90,7 +90,7 @@ public class Sms extends AppCompatActivity {
 
     public void cogerDatos() {
 
-        n = getIntent().getStringExtra("tel");
+        n = getIntent().getStringExtra("telefono");
         telefono.setText(n);
         idess = getIntent().getStringExtra("id_enfermo");
         ide.setText(idess);
@@ -271,8 +271,11 @@ public class Sms extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
 
-        startActivity(new Intent(this, MainActivity.class));
-
+        Intent i = new Intent(getApplicationContext(), Principal.class);
+        i.putExtra("telefono", n);
+        i.putExtra("id_enfermo", idess);
+        i.putExtra("imei", imei);
+        startActivity(i);
 
     }
 }
