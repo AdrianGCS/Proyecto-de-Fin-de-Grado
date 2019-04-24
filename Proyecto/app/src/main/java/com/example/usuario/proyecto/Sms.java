@@ -42,7 +42,7 @@ public class Sms extends AppCompatActivity {
     public static String n;
     public static String Text;
     public static String longi;
-    public static String ts;
+    public static String idess;
     public static String imei;
     private AccessServiceAPI miser;
     private Dialog midialogo;
@@ -82,7 +82,7 @@ public class Sms extends AppCompatActivity {
 
 
                 enviarMensaje(n, calle.getText().toString());
-                new TaskRegister().execute(la.getText().toString(), lo.getText().toString(),ts,imei);
+                new TaskRegister().execute(idess,lo.getText().toString(),la.getText().toString() ,imei);
             }
         });
     }
@@ -91,8 +91,8 @@ public class Sms extends AppCompatActivity {
 
         n = getIntent().getStringExtra("tel");
         telefono.setText(n);
-        ts = getIntent().getStringExtra("id_enfermo");
-        ide.setText(ts);
+        idess = getIntent().getStringExtra("id_enfermo");
+        ide.setText(idess);
         imei = getIntent().getStringExtra("imei");
         imai.setText(imei);
     }

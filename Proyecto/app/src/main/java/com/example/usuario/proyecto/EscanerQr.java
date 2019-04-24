@@ -228,7 +228,6 @@ public class EscanerQr extends AppCompatActivity {
                 i.putExtra("qr", texto.getText() + "");
                 i.putExtra("telefono", telefono);
                 i.putExtra("id_enfermo", id_enfermo);
-                i.putExtra("id_enfermo", id_enfermo);
                 i.putExtra("imei", imei);
                 setResult(1, i);
                 startActivity(i);
