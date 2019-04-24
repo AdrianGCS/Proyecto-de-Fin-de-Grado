@@ -51,6 +51,7 @@ public class Sms extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sms);
+        Toast.makeText(getApplicationContext(), "Enviar sms tiene cargo", Toast.LENGTH_LONG).show();
         dale = (Button) findViewById(R.id.dale);
         telefono = findViewById(R.id.ono);
         la = (TextView) findViewById(R.id.longitud);
@@ -61,7 +62,7 @@ public class Sms extends AppCompatActivity {
         miser = new AccessServiceAPI();
         cogerDatos();
 
-        Toast.makeText(getApplicationContext(), "Enviar sms tiene cargo", Toast.LENGTH_LONG).show();
+
 
         if (ActivityCompat.checkSelfPermission(
                 this, Manifest.permission.SEND_SMS)

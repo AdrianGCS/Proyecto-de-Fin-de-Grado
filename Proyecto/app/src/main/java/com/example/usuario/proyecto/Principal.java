@@ -58,13 +58,9 @@ public class Principal extends AppCompatActivity {
     }
 
     private void cogerDatos() {
-        String t = getIntent().getStringExtra("telefono");
-        telefono = t;
-        phon.setText(telefono);
-        String id = getIntent().getStringExtra("id_enfermo");
-        ids = id;
-        hy.setText(ids);
-       imei=getIntent().getStringExtra("imei");
+        telefono = getIntent().getStringExtra("telefono");
+        ids = getIntent().getStringExtra("id_enfermo");
+        imei = getIntent().getStringExtra("imei");
 
     }
 
@@ -81,8 +77,8 @@ public class Principal extends AppCompatActivity {
         fone = telefono;
         Intent i = new Intent(getApplicationContext(), Sms.class);
         i.putExtra("tel", telefono);
-        i.putExtra("id_enfermo",ids);
-        i.putExtra("imei",imei);
+        i.putExtra("id_enfermo", ids);
+        i.putExtra("imei", imei);
         startActivity(i);
         finish();
     }
