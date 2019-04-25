@@ -49,21 +49,6 @@ public class Splah extends AppCompatActivity {
 
         ,2000);
     }
-    public void getCoordenadas() {
-        //Obtener la direccion de la calle a partir de la latitud y la longitud
 
-            try {
-                Geocoder geocoder = new Geocoder(this, Locale.getDefault());
-                List<Address> list = geocoder.getFromLocationName("Madrid",1);
-                if (!list.isEmpty()) {
-                    Address coordenadas =list.get(0);
-                   double x = coordenadas.getLatitude();
-                   double Y = coordenadas.getLongitude();
-                   int Z = coordenadas.getMaxAddressLineIndex();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
     }
 

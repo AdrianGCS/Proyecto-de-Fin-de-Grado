@@ -7,6 +7,8 @@ import android.app.WallpaperManager;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.AsyncTask;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import android.app.Activity;
 
+import java.io.IOException;
 import java.lang.String;
 
 import com.google.zxing.BarcodeFormat;
@@ -29,6 +32,8 @@ import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 import org.json.JSONObject;
 
+import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 import java.util.HashMap;
 import java.util.Map;
@@ -46,8 +51,9 @@ public class CreacionEnfermo extends AppCompatActivity {
     private Button boto;
     private ImageView qr;
     private String a;
-     public static Bitmap bitmap;
+    public static Bitmap bitmap;
     public static String codigo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +70,12 @@ public class CreacionEnfermo extends AppCompatActivity {
 
     public void onClick(View view) {
         //  Pattern pattern = Pattern.compile("^(?:(?:\\+|00)?34)?[89]\\d{8}$");
+        if (!"".equals(calle.getText().toString()) && validarDireccion(calle.getText().toString()) == false) {
+            calle.setError("Añada una calle valida");
+            return;
+        }
+
+
         if ("".equals(nombre.getText().toString())) {
             nombre.setError("Introduce el nombre");
             return;
@@ -76,7 +88,7 @@ public class CreacionEnfermo extends AppCompatActivity {
             telefono.setError("Introduce el telefono");
             return;
         }
-        if(telefono.getText().length()<9){
+        if (telefono.getText().length() < 9) {
             telefono.setError("Introduce un numero de telefono correcto");
             return;
         }
@@ -113,7 +125,7 @@ public class CreacionEnfermo extends AppCompatActivity {
                 String jsonString = miser.getJSONStringWithParam_POST(Common.SERVICE_API_URL, postParam);
                 JSONObject jsonObject = new JSONObject(jsonString);
                 a = jsonObject.getString("Encriptado");
-                codigo=jsonObject.getString("Telefono");
+                codigo = jsonObject.getString("Telefono");
                 if (!a.equals("8")) {
                     darle(a);
                     return jsonObject.getInt("result");
@@ -138,12 +150,12 @@ public class CreacionEnfermo extends AppCompatActivity {
             if (integer == Common.RESULT_SUCCESS) {
                 Toast.makeText(CreacionEnfermo.this, "Registrado con exito", Toast.LENGTH_LONG).show();
                 Intent i = new Intent(getApplicationContext(), Datos_Enfermo.class);
-                i.putExtra("nombre", nombre.getText()+"");
-                i.putExtra("apellidos", apellidos.getText()+"");
-                i.putExtra("telefono", telefono.getText()+"");
-                i.putExtra("direccion", calle.getText()+"");
-                i.putExtra("BitmapImage",  bitmap);
-                i.putExtra("Codigo",codigo);
+                i.putExtra("nombre", nombre.getText() + "");
+                i.putExtra("apellidos", apellidos.getText() + "");
+                i.putExtra("telefono", telefono.getText() + "");
+                i.putExtra("direccion", calle.getText() + "");
+                i.putExtra("BitmapImage", bitmap);
+                i.putExtra("Codigo", codigo);
                 setResult(1, i);
                 startActivity(i);
 
@@ -151,7 +163,7 @@ public class CreacionEnfermo extends AppCompatActivity {
 
             } else if (integer == Common.RESULT_USER_EXISTS) {
                 Toast.makeText(CreacionEnfermo.this, "El usuario ya existe en la base de datos", Toast.LENGTH_LONG).show();
-            } else{
+            } else {
                 Toast.makeText(CreacionEnfermo.this, "Registro fallido", Toast.LENGTH_LONG).show();
             }
         }
@@ -165,11 +177,27 @@ public class CreacionEnfermo extends AppCompatActivity {
             BitMatrix codigo = formaescribir.encode(a, BarcodeFormat.QR_CODE, 164, 196);
             BarcodeEncoder codigoqr = new BarcodeEncoder();
             bitmap = codigoqr.createBitmap(codigo);
-        // qr.setImageBitmap(bit);
+            // qr.setImageBitmap(bit);
         } catch (WriterException e) {
             e.printStackTrace();
         }
     }
 
+    public boolean validarDireccion(String direccion) {
+        //Obtener la direccion de la calle a partir de la latitud y la longitud
+
+        try {
+            Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+            List<Address> list = geocoder.getFromLocationName(direccion + ",Madrid,España", 10);
+
+            if (!list.isEmpty()&&!list.get(0).getFeatureName().equals("Madrid"))
+                return true;
+            else
+                return false;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
 }
