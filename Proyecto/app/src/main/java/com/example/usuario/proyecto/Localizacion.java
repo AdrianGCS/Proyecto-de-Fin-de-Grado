@@ -1,5 +1,7 @@
 package com.example.usuario.proyecto;
 
+import android.location.Address;
+import android.location.Geocoder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.annotation.SuppressLint;
@@ -8,7 +10,9 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
+import com.google.android.gms.common.images.ImageRequest;
 import com.mapbox.android.core.location.LocationEngine;
 import com.mapbox.android.core.location.LocationEngineListener;
 import com.mapbox.android.core.location.LocationEnginePriority;
@@ -36,7 +40,9 @@ import com.mapbox.services.android.navigation.ui.v5.NavigationLauncherOptions;
 import com.mapbox.services.android.navigation.ui.v5.route.NavigationMapRoute;
 import com.mapbox.services.android.navigation.v5.navigation.NavigationRoute;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -55,7 +61,9 @@ public class Localizacion extends AppCompatActivity implements OnMapReadyCallbac
     private Button boto;
     private NavigationMapRoute navigationMapRoute;
     private static final String TAG = "Localizacion";
-
+    public static double longitud;
+    public static double latitud;
+TextView te;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +73,8 @@ public class Localizacion extends AppCompatActivity implements OnMapReadyCallbac
         boto = findViewById(R.id.boton);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
+        te=findViewById(R.id.loca);
+
 
         boto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,7 +84,7 @@ public class Localizacion extends AppCompatActivity implements OnMapReadyCallbac
                         .destination(destinoPosition)
                         .shouldSimulateRoute(false)
                         .build();
-                NavigationLauncher.startNavigation(Localizacion.this, options);
+                    NavigationLauncher.startNavigation(Localizacion.this, options);
 
             }
         });
@@ -269,6 +279,22 @@ public class Localizacion extends AppCompatActivity implements OnMapReadyCallbac
         }
         mapView.onDestroy();
     }
+    public void getCoordenadas() {
+        //Obtener la direccion de la calle a partir de la latitud y la longitud
 
+        try {
+            Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+            List<Address> list = geocoder.getFromLocationName("Madrid",1);
+            if (!list.isEmpty()) {
+                Address coordenadas =list.get(0);
+                longitud  = coordenadas.getLatitude();
+                latitud  = coordenadas.getLongitude();
+
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

@@ -31,7 +31,7 @@ public class Datos_Enfermo extends AppCompatActivity {
     }
 
     public void onclick(View v) {
-        startActivity(new Intent(this, MenuUser.class));
+        startActivity(new Intent(this, Sms.class));
 
     }
 

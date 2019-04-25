@@ -45,6 +45,13 @@ public class Condiciones extends AppCompatActivity {
 
 
 
+
+    }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+
     }
 
 

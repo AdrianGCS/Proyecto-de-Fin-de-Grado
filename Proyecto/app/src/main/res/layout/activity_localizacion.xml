@@ -14,10 +14,13 @@
         android:layout_height="match_parent"
         mapbox:mapbox_cameraTargetLat="40.409276"
         mapbox:mapbox_cameraTargetLng="-3.655458"
-        mapbox:mapbox_styleUrl="mapbox://styles/mapbox/streets-v10"
         mapbox:mapbox_cameraZoom="12"
-        tools:layout_editor_absoluteX="298dp"
-        tools:layout_editor_absoluteY="16dp" />
+        mapbox:mapbox_styleUrl="mapbox://styles/mapbox/streets-v10"
+        tools:layout_editor_absoluteX="116dp"
+        tools:layout_editor_absoluteY="0dp">
+
+
+    </com.mapbox.mapboxsdk.maps.MapView>
 
     <Button
         android:id="@+id/boton"
@@ -37,6 +40,15 @@
         mapbox:layout_constraintStart_toStartOf="parent"
         mapbox:layout_constraintTop_toTopOf="parent"
         mapbox:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/loca"
+        android:layout_width="302dp"
+        android:layout_height="30dp"
+        android:text="TextView"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="29dp" />
 
 
 </android.support.constraint.ConstraintLayout>

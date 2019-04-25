@@ -62,8 +62,6 @@ public class Sms extends AppCompatActivity {
         miser = new AccessServiceAPI();
         cogerDatos();
 
-
-
         if (ActivityCompat.checkSelfPermission(
                 this, Manifest.permission.SEND_SMS)
                 != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
