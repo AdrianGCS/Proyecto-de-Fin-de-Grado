@@ -53,6 +53,7 @@ public class CreacionEnfermo extends AppCompatActivity {
     private String a;
     public static Bitmap bitmap;
     public static String codigo;
+    public static int id_enfermo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,6 +127,7 @@ public class CreacionEnfermo extends AppCompatActivity {
                 JSONObject jsonObject = new JSONObject(jsonString);
                 a = jsonObject.getString("Encriptado");
                 codigo = jsonObject.getString("Telefono");
+                id_enfermo=jsonObject.getInt("id");
                 if (!a.equals("8")) {
                     darle(a);
                     return jsonObject.getInt("result");
@@ -156,6 +158,7 @@ public class CreacionEnfermo extends AppCompatActivity {
                 i.putExtra("direccion", calle.getText() + "");
                 i.putExtra("BitmapImage", bitmap);
                 i.putExtra("Codigo", codigo);
+                i.putExtra("id_enfermo",id_enfermo);
                 setResult(1, i);
                 startActivity(i);
 

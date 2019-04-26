@@ -15,7 +15,7 @@ public class Datos_Enfermo extends AppCompatActivity {
     private TextView nombre, apellidos, telefono, direccion, codigoe;
     Bundle datos;
     private ImageView image;
-
+    public static int idenfer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +31,7 @@ public class Datos_Enfermo extends AppCompatActivity {
     }
 
     public void onclick(View v) {
-        startActivity(new Intent(this, Sms.class));
+        startActivity(new Intent(this, MenuUser.class));
 
     }
 
@@ -49,8 +49,9 @@ public class Datos_Enfermo extends AppCompatActivity {
         Bitmap bitmap = (Bitmap) getIntent().getParcelableExtra("BitmapImage");
         image.setImageBitmap(bitmap);
         String co = getIntent().getStringExtra("Codigo");
-        codigoe.setText(co);
 
+        idenfer=getIntent().getIntExtra("id_enfermo",idenfer);
+        codigoe.setText(""+co+""+idenfer);
     }
 
     @Override
@@ -60,5 +61,10 @@ public class Datos_Enfermo extends AppCompatActivity {
         startActivity(new Intent(this, MainActivity.class));
 
 
+    }
+    public void enviarDatos(){
+        Intent i= new Intent(this,MenuUser.class);
+        i.putExtra("id_enfermo",idenfer);
+        startActivity(i);
     }
 }
