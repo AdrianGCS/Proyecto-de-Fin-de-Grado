@@ -29,7 +29,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Condiciones"></activity>
+
         <activity
             android:name=".MenuUser"
             android:screenOrientation="portrait" />
@@ -68,6 +68,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Condiciones"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Splah"
