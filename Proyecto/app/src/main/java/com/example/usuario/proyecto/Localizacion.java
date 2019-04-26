@@ -1,7 +1,9 @@
 package com.example.usuario.proyecto;
 
+import android.app.ProgressDialog;
 import android.location.Address;
 import android.location.Geocoder;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.annotation.SuppressLint;
@@ -63,7 +65,7 @@ public class Localizacion extends AppCompatActivity implements OnMapReadyCallbac
     private static final String TAG = "Localizacion";
     public static double longitud;
     public static double latitud;
-TextView te;
+        TextView te;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,7 +90,7 @@ TextView te;
 
             }
         });
-
+        getCoordenadas();
     }
 
     @Override
@@ -296,6 +298,8 @@ TextView te;
             e.printStackTrace();
         }
     }
+
+
 
 
 }

@@ -30,10 +30,7 @@ public class Datos_Enfermo extends AppCompatActivity {
         cogerDatos();
     }
 
-    public void onclick(View v) {
-        startActivity(new Intent(this, MenuUser.class));
 
-    }
 
     private void cogerDatos() {
 
@@ -66,5 +63,9 @@ public class Datos_Enfermo extends AppCompatActivity {
         Intent i= new Intent(this,MenuUser.class);
         i.putExtra("id_enfermo",idenfer);
         startActivity(i);
+    }
+    public void onclick(View v) {
+        startActivity(new Intent(this, MenuUser.class));
+
     }
 }
