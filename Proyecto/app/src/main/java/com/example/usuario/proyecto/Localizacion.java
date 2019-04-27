@@ -1,6 +1,8 @@
 package com.example.usuario.proyecto;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.AsyncTask;
@@ -13,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.images.ImageRequest;
 import com.mapbox.android.core.location.LocationEngine;
@@ -42,9 +45,13 @@ import com.mapbox.services.android.navigation.ui.v5.NavigationLauncherOptions;
 import com.mapbox.services.android.navigation.ui.v5.route.NavigationMapRoute;
 import com.mapbox.services.android.navigation.v5.navigation.NavigationRoute;
 
+import org.json.JSONObject;
+
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -66,6 +73,10 @@ public class Localizacion extends AppCompatActivity implements OnMapReadyCallbac
     public static double longitud;
     public static double latitud;
         TextView te;
+    private Dialog midialogo;
+    private AccessServiceAPI miser;
+    public static String calle="";
+    public static String id_enfermo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +87,7 @@ public class Localizacion extends AppCompatActivity implements OnMapReadyCallbac
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
         te=findViewById(R.id.loca);
+
 
 
         boto.setOnClickListener(new View.OnClickListener() {
@@ -90,7 +102,8 @@ public class Localizacion extends AppCompatActivity implements OnMapReadyCallbac
 
             }
         });
-        getCoordenadas();
+       //new TaskRegister().execute(te.getText().toString());
+    getCoordenadas();
     }
 
     @Override
@@ -176,16 +189,23 @@ public class Localizacion extends AppCompatActivity implements OnMapReadyCallbac
         if (destinomarker != null) {
             map.removeMarker(destinomarker);
         }
+        getCoordenadas();
+        point.setLongitude(longitud);
+        point.setLatitude(latitud);
+
         destinomarker = map.addMarker(new MarkerOptions().position(point));
 
-        destinoPosition = Point.fromLngLat(point.getLongitude(), point.getLatitude());
+        destinoPosition = Point.fromLngLat(longitud,latitud);
         originPosistion = Point.fromLngLat(originLocation.getLongitude(), originLocation.getLatitude());
         getRoute(originPosistion, destinoPosition);
+        te.setText(""+longitud+""+latitud);
+
         boto.setEnabled(true);
         boto.setBackgroundResource(R.color.mapboxBlue);
     }
 
     private void getRoute(Point origen, Point destino) {
+
         NavigationRoute.builder()
                 .accessToken(Mapbox.getAccessToken())
                 .origin(origen)
@@ -298,8 +318,55 @@ public class Localizacion extends AppCompatActivity implements OnMapReadyCallbac
             e.printStackTrace();
         }
     }
+   /* public class TaskRegister extends AsyncTask<String, Void, Integer> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            midialogo = ProgressDialog.show(Localizacion.this, "Espere un momento", "Procesando datos...", true);
+
+        }
+
+        @Override
+        protected Integer doInBackground(String... params) {
+
+            Map<String, String> postParam = new HashMap<>();
+            postParam.put("action", "qr");
+            //postParam.put("calle", params[0]);
+            //postParam.put("qr", params[4]);
+            //llama al PHP
+
+            try {
+                String jsonString = miser.getJSONStringWithParam_POST(Common.SERVICE_API_URL, postParam);
+                JSONObject jsonObject = new JSONObject(jsonString);
+                calle = jsonObject.getString("Calle");
+                id_enfermo = jsonObject.getString("id");
+
+                return jsonObject.getInt("result");
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                return Common.RESULT_ERROR;
+            }
 
 
+        }
+
+        protected void onPostExecute(Integer integer) {
+            super.onPostExecute(integer);
+            midialogo.dismiss();
+            if (integer == Common.RESULT_SUCCESS) {
+                Toast.makeText(Localizacion.this, "Leido  con exito", Toast.LENGTH_LONG).show();
+                Intent i = new Intent(getApplicationContext(), Principal.class);
+                setResult(1, i);
+                startActivity(i);
+                finish();
+
+            } else {
+                Toast.makeText(Localizacion.this, "Leido fallido", Toast.LENGTH_LONG).show();
+            }
+        }
 
 
+    }*/
 }

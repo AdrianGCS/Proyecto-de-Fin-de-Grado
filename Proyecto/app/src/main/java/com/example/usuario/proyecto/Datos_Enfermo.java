@@ -10,6 +10,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.mapbox.services.android.navigation.ui.v5.NavigationLauncher;
+import com.mapbox.services.android.navigation.ui.v5.NavigationLauncherOptions;
+
 public class Datos_Enfermo extends AppCompatActivity {
     private Button boto;
     private TextView nombre, apellidos, telefono, direccion, codigoe;
@@ -28,6 +31,15 @@ public class Datos_Enfermo extends AppCompatActivity {
         image = findViewById(R.id.qr_enfermo);
         codigoe = findViewById(R.id.codigo);
         cogerDatos();
+        boto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                enviarDatos();
+              // Intent i=new Intent(Datos_Enfermo.this,MenuUser.class);
+
+            }
+        });
+
     }
 
 
@@ -62,10 +74,8 @@ public class Datos_Enfermo extends AppCompatActivity {
     public void enviarDatos(){
         Intent i= new Intent(this,MenuUser.class);
         i.putExtra("id_enfermo",idenfer);
-        startActivity(i);
+      startActivity(i);
     }
-    public void onclick(View v) {
-        startActivity(new Intent(this, MenuUser.class));
 
-    }
+
 }

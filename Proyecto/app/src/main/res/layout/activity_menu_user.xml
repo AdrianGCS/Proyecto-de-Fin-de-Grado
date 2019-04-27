@@ -83,6 +83,18 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.557" />
 
+        <TextView
+            android:id="@+id/idenfermo"
+            android:layout_width="107dp"
+            android:layout_height="45dp"
+            android:text="TextView"
+            android:textColor="@color/cardview_dark_background"
+            android:visibility="visible"
+            android:textColorHint="@color/cardview_dark_background"
+            tools:layout_editor_absoluteX="186dp"
+            tools:layout_editor_absoluteY="113dp"
+            tools:ignore="MissingConstraints" />
+
 
     </android.support.constraint.ConstraintLayout>
 
