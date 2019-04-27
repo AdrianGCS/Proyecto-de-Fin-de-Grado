@@ -18,7 +18,7 @@ public class Datos_Enfermo extends AppCompatActivity {
     private TextView nombre, apellidos, telefono, direccion, codigoe;
     Bundle datos;
     private ImageView image;
-    public static int idenfer;
+    public static String idenfer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +59,7 @@ public class Datos_Enfermo extends AppCompatActivity {
         image.setImageBitmap(bitmap);
         String co = getIntent().getStringExtra("Codigo");
 
-        idenfer=getIntent().getIntExtra("id_enfermo",idenfer);
+        idenfer=getIntent().getStringExtra("id_enfermo");
         codigoe.setText(""+co+""+idenfer);
     }
 

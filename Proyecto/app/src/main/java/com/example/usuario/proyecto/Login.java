@@ -24,6 +24,7 @@ public class Login extends AppCompatActivity {
     private AccessServiceAPI miservicio;
     private ProgressDialog dialogo;
     public static int x;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +36,7 @@ public class Login extends AppCompatActivity {
         SharedPreferences prefs =
                 getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
 
-        String validacion = prefs.getString("Correo","Inserte el correo");
+        String validacion = prefs.getString("Correo", "Inserte el correo");
         correouser.setText(validacion);
 
     }
@@ -83,7 +84,7 @@ public class Login extends AppCompatActivity {
             try {
 
                 jObjResult = miservicio.convertJSONString2Obj(miservicio.getJSONStringWithParam_POST(Common.SERVICE_API_URL, param));
-                 x=jObjResult.getInt("id");
+                x = jObjResult.getInt("id");
                 return jObjResult.getInt("result");
             } catch (Exception e) {
                 return Common.RESULT_ERROR;
@@ -99,15 +100,15 @@ public class Login extends AppCompatActivity {
 
                 SharedPreferences prefs =
                         getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor=prefs.edit();
-                editor.putString("Correo",correouser.getText().toString());
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putString("Correo", correouser.getText().toString());
 
                 editor.commit();
 
                 Toast.makeText(getApplicationContext(), "Login Correcto", Toast.LENGTH_LONG).show();
                 Intent i = new Intent(getApplicationContext(), MenuUser.class);
                 i.putExtra("correo", correouser.getText().toString());
-         startActivity(i);
+                startActivity(i);
             } else {
                 Toast.makeText(getApplicationContext(), "Login Mal", Toast.LENGTH_LONG).show();
             }
