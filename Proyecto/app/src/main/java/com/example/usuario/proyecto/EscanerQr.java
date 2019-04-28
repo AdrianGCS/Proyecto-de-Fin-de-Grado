@@ -100,17 +100,22 @@ public class EscanerQr extends AppCompatActivity {
             public void surfaceCreated(SurfaceHolder holder) {
                 try {
 
-                    if(ActivityCompat.checkSelfPermission(EscanerQr.this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED){
+                    if(ActivityCompat.checkSelfPermission(EscanerQr.this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(EscanerQr.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
                         ActivityCompat.requestPermissions(EscanerQr.this, new
-                                String[]{Manifest.permission.READ_PHONE_STATE}, REQUEST_READ_PHONE_STATE);
+                                String[]{Manifest.permission.READ_PHONE_STATE,Manifest.permission.CAMERA}, 1);
                     }
                     else {
-                        if (ActivityCompat.checkSelfPermission(EscanerQr.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-                            cameraSource.start(surfaceView.getHolder());
-
-                        } else {
+                        if (ActivityCompat.checkSelfPermission(EscanerQr.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                             ActivityCompat.requestPermissions(EscanerQr.this, new
                                     String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
+
+                        } else {
+                            if (ActivityCompat.checkSelfPermission(EscanerQr.this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED){
+                                ActivityCompat.requestPermissions(EscanerQr.this, new
+                                        String[]{Manifest.permission.READ_PHONE_STATE}, REQUEST_READ_PHONE_STATE);
+                            }
+
+                            cameraSource.start(surfaceView.getHolder());
                         }
                     }
 

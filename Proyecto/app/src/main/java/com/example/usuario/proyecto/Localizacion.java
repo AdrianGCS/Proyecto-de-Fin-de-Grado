@@ -103,7 +103,7 @@ public class Localizacion extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
        //new TaskRegister().execute(te.getText().toString());
-    getCoordenadas();
+
     }
 
     @Override
@@ -189,13 +189,13 @@ public class Localizacion extends AppCompatActivity implements OnMapReadyCallbac
         if (destinomarker != null) {
             map.removeMarker(destinomarker);
         }
-        getCoordenadas();
+       getCoordenadas();
         point.setLongitude(longitud);
         point.setLatitude(latitud);
 
         destinomarker = map.addMarker(new MarkerOptions().position(point));
 
-        destinoPosition = Point.fromLngLat(longitud,latitud);
+        destinoPosition = Point.fromLngLat(point.getLongitude(), point.getLatitude());
         originPosistion = Point.fromLngLat(originLocation.getLongitude(), originLocation.getLatitude());
         getRoute(originPosistion, destinoPosition);
         te.setText(""+longitud+""+latitud);
@@ -309,8 +309,8 @@ public class Localizacion extends AppCompatActivity implements OnMapReadyCallbac
             List<Address> list = geocoder.getFromLocationName("Madrid",1);
             if (!list.isEmpty()) {
                 Address coordenadas =list.get(0);
-                longitud  = coordenadas.getLatitude();
-                latitud  = coordenadas.getLongitude();
+                latitud  = coordenadas.getLatitude();
+                longitud   = coordenadas.getLongitude();
 
 
             }
