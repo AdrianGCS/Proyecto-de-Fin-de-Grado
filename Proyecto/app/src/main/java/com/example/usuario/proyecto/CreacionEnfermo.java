@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.app.Activity;
 
@@ -55,6 +56,7 @@ public class CreacionEnfermo extends AppCompatActivity {
     public static String codigo;
     public static String codfam;
     public static String id_enfermo;
+    TextView idsss;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +69,7 @@ public class CreacionEnfermo extends AppCompatActivity {
         boto = findViewById(R.id.entrar);
         calle = findViewById(R.id.direccion);
         qr = findViewById(R.id.qr3);
+        idsss = findViewById(R.id.isx);
         coger();
 
     }
@@ -100,13 +103,15 @@ public class CreacionEnfermo extends AppCompatActivity {
             telefono.setError("Introduce telefono valido");
             return;
         }*/
-        new TaskRegister().execute(codfam,nombre.getText().toString(), apellidos.getText().toString(), telefono.getText().toString(), calle.getText().toString());
+        new TaskRegister().execute(codfam, nombre.getText().toString(), apellidos.getText().toString(), telefono.getText().toString(), calle.getText().toString());
 
     }
-    public void coger()
-    {
-        codfam=getIntent().getStringExtra("id");
+
+    public void coger() {
+        codfam = getIntent().getStringExtra("id_familiar");
+        idsss.setText(codfam);
     }
+
     public class TaskRegister extends AsyncTask<String, Void, Integer> {
 
         @Override
@@ -120,7 +125,7 @@ public class CreacionEnfermo extends AppCompatActivity {
         protected Integer doInBackground(String... params) {
             Map<String, String> postParam = new HashMap<>();
             postParam.put("action", "enfermo");
-            postParam.put("id",codfam);
+            postParam.put("id", codfam);
             postParam.put("username", params[0]);
             postParam.put("phone", params[2]);
             postParam.put("adress", params[3]);
@@ -134,7 +139,7 @@ public class CreacionEnfermo extends AppCompatActivity {
                 JSONObject jsonObject = new JSONObject(jsonString);
                 a = jsonObject.getString("Encriptado");
                 codigo = jsonObject.getString("Telefono");
-                id_enfermo=jsonObject.getString("id");
+                id_enfermo = jsonObject.getString("id");
 
                 if (!a.equals("8")) {
                     darle(a);
@@ -166,8 +171,8 @@ public class CreacionEnfermo extends AppCompatActivity {
                 i.putExtra("direccion", calle.getText() + "");
                 i.putExtra("BitmapImage", bitmap);
                 i.putExtra("Codigo", codigo);
-                i.putExtra("id_enfermo",id_enfermo);
-                i.putExtra("idfam",codfam);
+                i.putExtra("id_enfermo", id_enfermo);
+                i.putExtra("idfam", codfam);
                 setResult(1, i);
                 startActivity(i);
 
@@ -202,7 +207,7 @@ public class CreacionEnfermo extends AppCompatActivity {
             Geocoder geocoder = new Geocoder(this, Locale.getDefault());
             List<Address> list = geocoder.getFromLocationName(direccion + ",Madrid,España", 10);
 
-            if (!list.isEmpty()&&!list.get(0).getFeatureName().equals("Madrid"))
+            if (!list.isEmpty() && !list.get(0).getFeatureName().equals("Madrid"))
                 return true;
             else
                 return false;

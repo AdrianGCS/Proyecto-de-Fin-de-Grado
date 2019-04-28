@@ -4,15 +4,17 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class OpcionUser extends AppCompatActivity {
     public static String id;
-
+TextView c;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_opcion_user);
+        c=findViewById(R.id.cod);
         cogerDatos();
     }
 
@@ -23,8 +25,9 @@ public class OpcionUser extends AppCompatActivity {
         switch (view.getId()) {
 
             case R.id.crear:
-                envio();
-                startActivity(new Intent(this, CreacionEnfermo.class));
+                Intent i = new Intent(this, CreacionEnfermo.class);
+                i.putExtra("id_familiar", id);
+               startActivity(i);
 
                 break;
             case R.id.unirse:
@@ -43,10 +46,8 @@ public class OpcionUser extends AppCompatActivity {
 
     public void cogerDatos() {
         id = getIntent().getStringExtra("id");
+        c.setText(id);
     }
 
-    public void envio() {
-        Intent i = new Intent(this, CreacionEnfermo.class);
-        i.putExtra("id", id);
-    }
+   
 }

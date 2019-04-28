@@ -20,6 +20,7 @@ public class Datos_Enfermo extends AppCompatActivity {
     private ImageView image;
     public static String idenfer;
     public static String idfa;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,13 +37,12 @@ public class Datos_Enfermo extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 enviarDatos();
-              // Intent i=new Intent(Datos_Enfermo.this,MenuUser.class);
+                // Intent i=new Intent(Datos_Enfermo.this,MenuUser.class);
 
             }
         });
 
     }
-
 
 
     private void cogerDatos() {
@@ -60,10 +60,9 @@ public class Datos_Enfermo extends AppCompatActivity {
         image.setImageBitmap(bitmap);
         String co = getIntent().getStringExtra("Codigo");
 
-        idenfer=getIntent().getStringExtra("id_enfermo");
-        codigoe.setText(""+co+""+idenfer);
-        idfa=getIntent().getStringExtra("idfam");
-
+        idenfer = getIntent().getStringExtra("id_enfermo");
+        codigoe.setText("" + co + "" + idenfer);
+        idfa = getIntent().getStringExtra("idfam");
     }
 
     @Override
@@ -74,11 +73,12 @@ public class Datos_Enfermo extends AppCompatActivity {
 
 
     }
-    public void enviarDatos(){
-        Intent i= new Intent(this,MenuUser.class);
-        i.putExtra("id_enfermo",idenfer);
-        i.putExtra("idfam",idfa);
-      startActivity(i);
+
+    public void enviarDatos() {
+        Intent i = new Intent(this, MenuUser.class);
+        i.putExtra("id_enfermo", idenfer);
+        i.putExtra("idfam", idfa);
+        startActivity(i);
     }
 
 
