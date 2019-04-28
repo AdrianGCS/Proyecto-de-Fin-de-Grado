@@ -7,25 +7,28 @@ import android.view.View;
 import android.widget.Toast;
 
 public class OpcionUser extends AppCompatActivity {
+    public static String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_opcion_user);
-
+        cogerDatos();
     }
-    public void onClick(View view){
+
+    public void onClick(View view) {
         /*Intent intento= new Intent(Principal.this,Login.class);
         startActivity(intento);
         */
-        switch (view.getId()){
+        switch (view.getId()) {
 
             case R.id.crear:
-                startActivity(new Intent(this,CreacionEnfermo.class));
+                envio();
+                startActivity(new Intent(this, CreacionEnfermo.class));
 
                 break;
             case R.id.unirse:
-                startActivity(new Intent(this,UnirseEnfermo.class));
+                startActivity(new Intent(this, UnirseEnfermo.class));
                 break;
 
         }
@@ -35,8 +38,15 @@ public class OpcionUser extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         Toast.makeText(getApplicationContext(), "No puede ir atras", Toast.LENGTH_LONG).show();
-        startActivity(new Intent(OpcionUser.this,OpcionUser.class));
+        startActivity(new Intent(OpcionUser.this, OpcionUser.class));
+    }
 
+    public void cogerDatos() {
+        id = getIntent().getStringExtra("id");
+    }
 
+    public void envio() {
+        Intent i = new Intent(this, CreacionEnfermo.class);
+        i.putExtra("id", id);
     }
 }

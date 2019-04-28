@@ -28,6 +28,7 @@ private EditText apellidos;
     private EditText confirmarcontraseña;
     private AccessServiceAPI miservicio;
     private ProgressDialog dialogo;
+    public static String id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,7 +100,7 @@ private EditText apellidos;
             try{
                 String jsonString = miservicio.getJSONStringWithParam_POST(Common.SERVICE_API_URL, postParam);
                 JSONObject jsonObject = new JSONObject(jsonString);
-                int ID = jsonObject.getInt("id");
+                 id= jsonObject.getString("id");
                 return jsonObject.getInt("result");
             }catch (Exception e) {
                 e.printStackTrace();
@@ -119,6 +120,7 @@ private EditText apellidos;
                 i.putExtra("contraseña", contraseña.getText().toString());
                 i.putExtra("apellidos", apellidos.getText().toString());
                 i.putExtra("correo", correo.getText().toString());
+                i.putExtra("id",id);
                 setResult(1, i);
                 startActivity(i);
                 finish();

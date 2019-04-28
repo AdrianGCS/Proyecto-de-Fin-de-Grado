@@ -53,7 +53,8 @@ public class CreacionEnfermo extends AppCompatActivity {
     private String a;
     public static Bitmap bitmap;
     public static String codigo;
-    public static int id_enfermo;
+    public static String codfam;
+    public static String id_enfermo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +67,7 @@ public class CreacionEnfermo extends AppCompatActivity {
         boto = findViewById(R.id.entrar);
         calle = findViewById(R.id.direccion);
         qr = findViewById(R.id.qr3);
+        coger();
 
     }
 
@@ -98,10 +100,13 @@ public class CreacionEnfermo extends AppCompatActivity {
             telefono.setError("Introduce telefono valido");
             return;
         }*/
-        new TaskRegister().execute(nombre.getText().toString(), apellidos.getText().toString(), telefono.getText().toString(), calle.getText().toString());
+        new TaskRegister().execute(codfam,nombre.getText().toString(), apellidos.getText().toString(), telefono.getText().toString(), calle.getText().toString());
 
     }
-
+    public void coger()
+    {
+        codfam=getIntent().getStringExtra("id");
+    }
     public class TaskRegister extends AsyncTask<String, Void, Integer> {
 
         @Override
@@ -115,10 +120,12 @@ public class CreacionEnfermo extends AppCompatActivity {
         protected Integer doInBackground(String... params) {
             Map<String, String> postParam = new HashMap<>();
             postParam.put("action", "enfermo");
+            postParam.put("id",codfam);
             postParam.put("username", params[0]);
             postParam.put("phone", params[2]);
             postParam.put("adress", params[3]);
             postParam.put("lastname", params[1]);
+
             //postParam.put("qr", params[4]);
             //llama al PHP
 
@@ -127,7 +134,8 @@ public class CreacionEnfermo extends AppCompatActivity {
                 JSONObject jsonObject = new JSONObject(jsonString);
                 a = jsonObject.getString("Encriptado");
                 codigo = jsonObject.getString("Telefono");
-                id_enfermo=jsonObject.getInt("id");
+                id_enfermo=jsonObject.getString("id");
+
                 if (!a.equals("8")) {
                     darle(a);
                     return jsonObject.getInt("result");
@@ -159,6 +167,7 @@ public class CreacionEnfermo extends AppCompatActivity {
                 i.putExtra("BitmapImage", bitmap);
                 i.putExtra("Codigo", codigo);
                 i.putExtra("id_enfermo",id_enfermo);
+                i.putExtra("idfam",codfam);
                 setResult(1, i);
                 startActivity(i);
 

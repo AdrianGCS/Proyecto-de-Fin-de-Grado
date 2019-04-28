@@ -34,7 +34,6 @@ import android.content.Context;
 import org.json.JSONObject;
 
 public class Sms extends AppCompatActivity {
-    private static final int MY_PERMISSIONS_REQUEST_SEND_SMS = 0;
     Button dale;
     TextView telefono, imai, ide;
     TextView la;
@@ -46,6 +45,8 @@ public class Sms extends AppCompatActivity {
     public static String imei;
     private AccessServiceAPI miser;
     private Dialog midialogo;
+    private static final int SEND_SMS = 101;
+    private static final int ACCESS_FINE_LOCATION = 201;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,26 +63,31 @@ public class Sms extends AppCompatActivity {
         miser = new AccessServiceAPI();
         cogerDatos();
 
-        if (ActivityCompat.checkSelfPermission(
-                this, Manifest.permission.SEND_SMS)
-                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                this, Manifest
-                        .permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]
-                    {Manifest.permission.SEND_SMS,}, 1000);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new
+                    String[]{Manifest.permission.SEND_SMS, Manifest.permission.ACCESS_FINE_LOCATION}, 1);
         } else {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new
+                        String[]{Manifest.permission.SEND_SMS}, SEND_SMS);
+
+            } else {
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(this, new
+                            String[]{Manifest.permission.ACCESS_FINE_LOCATION}, ACCESS_FINE_LOCATION);
+                } else {
+
+                    locationStart();
+                }
+            }
         }
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION,}, 1000);
-        } else {
-            locationStart();
-        }
+
         dale.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
 
                 enviarMensaje(n, calle.getText().toString());
-                new TaskRegister().execute(idess,lo.getText().toString(),la.getText().toString() ,imei);
+                new TaskRegister().execute(idess, lo.getText().toString(), la.getText().toString(), imei);
             }
         });
     }
@@ -208,7 +214,7 @@ public class Sms extends AppCompatActivity {
     }
 
 
-  public class TaskRegister extends AsyncTask<String, Void, Integer> {
+    public class TaskRegister extends AsyncTask<String, Void, Integer> {
 
         @Override
         protected void onPreExecute() {

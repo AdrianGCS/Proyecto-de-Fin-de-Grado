@@ -19,6 +19,7 @@ public class Datos_Enfermo extends AppCompatActivity {
     Bundle datos;
     private ImageView image;
     public static String idenfer;
+    public static String idfa;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +62,8 @@ public class Datos_Enfermo extends AppCompatActivity {
 
         idenfer=getIntent().getStringExtra("id_enfermo");
         codigoe.setText(""+co+""+idenfer);
+        idfa=getIntent().getStringExtra("idfam");
+
     }
 
     @Override
@@ -74,6 +77,7 @@ public class Datos_Enfermo extends AppCompatActivity {
     public void enviarDatos(){
         Intent i= new Intent(this,MenuUser.class);
         i.putExtra("id_enfermo",idenfer);
+        i.putExtra("idfam",idfa);
       startActivity(i);
     }
 
