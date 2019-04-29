@@ -50,7 +50,7 @@ public class EscanerQr extends AppCompatActivity {
     private AccessServiceAPI miser;
     public static String id_enfermo;
     public static String imei;
-    public  static String direccion;
+    public static String direccion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,22 +101,23 @@ public class EscanerQr extends AppCompatActivity {
             public void surfaceCreated(SurfaceHolder holder) {
                 try {
 
-                    if(ActivityCompat.checkSelfPermission(EscanerQr.this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(EscanerQr.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
+                    if (ActivityCompat.checkSelfPermission(EscanerQr.this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(EscanerQr.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                         ActivityCompat.requestPermissions(EscanerQr.this, new
-                                String[]{Manifest.permission.READ_PHONE_STATE,Manifest.permission.CAMERA}, 1);
-                    }
-                    else {
+                                String[]{Manifest.permission.READ_PHONE_STATE, Manifest.permission.CAMERA}, 1);
+                    } else {
                         if (ActivityCompat.checkSelfPermission(EscanerQr.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                             ActivityCompat.requestPermissions(EscanerQr.this, new
                                     String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
 
                         } else {
-                            if (ActivityCompat.checkSelfPermission(EscanerQr.this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED){
+                            if (ActivityCompat.checkSelfPermission(EscanerQr.this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
                                 ActivityCompat.requestPermissions(EscanerQr.this, new
                                         String[]{Manifest.permission.READ_PHONE_STATE}, REQUEST_READ_PHONE_STATE);
+                            } else {
+
+                                cameraSource.start(surfaceView.getHolder());
                             }
 
-                            cameraSource.start(surfaceView.getHolder());
                         }
                     }
 
@@ -189,7 +190,22 @@ public class EscanerQr extends AppCompatActivity {
         initialiseDetectorsAndSources();
     }
 
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        if (requestCode == 1) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
 
+                    return;
+                }
+                try {
+                    cameraSource.start(surfaceView.getHolder());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }
+    }
     public class TaskRegister extends AsyncTask<String, Void, Integer> {
 
         @Override

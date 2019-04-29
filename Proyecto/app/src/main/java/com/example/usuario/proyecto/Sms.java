@@ -102,6 +102,7 @@ public class Sms extends AppCompatActivity {
         imai.setText(imei);
     }
 
+
     private void enviarMensaje(String n, String mensaje) {
         try {
 
