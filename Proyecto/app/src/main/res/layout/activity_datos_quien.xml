@@ -17,28 +17,6 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp">
 
-        <Button
-            android:id="@+id/permisos"
-            android:layout_width="239dp"
-            android:layout_height="53dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
-            android:accessibilityHeading="false"
-            android:background="@android:color/holo_green_dark"
-            android:drawablePadding="8dp"
-            android:onClick="onClick"
-            android:text="Editar Permisos"
-            android:textColor="#FFFFFF"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.416"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.279" />
 
         <Button
             android:id="@+id/calendario"
@@ -61,7 +39,7 @@
             app:layout_constraintHorizontal_bias="0.416"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.796" />
+            app:layout_constraintVertical_bias="0.696" />
 
         <Button
             android:id="@+id/datos"
@@ -86,31 +64,10 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.432" />
 
-        <Button
-            android:id="@+id/historial"
-            android:layout_width="239dp"
-            android:layout_height="53dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
-            android:accessibilityHeading="false"
-            android:background="@color/zxing_viewfinder_laser"
-            android:drawablePadding="8dp"
-            android:onClick="onClick"
-            android:text="Mostrar historial"
-            android:textColor="#FFFFFF"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.416"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.622" />
+
 
         <TextView
-            android:id="@+id/idenfermo"
+            android:id="@+id/iduse"
             android:layout_width="107dp"
             android:layout_height="45dp"
             android:text="TextView"

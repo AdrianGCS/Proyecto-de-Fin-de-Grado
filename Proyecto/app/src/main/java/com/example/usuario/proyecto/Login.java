@@ -11,6 +11,7 @@ import android.view.View;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONObject;
@@ -23,8 +24,8 @@ public class Login extends AppCompatActivity {
     private EditText passuser;
     private AccessServiceAPI miservicio;
     private ProgressDialog dialogo;
-    public static int x;
-
+    public static String x;
+TextView idsd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +54,7 @@ public class Login extends AppCompatActivity {
 
         }
         new TaskLogin().execute(correouser.getText().toString(), passuser.getText().toString());
+
     }
 
     @Override
@@ -84,7 +86,7 @@ public class Login extends AppCompatActivity {
             try {
 
                 jObjResult = miservicio.convertJSONString2Obj(miservicio.getJSONStringWithParam_POST(Common.SERVICE_API_URL, param));
-                x = jObjResult.getInt("id");
+                x = jObjResult.getString("id");
                 return jObjResult.getInt("result");
             } catch (Exception e) {
                 return Common.RESULT_ERROR;
@@ -107,8 +109,9 @@ public class Login extends AppCompatActivity {
 
                 Toast.makeText(getApplicationContext(), "Login Correcto", Toast.LENGTH_LONG).show();
                 Intent i = new Intent(getApplicationContext(), MenuUser.class);
-                i.putExtra("correo", correouser.getText().toString());
+                i.putExtra("iduser",x);
                 startActivity(i);
+                finish();
             } else {
                 Toast.makeText(getApplicationContext(), "Login Mal", Toast.LENGTH_LONG).show();
             }

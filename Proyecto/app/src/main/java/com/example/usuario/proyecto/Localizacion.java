@@ -72,11 +72,15 @@ public class Localizacion extends AppCompatActivity implements OnMapReadyCallbac
     private static final String TAG = "Localizacion";
     public static double longitud;
     public static double latitud;
-        TextView te;
+    public static String direccion;
+    TextView te;
     private Dialog midialogo;
     private AccessServiceAPI miser;
-    public static String calle="";
+    public static String telefono;
     public static String id_enfermo;
+    public static String imei;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,9 +90,8 @@ public class Localizacion extends AppCompatActivity implements OnMapReadyCallbac
         boto = findViewById(R.id.boton);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
-        te=findViewById(R.id.loca);
-
-
+        te = findViewById(R.id.loca);
+        cogerCalle();
 
         boto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,11 +101,11 @@ public class Localizacion extends AppCompatActivity implements OnMapReadyCallbac
                         .destination(destinoPosition)
                         .shouldSimulateRoute(false)
                         .build();
-                    NavigationLauncher.startNavigation(Localizacion.this, options);
+                NavigationLauncher.startNavigation(Localizacion.this, options);
 
             }
         });
-       //new TaskRegister().execute(te.getText().toString());
+
 
     }
 
@@ -189,7 +192,7 @@ public class Localizacion extends AppCompatActivity implements OnMapReadyCallbac
         if (destinomarker != null) {
             map.removeMarker(destinomarker);
         }
-       getCoordenadas();
+        getCoordenadas();
         point.setLongitude(longitud);
         point.setLatitude(latitud);
 
@@ -198,7 +201,7 @@ public class Localizacion extends AppCompatActivity implements OnMapReadyCallbac
         destinoPosition = Point.fromLngLat(point.getLongitude(), point.getLatitude());
         originPosistion = Point.fromLngLat(originLocation.getLongitude(), originLocation.getLatitude());
         getRoute(originPosistion, destinoPosition);
-        te.setText(""+longitud+""+latitud);
+        te.setText(direccion);
 
         boto.setEnabled(true);
         boto.setBackgroundResource(R.color.mapboxBlue);
@@ -301,16 +304,17 @@ public class Localizacion extends AppCompatActivity implements OnMapReadyCallbac
         }
         mapView.onDestroy();
     }
+
     public void getCoordenadas() {
         //Obtener la direccion de la calle a partir de la latitud y la longitud
 
         try {
             Geocoder geocoder = new Geocoder(this, Locale.getDefault());
-            List<Address> list = geocoder.getFromLocationName("Madrid",1);
+            List<Address> list = geocoder.getFromLocationName("Madrid", 1);//direccion
             if (!list.isEmpty()) {
-                Address coordenadas =list.get(0);
-                latitud  = coordenadas.getLatitude();
-                longitud   = coordenadas.getLongitude();
+                Address coordenadas = list.get(0);
+                latitud = coordenadas.getLatitude();
+                longitud = coordenadas.getLongitude();
 
 
             }
@@ -318,55 +322,23 @@ public class Localizacion extends AppCompatActivity implements OnMapReadyCallbac
             e.printStackTrace();
         }
     }
-   /* public class TaskRegister extends AsyncTask<String, Void, Integer> {
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            midialogo = ProgressDialog.show(Localizacion.this, "Espere un momento", "Procesando datos...", true);
+    public void cogerCalle() {
+        direccion = getIntent().getStringExtra("direccion");
+        id_enfermo = getIntent().getStringExtra("id_enfermo");
+        telefono = getIntent().getStringExtra("telefono");
+         imei = getIntent().getStringExtra("imei");
+        te.setText(direccion);
+    }
 
-        }
-
-        @Override
-        protected Integer doInBackground(String... params) {
-
-            Map<String, String> postParam = new HashMap<>();
-            postParam.put("action", "qr");
-            //postParam.put("calle", params[0]);
-            //postParam.put("qr", params[4]);
-            //llama al PHP
-
-            try {
-                String jsonString = miser.getJSONStringWithParam_POST(Common.SERVICE_API_URL, postParam);
-                JSONObject jsonObject = new JSONObject(jsonString);
-                calle = jsonObject.getString("Calle");
-                id_enfermo = jsonObject.getString("id");
-
-                return jsonObject.getInt("result");
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                return Common.RESULT_ERROR;
-            }
-
-
-        }
-
-        protected void onPostExecute(Integer integer) {
-            super.onPostExecute(integer);
-            midialogo.dismiss();
-            if (integer == Common.RESULT_SUCCESS) {
-                Toast.makeText(Localizacion.this, "Leido  con exito", Toast.LENGTH_LONG).show();
-                Intent i = new Intent(getApplicationContext(), Principal.class);
-                setResult(1, i);
-                startActivity(i);
-                finish();
-
-            } else {
-                Toast.makeText(Localizacion.this, "Leido fallido", Toast.LENGTH_LONG).show();
-            }
-        }
-
-
-    }*/
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(getApplicationContext(), Principal.class);
+        i.putExtra("direccion", direccion);
+        i.putExtra("telefono", telefono);
+        i.putExtra("id_enfermo", id_enfermo);
+        i.putExtra("imei", imei);
+        startActivity(i);
+        finish();
+    }
 }

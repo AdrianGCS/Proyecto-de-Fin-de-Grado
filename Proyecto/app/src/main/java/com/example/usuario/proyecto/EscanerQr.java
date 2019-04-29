@@ -50,6 +50,7 @@ public class EscanerQr extends AppCompatActivity {
     private AccessServiceAPI miser;
     public static String id_enfermo;
     public static String imei;
+    public  static String direccion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -206,14 +207,15 @@ public class EscanerQr extends AppCompatActivity {
             postParam.put("qr", params[0]);
             postParam.put("imei", Imei);
             //postParam.put("qr", params[4]);
-            //llama al PHP
+            //llama al PHP y envia los datos
 
             try {
                 String jsonString = miser.getJSONStringWithParam_POST(Common.SERVICE_API_URL, postParam);
                 JSONObject jsonObject = new JSONObject(jsonString);
+                //coge los datos que le pasa php
                  telefono = jsonObject.getString("Telefono");
                  id_enfermo = jsonObject.getString("id");
-
+                 //direccion=jsonObject.getString("direccion");
                 return jsonObject.getInt("result");
 
             } catch (Exception e) {
@@ -234,6 +236,7 @@ public class EscanerQr extends AppCompatActivity {
                 i.putExtra("telefono", telefono);
                 i.putExtra("id_enfermo", id_enfermo);
                 i.putExtra("imei", imei);
+                i.putExtra("direccion", direccion);
                 setResult(1, i);
                 startActivity(i);
                 finish();
