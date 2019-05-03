@@ -64,11 +64,12 @@ public class Principal extends AppCompatActivity {
         ids = getIntent().getStringExtra("id_enfermo");
         imei = getIntent().getStringExtra("imei");
         direccion = getIntent().getStringExtra("direccion");
-     /*   if ("".equals(direccion) || direccion == null) {
-            lo.setEnabled(false);
+     if (!"".equals(direccion) || direccion != null) {
+
+         lo.setEnabled(true);
         } else {
-            lo.setEnabled(true);
-        }*/
+         lo.setEnabled(false);
+        }
         hy.setText(ids);
         phon.setText(telefono);
         u.setText(imei);

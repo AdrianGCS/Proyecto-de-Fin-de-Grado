@@ -231,7 +231,7 @@ public class EscanerQr extends AppCompatActivity {
                 //coge los datos que le pasa php
                  telefono = jsonObject.getString("Telefono");
                  id_enfermo = jsonObject.getString("id");
-                 //direccion=jsonObject.getString("direccion");
+                 direccion=jsonObject.getString("direccion");
                 return jsonObject.getInt("result");
 
             } catch (Exception e) {

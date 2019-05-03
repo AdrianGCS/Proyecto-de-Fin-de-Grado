@@ -8,10 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.mapbox.services.android.navigation.ui.v5.NavigationLauncher;
-import com.mapbox.services.android.navigation.ui.v5.NavigationLauncherOptions;
 
 public class Datos_Enfermo extends AppCompatActivity {
     private Button boto;
@@ -25,7 +21,7 @@ public class Datos_Enfermo extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_datos__enfermo);
-        boto = findViewById(R.id.entrar);
+        boto = findViewById(R.id.salir);
         nombre = findViewById(R.id.nombre);
         apellidos = findViewById(R.id.apellidos);
         telefono = findViewById(R.id.telefono);
@@ -59,10 +55,10 @@ public class Datos_Enfermo extends AppCompatActivity {
         Bitmap bitmap = (Bitmap) getIntent().getParcelableExtra("BitmapImage");
         image.setImageBitmap(bitmap);
         String co = getIntent().getStringExtra("Codigo");
-
+        codigoe.setText(co);
         idenfer = getIntent().getStringExtra("id_enfermo");
-        codigoe.setText("" + co + "" + idenfer);
-        idfa = getIntent().getStringExtra("idfam");
+
+        idfa = getIntent().getStringExtra("iduser");
     }
 
     @Override
@@ -77,7 +73,7 @@ public class Datos_Enfermo extends AppCompatActivity {
     public void enviarDatos() {
         Intent i = new Intent(this, MenuUser.class);
         i.putExtra("id_enfermo", idenfer);
-        i.putExtra("idfam", idfa);
+        i.putExtra("iduser", idfa);
         startActivity(i);
     }
 

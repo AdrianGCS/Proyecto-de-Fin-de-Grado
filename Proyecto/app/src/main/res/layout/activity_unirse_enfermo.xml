@@ -9,7 +9,7 @@
 
 
     <Button
-        android:id="@+id/entrar"
+        android:id="@+id/salir"
         android:layout_width="140dp"
         android:layout_height="48dp"
         android:layout_marginStart="8dp"

@@ -92,10 +92,14 @@ public class Localizacion extends AppCompatActivity implements OnMapReadyCallbac
         mapView.getMapAsync(this);
         te = findViewById(R.id.loca);
         cogerCalle();
-
+        getCoordenadas();
+        te.setText(direccion);
         boto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                cogerCalle();
+                te.setText(direccion);
+getCoordenadas();
                 NavigationLauncherOptions options = NavigationLauncherOptions.builder()
                         .origin(originPosistion)
                         .destination(destinoPosition)
@@ -198,7 +202,7 @@ public class Localizacion extends AppCompatActivity implements OnMapReadyCallbac
 
         destinomarker = map.addMarker(new MarkerOptions().position(point));
 
-        destinoPosition = Point.fromLngLat(point.getLongitude(), point.getLatitude());
+        destinoPosition = Point.fromLngLat(longitud,latitud);
         originPosistion = Point.fromLngLat(originLocation.getLongitude(), originLocation.getLatitude());
         getRoute(originPosistion, destinoPosition);
         te.setText(direccion);
@@ -310,7 +314,7 @@ public class Localizacion extends AppCompatActivity implements OnMapReadyCallbac
 
         try {
             Geocoder geocoder = new Geocoder(this, Locale.getDefault());
-            List<Address> list = geocoder.getFromLocationName("Madrid", 1);//direccion
+            List<Address> list = geocoder.getFromLocationName(direccion+ ",Madrid,España", 1);//direccion
             if (!list.isEmpty()) {
                 Address coordenadas = list.get(0);
                 latitud = coordenadas.getLatitude();
@@ -327,7 +331,7 @@ public class Localizacion extends AppCompatActivity implements OnMapReadyCallbac
         direccion = getIntent().getStringExtra("direccion");
         id_enfermo = getIntent().getStringExtra("id_enfermo");
         telefono = getIntent().getStringExtra("telefono");
-         imei = getIntent().getStringExtra("imei");
+        imei = getIntent().getStringExtra("imei");
         te.setText(direccion);
     }
 

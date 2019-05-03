@@ -1,26 +1,20 @@
 package com.example.usuario.proyecto;
 
-import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.app.WallpaperManager;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.AsyncTask;
-import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.app.Activity;
 
 import java.io.IOException;
 import java.lang.String;
@@ -35,18 +29,15 @@ import org.json.JSONObject;
 
 import java.util.List;
 import java.util.Locale;
-import java.util.Random;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Arrays;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class CreacionEnfermo extends AppCompatActivity {
     private EditText nombre;
     private EditText apellidos;
     private EditText telefono;
     private EditText calle;
+    private EditText post;
     private AccessServiceAPI miser;
     private Dialog midialogo;
     private Button boto;
@@ -54,7 +45,7 @@ public class CreacionEnfermo extends AppCompatActivity {
     private String a;
     public static Bitmap bitmap;
     public static String codigo;
-    public static String codfam;
+    public static String idefami;
     public static String id_enfermo;
     TextView idsss;
 
@@ -66,9 +57,9 @@ public class CreacionEnfermo extends AppCompatActivity {
         apellidos = findViewById(R.id.apellidos);
         telefono = findViewById(R.id.telefono);
         miser = new AccessServiceAPI();
-        boto = findViewById(R.id.entrar);
+        boto = findViewById(R.id.salir);
         calle = findViewById(R.id.direccion);
-        qr = findViewById(R.id.qr3);
+        post=findViewById(R.id.postal);
         idsss = findViewById(R.id.isx);
         coger();
 
@@ -103,13 +94,13 @@ public class CreacionEnfermo extends AppCompatActivity {
             telefono.setError("Introduce telefono valido");
             return;
         }*/
-        new TaskRegister().execute(codfam, nombre.getText().toString(), apellidos.getText().toString(), telefono.getText().toString(), calle.getText().toString());
+        new TaskRegister().execute(nombre.getText().toString(), apellidos.getText().toString(), telefono.getText().toString(), calle.getText().toString()+","+post.getText().toString(), idefami);
 
     }
 
     public void coger() {
-        codfam = getIntent().getStringExtra("id_familiar");
-        idsss.setText(codfam);
+        idefami = getIntent().getStringExtra("id_familiar");
+        idsss.setText(idefami);
     }
 
     public class TaskRegister extends AsyncTask<String, Void, Integer> {
@@ -125,11 +116,11 @@ public class CreacionEnfermo extends AppCompatActivity {
         protected Integer doInBackground(String... params) {
             Map<String, String> postParam = new HashMap<>();
             postParam.put("action", "enfermo");
-            postParam.put("id", codfam);
             postParam.put("username", params[0]);
+            postParam.put("lastname", params[1]);
             postParam.put("phone", params[2]);
             postParam.put("adress", params[3]);
-            postParam.put("lastname", params[1]);
+            postParam.put("id", idefami);
 
             //postParam.put("qr", params[4]);
             //llama al PHP
@@ -139,7 +130,7 @@ public class CreacionEnfermo extends AppCompatActivity {
                 JSONObject jsonObject = new JSONObject(jsonString);
                 a = jsonObject.getString("Encriptado");
                 codigo = jsonObject.getString("Telefono");
-                id_enfermo = jsonObject.getString("id");
+               // id_enfermo = jsonObject.getString("id");
 
                 if (!a.equals("8")) {
                     darle(a);
@@ -168,11 +159,11 @@ public class CreacionEnfermo extends AppCompatActivity {
                 i.putExtra("nombre", nombre.getText() + "");
                 i.putExtra("apellidos", apellidos.getText() + "");
                 i.putExtra("telefono", telefono.getText() + "");
-                i.putExtra("direccion", calle.getText() + "");
+                i.putExtra("direccion", calle.getText() + ","+post.getText().toString());
                 i.putExtra("BitmapImage", bitmap);
                 i.putExtra("Codigo", codigo);
                 i.putExtra("id_enfermo", id_enfermo);
-                i.putExtra("idfam", codfam);
+                i.putExtra("iduser", idefami);
                 setResult(1, i);
                 startActivity(i);
 

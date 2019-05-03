@@ -18,7 +18,7 @@
         tools:layout_editor_absoluteY="0dp">
 
         <Button
-            android:id="@+id/entrar"
+            android:id="@+id/salir"
             android:layout_width="239dp"
             android:layout_height="53dp"
             android:layout_marginStart="8dp"
