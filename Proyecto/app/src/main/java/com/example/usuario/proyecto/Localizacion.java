@@ -99,13 +99,15 @@ public class Localizacion extends AppCompatActivity implements OnMapReadyCallbac
             public void onClick(View v) {
                 cogerCalle();
                 te.setText(direccion);
-getCoordenadas();
-                NavigationLauncherOptions options = NavigationLauncherOptions.builder()
-                        .origin(originPosistion)
-                        .destination(destinoPosition)
-                        .shouldSimulateRoute(false)
-                        .build();
-                NavigationLauncher.startNavigation(Localizacion.this, options);
+
+
+                    NavigationLauncherOptions options = NavigationLauncherOptions.builder()
+                            .origin(originPosistion)
+                            .destination(destinoPosition)
+                            .shouldSimulateRoute(false)
+                            .build();
+                    NavigationLauncher.startNavigation(Localizacion.this, options);
+
 
             }
         });
@@ -193,22 +195,24 @@ getCoordenadas();
 
     @Override
     public void onMapClick(@NonNull LatLng point) {
-        if (destinomarker != null) {
-            map.removeMarker(destinomarker);
-        }
-        getCoordenadas();
+
+
         point.setLongitude(longitud);
         point.setLatitude(latitud);
+        if(localizcionVal(originLocation.getLatitude(),originLocation.getLongitude())) {
+            destinomarker = map.addMarker(new MarkerOptions().position(point));
+            destinoPosition = Point.fromLngLat(longitud, latitud);
+            originPosistion = Point.fromLngLat(originLocation.getLongitude(), originLocation.getLatitude());
+            getRoute(originPosistion, destinoPosition);
+            te.setText(direccion);
 
-        destinomarker = map.addMarker(new MarkerOptions().position(point));
-
-        destinoPosition = Point.fromLngLat(longitud,latitud);
-        originPosistion = Point.fromLngLat(originLocation.getLongitude(), originLocation.getLatitude());
-        getRoute(originPosistion, destinoPosition);
-        te.setText(direccion);
-
-        boto.setEnabled(true);
-        boto.setBackgroundResource(R.color.mapboxBlue);
+            boto.setEnabled(true);
+            boto.setBackgroundResource(R.color.mapboxBlue);
+        }
+        else {
+            Toast.makeText(getBaseContext(), "Esta opcion solo funciona en dentro de madrid",Toast.LENGTH_LONG).show();
+            return;
+        }
     }
 
     private void getRoute(Point origen, Point destino) {
@@ -325,6 +329,22 @@ getCoordenadas();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    public boolean localizcionVal(double latitud,double longitud) {
+        //Obtener la direccion de la calle a partir de la latitud y la longitud
+
+        try {
+            Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+            List<Address> list = geocoder.getFromLocation(latitud,longitud,1);
+            if (!list.isEmpty() && list.get(0).getCountryName().equals("Spain")) {
+            return true;
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return false;
     }
 
     public void cogerCalle() {
