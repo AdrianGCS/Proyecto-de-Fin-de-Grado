@@ -18,6 +18,7 @@ $id = 2;
 $idEnfermo = 0;
 $imei = 0;
 $telefono = 0;
+$direccion = 0;
 
 switch ($action) {
 
@@ -39,6 +40,7 @@ switch ($action) {
 			insertCuenta($cnn, $mail, $pwd, $id);
 			$result = RESULT_SUCCESS;
 		}
+		echo(json_encode(array('result' => $result , 'id' => $id )));
 
 		break;
 
@@ -46,6 +48,7 @@ switch ($action) {
 
 		$username = $_POST["username"];
 		$lastname = $_POST["lastname"];
+		$id = $_POST["id"];
 		$phone = $_POST["phone"];
 		$adress = $_POST["adress"];
 		if (is_null($adress)) {
@@ -64,9 +67,16 @@ switch ($action) {
 				
 		$Encript= openssl_encrypt($data, 'aes128', 'Seguridad',0,'1234567812345678');
 
+		$telefono = ($idEnfermo * 1024)/4;
+		$telefono = decoct($telefono);
+		$telefono = openssl_encrypt($telefono, 'aes128', 'Seguridad',0,'1234567812345678');
+		insertexterno($cnn, $id, $idEnfermo);
 		$result = RESULT_SUCCESS;
 
+		echo(json_encode(array('result' => $result , 'Encriptado' => $Encript, 'Telefono' => $telefono, )));
+
 		break;
+
 	
 
 		case "login":
@@ -83,6 +93,8 @@ switch ($action) {
 				$result = RESULT_ERROR;
 			}
 
+			echo(json_encode(array('result' => $result , 'id' => $id )));
+
 		break;
 
 		case "qr":
@@ -98,28 +110,95 @@ switch ($action) {
 			if ( isExistEnfermo($cnn, $array[0], $array[1], $array[2], $array[3])) {
 				$imei= $_POST["imei"];
 				insertAnonimo($cnn, $id, $imei);
+				$direccion=qrDireccion($cnn, $id);
 				$result = RESULT_SUCCESS;
 			}
 			else
 			{
 				$result = RESULT_ERROR;
 			}
+
+
+			
+
+			echo(json_encode(array('result' => $result , 'id' => $id ,  'Telefono' => $telefono, 'direccion' => $direccion)));
+			break;
+
+		case "Local":
+
+			$id_enfermo = $_POST["id_enfermo"];
+			$length = $_POST["length"];
+			$altitude = $_POST["altitude"];
+			$imei = $_POST["imei"];
+
+
+
+
+			insertLocalizacion($cnn, $id_enfermo, $length, $altitude, $imei);
+			
+				$result = RESULT_SUCCESS;
+
+				echo(json_encode(array('result' => $result)));
+
+
+		break;
+			//desencriptar
+			//$id_enfermo=openssl_decrypt($id_enfermo,'aes128','Seguridad',0,'1234567812345678');	
+			//$id_enfermo=octdec($id_enfermo);
+			//$id_enfermo=($id_enfermo*4)/1024;
+
+		case "DatosEnfermo":
+
+			$id = $_POST["id"];
+
+			$idEnfermoExt=IdEnfemoExt($cnn, $id);
+
+			$datos = array();
+			
+			foreach ($idEnfermoExt as $val) {
+
+			$temp = sacarDatosEnfermo($cnn, $idEnfermoExt[0]);
+			array_push($datos, $temp);
+			}
+			$result = RESULT_SUCCESS;
+			echo(json_encode(array('result' => $result ,'datos' => $datos)));
 			break;
 
 }
 
 //Print result as json
-echo(json_encode(array('result' => $result , 'id' => $id , 'Encriptado' => $Encript, 'Telefono' => $telefono)));
+//echo(json_encode(array('result' => $result , 'id' => $id , 'Encriptado' => $Encript, 'Telefono' => $telefono, 'direccion' => $direccion)));
+
+
+function insertLocalizacion($cnn, $id_enfermo, $length, $altitude, $imei)
+{
+
+	$query = "INSERT INTO LOCALIZACION(ID_ENFERMO , LONGITUD , LATITUD , IMEI) VALUES(?, ?, ?, ?)";
+	$stmt = $cnn->prepare($query);
+	$stmt->bind_param("isss", $id_enfermo, $length, $altitude, $imei);
+	$stmt->execute();
+
+}
 
 function insertAnonimo($cnn, $id, $imei)
 {
 
 	$query = "INSERT INTO ANONIMO(IMEI_EXTERNO ,ID_ENFERMO) VALUES(?, ?)";
 	$stmt = $cnn->prepare($query);
-	$stmt->bind_param("si", $imei, $id, );
+	$stmt->bind_param("si", $imei, $id );
 	$stmt->execute();
 
 }
+function insertexterno($cnn, $id, $id_enfermo)
+{
+
+	$query = "INSERT INTO EXTERNO(ID_ENFERMO ,ID_USUARIO) VALUES(?, ?)";
+	$stmt = $cnn->prepare($query);
+	$stmt->bind_param("ii", $id_enfermo, $id );
+	$stmt->execute();
+
+}
+
 
 
 function insertEnfermo($cnn, $id, $username ,$lastname, $phone, $adress )
@@ -205,4 +284,48 @@ function loginId($cnn, $mail, $pwd)
 
 
 }
+function qrDireccion($cnn, $id)
+{
+	$query = "SELECT DIRECCION FROM ENFERMO WHERE ID = ?";
+	$stmt = $cnn->prepare($query);
+	$stmt->bind_param("i", $id);
+	$stmt->bind_result($direccion);
+	$stmt->execute();
+	$stmt->store_result();
+	$stmt->fetch();
+	
+	return $direccion;
 
+
+}
+
+function IdEnfemoExt($cnn, $ID_USUARIO)
+{
+	$query = "SELECT ID_ENFERMO FROM EXTERNO WHERE ID_USUARIO=?";
+	$stmt = $cnn->prepare($query);
+	$stmt->bind_param("i", $ID_USUARIO);
+	$stmt->bind_result($Ext);
+	$stmt->execute();
+	$stmt->store_result();
+	$rowcount = $stmt->num_rows;
+	$IdEnfemoExt = array();
+	while ($stmt->fetch()) {
+		array_push($IdEnfemoExt, $Ext);
+	}
+	
+	return $IdEnfemoExt;
+}
+
+function sacarDatosEnfermo($cnn, $Id)
+{
+	$query = "SELECT NOMBRE , APELLIDO, TELEFONO_CONTACTO, DIRECCION  FROM ENFERMO WHERE ID=?";
+	$stmt = $cnn->prepare($query);
+	$stmt->bind_param("i", $Id);
+	$stmt->bind_result($Nombre, $Apellido, $Telefono ,$Direccion);
+	$stmt->execute();
+	$stmt->store_result();
+	$stmt->fetch();
+	$datosEnfermor = array('Nombre'=>$Nombre,'Apellido'=>$Apellido,'Telefono'=>$Telefono,'Direccion'=>$Direccion);
+	
+	return $datosEnfermor;
+}
