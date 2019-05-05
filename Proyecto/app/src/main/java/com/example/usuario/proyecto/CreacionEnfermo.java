@@ -129,7 +129,7 @@ public class CreacionEnfermo extends AppCompatActivity {
                 String jsonString = miser.getJSONStringWithParam_POST(Common.SERVICE_API_URL, postParam);
                 JSONObject jsonObject = new JSONObject(jsonString);
                 a = jsonObject.getString("Encriptado");
-                codigo = jsonObject.getString("Telefono");
+                codigo = jsonObject.getString("codigo");
                // id_enfermo = jsonObject.getString("id");
 
                 if (!a.equals("8")) {
