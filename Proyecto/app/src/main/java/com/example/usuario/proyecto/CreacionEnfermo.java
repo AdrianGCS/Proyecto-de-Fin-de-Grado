@@ -89,11 +89,11 @@ public class CreacionEnfermo extends AppCompatActivity {
             telefono.setError("Introduce un numero de telefono correcto");
             return;
         }
-        //Matcher mather = pattern.matcher(telefono.getText());
-       /* if (mather.find() == false) {
-            telefono.setError("Introduce telefono valido");
-            return;
-        }*/
+       if(!post.equals("28") && post.length()<5){
+           post.setText("introduce un codigo correcto");
+           return;
+       }
+
         new TaskRegister().execute(nombre.getText().toString(), apellidos.getText().toString(), telefono.getText().toString(), calle.getText().toString()+","+post.getText().toString(), idefami);
 
     }

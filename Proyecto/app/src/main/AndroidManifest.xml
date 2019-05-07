@@ -30,7 +30,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Calendario"></activity>
+        <activity android:name=".Intermedia"></activity>
+        <activity android:name=".Calendario" />
         <activity android:name=".Historial" />
         <activity android:name=".Permisos" />
         <activity android:name=".IllData" />
