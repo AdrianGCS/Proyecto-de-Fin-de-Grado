@@ -24,7 +24,7 @@ public class DatosQuien extends AppCompatActivity {
         */
         switch (view.getId()) {
             case R.id.ill:
-                Intent v = new Intent(this, IllData.class);
+                Intent v = new Intent(this, Intermedia.class);
                 v.putExtra("iduser", ids);
                 startActivity(v);
                 break;

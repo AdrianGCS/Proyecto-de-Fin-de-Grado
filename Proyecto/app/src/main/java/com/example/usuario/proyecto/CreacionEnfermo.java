@@ -90,7 +90,7 @@ public class CreacionEnfermo extends AppCompatActivity {
             return;
         }
        if(!post.equals("28") && post.length()<5){
-           post.setText("introduce un codigo correcto");
+           post.setError("introduce un codigo correcto");
            return;
        }
 
