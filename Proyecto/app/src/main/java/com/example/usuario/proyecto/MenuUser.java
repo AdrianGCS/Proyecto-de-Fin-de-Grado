@@ -53,6 +53,13 @@ public class MenuUser extends AppCompatActivity {
                 startActivity(c);
                 finish();
                 break;
+            case R.id.cuni:
+                Intent n = new Intent(this, OpcionUser.class);
+                n.putExtra("iduser", iduser);
+                // p.putExtra("id_enfermo", id);
+                startActivity(n);
+                finish();
+                break;
         }
     }
 

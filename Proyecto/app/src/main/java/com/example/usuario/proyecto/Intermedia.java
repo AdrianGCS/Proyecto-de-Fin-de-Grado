@@ -33,7 +33,7 @@ public class Intermedia extends AppCompatActivity {
         coger();
         LinearLayout llBotonera = (LinearLayout) findViewById(R.id.llBotonera);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        new TaskRegister().execute();
+        new TaskRegister().execute(ids);
     }
 
     class ButtonsOnClickListener implements View.OnClickListener {
@@ -71,8 +71,8 @@ public class Intermedia extends AppCompatActivity {
         protected Integer doInBackground(String... params) {
 
             Map<String, String> postParam = new HashMap<>();
-            postParam.put("action", "qr");
-            //postParam.put("qr", params[4]);
+            postParam.put("action", "DatosEnfermo");
+            postParam.put("id", params[0]);
             //llama al PHP y envia los datos
 
             try {

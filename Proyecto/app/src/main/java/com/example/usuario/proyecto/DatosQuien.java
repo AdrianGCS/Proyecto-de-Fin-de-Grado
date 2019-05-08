@@ -31,7 +31,7 @@ public class DatosQuien extends AppCompatActivity {
         cid = findViewById(R.id.iduse);
         miser = new AccessServiceAPI();
         coger();
-        new TaskRegister().execute(ids);
+
     }
 
     public void onClick(View view) {
@@ -45,14 +45,7 @@ public class DatosQuien extends AppCompatActivity {
                 startActivity(v);
                 break;
             case R.id.user:
-                Intent i = new Intent(getApplicationContext(), UserData.class);
-                i.putExtra("nombre", no);
-                i.putExtra("apellidos", ap);
-                i.putExtra("telefono", te);
-                i.putExtra("direccion", di);
-                setResult(1, i);
-                startActivity(i);
-                finish();
+                new TaskRegister().execute(ids);
                 break;
         }
 

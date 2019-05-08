@@ -89,10 +89,7 @@ public class CreacionEnfermo extends AppCompatActivity {
             telefono.setError("Introduce un numero de telefono correcto");
             return;
         }
-       if(!post.equals("28") && post.length()<5){
-           post.setError("introduce un codigo correcto");
-           return;
-       }
+
 
         new TaskRegister().execute(nombre.getText().toString(), apellidos.getText().toString(), telefono.getText().toString(), calle.getText().toString()+","+post.getText().toString(), idefami);
 
@@ -197,7 +194,12 @@ public class CreacionEnfermo extends AppCompatActivity {
         try {
             Geocoder geocoder = new Geocoder(this, Locale.getDefault());
             List<Address> list = geocoder.getFromLocationName(direccion + ",Madrid,España", 10);
+            if(post.length()<3){
+              post.setText("28"+post.getText().toString());
 
+            }else{
+                post.setError("MAL");
+            }
             if (!list.isEmpty() && !list.get(0).getFeatureName().equals("Madrid"))
                 return true;
             else
