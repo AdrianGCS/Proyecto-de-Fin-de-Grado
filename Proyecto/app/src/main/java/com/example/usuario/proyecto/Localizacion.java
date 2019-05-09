@@ -336,7 +336,8 @@ public class Localizacion extends AppCompatActivity implements OnMapReadyCallbac
         try {
             Geocoder geocoder = new Geocoder(this, Locale.getDefault());
             List<Address> list = geocoder.getFromLocation(latitud,longitud,1);
-            if (!list.isEmpty() && list.get(0).getCountryName().equals("Spain")) {
+            if ((!list.isEmpty() &&( list.get(0).getCountryName().equals("Spain"))||
+                    list.get(0).getCountryName().equals("España"))) {
             return true;
             }
 
