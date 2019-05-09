@@ -4,6 +4,8 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -22,6 +24,9 @@ public class DatosQuien extends AppCompatActivity {
     private Dialog midialogo;
     private AccessServiceAPI miser;
     public static JSONArray a;
+    public static JSONObject b;
+    public static JSONObject c;
+    public  static String nom,ape,con,cor;
 
     public static String no, ap, di, te, coduni;
     @Override
@@ -72,6 +77,7 @@ public class DatosQuien extends AppCompatActivity {
 
         }
 
+        @RequiresApi(api = Build.VERSION_CODES.KITKAT)
         @Override
         protected Integer doInBackground(String... params) {
 
@@ -85,7 +91,13 @@ public class DatosQuien extends AppCompatActivity {
                 JSONObject jsonObject = new JSONObject(jsonString);
 
                 a = jsonObject.getJSONArray("datos");
+                 b = a.getJSONObject(0);
 
+                nom=b.getString("Nombre");
+                ape=b.getString("Apellido");
+                c=a.getJSONObject(1);
+                cor=c.getString("Correo");
+                con=c.getString("Contrasenia");
                 //coge los datos que le pasa php
                 return jsonObject.getInt("result");
 

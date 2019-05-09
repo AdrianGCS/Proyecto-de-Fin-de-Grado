@@ -177,12 +177,17 @@ public class CreacionEnfermo extends AppCompatActivity {
 
     public void darle(String c) {
         //c = nombre.getText().toString() + "/" + apellidos.getText().toString() + "/";
-        MultiFormatWriter formaescribir = new MultiFormatWriter();
+        MultiFormatWriter formaescribir = new MultiFormatWriter();//es una clase que forma el codigo qr
         try {
             BitMatrix codigo = formaescribir.encode(a, BarcodeFormat.QR_CODE, 164, 196);
+            //indicas las medidas del codigoqr y con que lo vas a componer
+
             BarcodeEncoder codigoqr = new BarcodeEncoder();
+            //aqui generas el codigo qr
             bitmap = codigoqr.createBitmap(codigo);
+            //una funcion que crea el mapa de bits que es lo que compone el qr
             // qr.setImageBitmap(bit);
+            //con esto sacaria en qr en una imagen
         } catch (WriterException e) {
             e.printStackTrace();
         }
