@@ -41,7 +41,7 @@ TextView c;
     public void onBackPressed() {
         super.onBackPressed();
         Toast.makeText(getApplicationContext(), "No puede ir atras", Toast.LENGTH_LONG).show();
-        startActivity(new Intent(OpcionUser.this, OpcionUser.class));
+        //startActivity(new Intent(OpcionUser.this, OpcionUser.class));
     }
 
     public void cogerDatos() {

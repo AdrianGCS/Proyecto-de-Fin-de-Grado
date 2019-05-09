@@ -48,7 +48,7 @@ public class UserData extends AppCompatActivity {
         switch (view.getId()) {
 
             case R.id.save:
-                new TaskRegister().execute(ids,nom,ape,cor,con);
+                new TaskRegister().execute(ids,nombre.getText().toString(),apellidos.getText().toString(),correo.getText().toString(),contra.getText().toString());
                 break;
             case R.id.log:
                 startActivity(new Intent(UserData.this, DatosQuien.class));
@@ -95,7 +95,7 @@ public class UserData extends AppCompatActivity {
             postParam.put("Nombre", params[1]);
             postParam.put("Apellido", params[2]);
             postParam.put("Correo", params[3]);
-            postParam.put("Contrania", params[4]);
+            postParam.put("Contrasenia", params[4]);
 
             //llama al PHP y envia los datos
 
@@ -123,7 +123,7 @@ public class UserData extends AppCompatActivity {
                 Intent i = new Intent(getApplicationContext(), UserData.class);
                 i.putExtra("nombre", nom);
                 i.putExtra("apellidos", ape);
-                i.putExtra("correo", cor);
+                i.putExtra("correo", contra.getText());
                 i.putExtra("contraseña", con);
                 setResult(1, i);
                 startActivity(i);
