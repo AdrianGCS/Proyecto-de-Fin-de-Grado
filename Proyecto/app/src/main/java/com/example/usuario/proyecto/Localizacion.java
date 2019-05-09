@@ -199,7 +199,7 @@ public class Localizacion extends AppCompatActivity implements OnMapReadyCallbac
 
         point.setLongitude(longitud);
         point.setLatitude(latitud);
-       // if(localizcionVal(originLocation.getLatitude(),originLocation.getLongitude())) {
+       if(localizcionVal(originLocation.getLatitude(),originLocation.getLongitude())) {
             destinomarker = map.addMarker(new MarkerOptions().position(point));
             destinoPosition = Point.fromLngLat(longitud, latitud);
             originPosistion = Point.fromLngLat(originLocation.getLongitude(), originLocation.getLatitude());
@@ -208,11 +208,11 @@ public class Localizacion extends AppCompatActivity implements OnMapReadyCallbac
 
             boto.setEnabled(true);
             boto.setBackgroundResource(R.color.mapboxBlue);
-        //}
-        /*else {
+        }
+        else {
             Toast.makeText(getBaseContext(), "Esta opcion solo funciona en dentro de madrid",Toast.LENGTH_LONG).show();
             return;
-        }*/
+        }
     }
 
     private void getRoute(Point origen, Point destino) {

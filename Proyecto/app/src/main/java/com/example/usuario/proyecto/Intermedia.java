@@ -79,7 +79,6 @@ public class Intermedia extends AppCompatActivity {
                 String jsonString = miser.getJSONStringWithParam_POST(Common.SERVICE_API_URL, postParam);
                 JSONObject jsonObject = new JSONObject(jsonString);
                 a = jsonObject.getJSONArray("datos");
-                datosE();
                 //coge los datos que le pasa php
                 return jsonObject.getInt("result");
 

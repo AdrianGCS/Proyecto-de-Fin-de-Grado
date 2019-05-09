@@ -28,7 +28,7 @@ public class DatosQuien extends AppCompatActivity {
     public static JSONObject c;
     public  static String nom,ape,con,cor;
 
-    public static String no, ap, di, te, coduni;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -115,10 +115,11 @@ public class DatosQuien extends AppCompatActivity {
             if (integer == Common.RESULT_SUCCESS) {
                 Toast.makeText(DatosQuien.this, "Leido  con exito", Toast.LENGTH_LONG).show();
                 Intent i = new Intent(getApplicationContext(), UserData.class);
-                i.putExtra("nombre", no);
-                i.putExtra("apellidos", ap);
-                i.putExtra("telefono", te);
-                i.putExtra("direccion", di);
+                i.putExtra("iduser",ids);
+                i.putExtra("nombre", nom);
+                i.putExtra("apellidos", ape);
+                i.putExtra("correo", cor);
+                i.putExtra("contraseña", con);
                 setResult(1, i);
                 startActivity(i);
                 finish();

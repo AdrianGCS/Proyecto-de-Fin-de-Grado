@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class IllData extends AppCompatActivity {
-    public static String  ids;
+    public static String  ids,nom,ape,cor,con;
     TextView n,nombre,apellidos,telefono,direccion;
 
     @Override
@@ -36,6 +36,7 @@ public class IllData extends AppCompatActivity {
     public void coger() {
         ids = getIntent().getStringExtra("iduser");
         n.setText(ids );
+
 
     }
 
