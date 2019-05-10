@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,8 +13,11 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,9 +25,14 @@ public class Intermedia extends AppCompatActivity {
     static int numBotones = 2;
     private Dialog midialogo;
     private AccessServiceAPI miser;
-    public static String no, ap, di, te, coduni;
+    public static String no, ap, di, te, cv;
     public static JSONArray a;
     public static String ids;
+    public static JSONObject b;
+    public static JSONObject c;
+    public static Parcelable y;
+    public static Serializable x;
+    public static CharSequence z;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,27 +43,13 @@ public class Intermedia extends AppCompatActivity {
         LinearLayout llBotonera = (LinearLayout) findViewById(R.id.llBotonera);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         new TaskRegister().execute(ids);
-    }
 
-    class ButtonsOnClickListener implements View.OnClickListener {
-        public ButtonsOnClickListener(Intermedia intermedia) {
-
-        }
-
-        @Override
-        public void onClick(View v) {
-
-
-            Toast.makeText(getApplicationContext(), "pedro", Toast.LENGTH_SHORT).show();
-
-        }
 
     }
-
-    ;
 
     public void coger() {
         ids = getIntent().getStringExtra("iduser");
+
 
     }
 
@@ -79,6 +74,8 @@ public class Intermedia extends AppCompatActivity {
                 String jsonString = miser.getJSONStringWithParam_POST(Common.SERVICE_API_URL, postParam);
                 JSONObject jsonObject = new JSONObject(jsonString);
                 a = jsonObject.getJSONArray("datos");
+                datosE();
+
                 //coge los datos que le pasa php
                 return jsonObject.getInt("result");
 
@@ -111,20 +108,52 @@ public class Intermedia extends AppCompatActivity {
     }
 
     public void datosE() {
-        LinearLayout llBotonera = (LinearLayout) findViewById(R.id.llBotonera);
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        for (int i = 0; i < numBotones; i++) {
-            Button button = new Button(this);
-            //Asignamos propiedades de layout al boton
-            button.setLayoutParams(lp);
-            //Asignamos Texto al botón
 
-            button.setText((CharSequence) a);
 
-            //Asignamose el Listener
-            button.setOnClickListener(new ButtonsOnClickListener(Intermedia.this));
-            //Añadimos el botón a la botonera
-            llBotonera.addView(button);
+        for (int i = 0; i < a.length(); i++) {
+
+
+            try {
+                LinearLayout llBotonera = (LinearLayout) findViewById(R.id.llBotonera);
+                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                Button button = new Button(this);
+                b = a.getJSONObject(i);
+
+
+                //Asignamos propiedades de layout al boton
+
+                //Asignamos Texto al botón
+                cv = b.getString("Nombre") + "," + b.getString("Apellido") + "," + b.getString("Telefono");
+                button.setLayoutParams(lp);
+                button.setText(cv);
+
+                //Asignamose el Listener
+                //Añadimos el botón a la botonera
+                llBotonera.addView(button);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
         }
+
+
     }
+
+    class ButtonsOnClickListener implements View.OnClickListener {
+        public ButtonsOnClickListener(Intermedia intermedia) {
+
+        }
+
+        @Override
+        public void onClick(View v) {
+
+
+            Toast.makeText(getApplicationContext(), "pedro", Toast.LENGTH_SHORT).show();
+
+        }
+
+    }
+
+
 }

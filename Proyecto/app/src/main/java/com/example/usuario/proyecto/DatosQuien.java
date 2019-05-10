@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Parcelable;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -47,6 +49,7 @@ public class DatosQuien extends AppCompatActivity {
             case R.id.ill:
                 Intent v = new Intent(this, Intermedia.class);
                 v.putExtra("iduser", ids);
+                //v.putExtra("datos", a);
                 startActivity(v);
                 break;
             case R.id.user:

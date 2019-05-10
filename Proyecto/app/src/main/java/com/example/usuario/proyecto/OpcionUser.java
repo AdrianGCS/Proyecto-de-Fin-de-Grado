@@ -9,12 +9,13 @@ import android.widget.Toast;
 
 public class OpcionUser extends AppCompatActivity {
     public static String id;
-TextView c;
+    TextView c;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_opcion_user);
-        c=findViewById(R.id.cod);
+        c = findViewById(R.id.cod);
         cogerDatos();
     }
 
@@ -27,7 +28,7 @@ TextView c;
             case R.id.crear:
                 Intent i = new Intent(this, CreacionEnfermo.class);
                 i.putExtra("id_familiar", id);
-               startActivity(i);
+                startActivity(i);
 
                 break;
             case R.id.unirse:

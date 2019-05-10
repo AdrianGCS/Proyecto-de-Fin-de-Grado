@@ -22,22 +22,23 @@ import java.util.Map;
 
 public class UserData extends AppCompatActivity {
     public static String ids, ide;
-    public static String  nom,ape,cor,con;
-    EditText nombre,apellidos,contra;
+    public static String nom, ape, cor, con;
+    EditText nombre, apellidos, contra;
     TextView correo;
     private Dialog midialogo;
     private AccessServiceAPI miser;
 
     Button guar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_data);
-        nombre=findViewById(R.id.nombre);
-        apellidos=findViewById(R.id.apellidos);
-        correo=findViewById(R.id.correo);
-        contra=findViewById(R.id.contaseña);
-        guar=findViewById(R.id.save);
+        nombre = findViewById(R.id.nombre);
+        apellidos = findViewById(R.id.apellidos);
+        correo = findViewById(R.id.correo);
+        contra = findViewById(R.id.contaseña);
+        guar = findViewById(R.id.save);
         miser = new AccessServiceAPI();
         coger();
 
@@ -48,7 +49,7 @@ public class UserData extends AppCompatActivity {
         switch (view.getId()) {
 
             case R.id.save:
-                new TaskRegister().execute(ids,nombre.getText().toString(),apellidos.getText().toString(),correo.getText().toString(),contra.getText().toString());
+                new TaskRegister().execute(ids, nombre.getText().toString(), apellidos.getText().toString(), correo.getText().toString(), contra.getText().toString());
                 break;
             case R.id.log:
                 startActivity(new Intent(UserData.this, DatosQuien.class));
@@ -57,18 +58,20 @@ public class UserData extends AppCompatActivity {
 
         }
     }
-    public void coger(){
-        ids=getIntent().getStringExtra("iduser");
 
-        nom=getIntent().getStringExtra("nombre");
+    public void coger() {
+        ids = getIntent().getStringExtra("iduser");
+
+        nom = getIntent().getStringExtra("nombre");
         nombre.setText(nom);
-        ape=getIntent().getStringExtra("apellidos");
+        ape = getIntent().getStringExtra("apellidos");
         apellidos.setText(ape);
-        cor=getIntent().getStringExtra("correo");
+        cor = getIntent().getStringExtra("correo");
         correo.setText(cor);
-        con=getIntent().getStringExtra("contraseña");
+        con = getIntent().getStringExtra("contraseña");
         contra.setText(con);
     }
+
     @Override
     public void onBackPressed() {
         Intent i = new Intent(getApplicationContext(), DatosQuien.class);
@@ -76,6 +79,7 @@ public class UserData extends AppCompatActivity {
         startActivity(i);
         finish();
     }
+
     public class TaskRegister extends AsyncTask<String, Void, Integer> {
 
         @Override
@@ -119,18 +123,18 @@ public class UserData extends AppCompatActivity {
             super.onPostExecute(integer);
             midialogo.dismiss();
             if (integer == Common.RESULT_SUCCESS) {
-                Toast.makeText(UserData.this, "Leido  con exito", Toast.LENGTH_LONG).show();
-                Intent i = new Intent(getApplicationContext(), UserData.class);
+                Toast.makeText(UserData.this, "Cambios guardados con exito", Toast.LENGTH_LONG).show();
+            /*    Intent i = new Intent(getApplicationContext(), UserData.class);
                 i.putExtra("nombre", nom);
                 i.putExtra("apellidos", ape);
-                i.putExtra("correo", contra.getText());
+                i.putExtra("correo", cor);
                 i.putExtra("contraseña", con);
                 setResult(1, i);
                 startActivity(i);
                 finish();
-
+*/
             } else {
-                Toast.makeText(UserData.this, "Leido fallido", Toast.LENGTH_LONG).show();
+                Toast.makeText(UserData.this, "Cambios incorrectos", Toast.LENGTH_LONG).show();
             }
         }
     }
