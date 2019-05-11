@@ -8,8 +8,11 @@ import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -18,6 +21,7 @@ import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,15 +37,17 @@ public class Intermedia extends AppCompatActivity {
     public static Parcelable y;
     public static Serializable x;
     public static CharSequence z;
+    public Spinner spi;
+    public static ArrayList<String> dat = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_intermedia);
         miser = new AccessServiceAPI();
+        spi = findViewById(R.id.sp);
         coger();
-        LinearLayout llBotonera = (LinearLayout) findViewById(R.id.llBotonera);
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+
         new TaskRegister().execute(ids);
 
 
@@ -70,11 +76,27 @@ public class Intermedia extends AppCompatActivity {
             postParam.put("id", params[0]);
             //llama al PHP y envia los datos
 
+
             try {
                 String jsonString = miser.getJSONStringWithParam_POST(Common.SERVICE_API_URL, postParam);
                 JSONObject jsonObject = new JSONObject(jsonString);
                 a = jsonObject.getJSONArray("datos");
-                datosE();
+                for (int i = 0; i < a.length(); i++) {
+
+
+                    b = a.getJSONObject(i);
+
+                    dat.add(b.getString("Nombre") + "," + b.getString("Apellido") + "," + b.getString("Telefono"));
+
+                    ArrayAdapter cvc = new ArrayAdapter(Intermedia.this, android.R.layout.simple_spinner_dropdown_item, dat);
+                    spi.setAdapter(cvc);
+
+
+                    //cv = b.getString("Nombre") + "," + b.getString("Apellido") + "," + b.getString("Telefono");
+                }
+
+                //datosE();
+                //dat.add(b.getString("Nombre") + "," + b.getString("Apellido") + "," + b.getString("Telefono"));
 
                 //coge los datos que le pasa php
                 return jsonObject.getInt("result");
@@ -92,7 +114,7 @@ public class Intermedia extends AppCompatActivity {
             midialogo.dismiss();
             if (integer == Common.RESULT_SUCCESS) {
                 Toast.makeText(Intermedia.this, "Leido  con exito", Toast.LENGTH_LONG).show();
-                Intent i = new Intent(getApplicationContext(), Principal.class);
+                /*Intent i = new Intent(getApplicationContext(), Intermedia.class);
                 i.putExtra("nombre", no);
                 i.putExtra("apellidos", ap);
                 i.putExtra("telefono", te);
@@ -100,60 +122,51 @@ public class Intermedia extends AppCompatActivity {
                 setResult(1, i);
                 startActivity(i);
                 finish();
-
+*/
             } else {
                 Toast.makeText(Intermedia.this, "Leido fallido", Toast.LENGTH_LONG).show();
             }
         }
     }
 
-    public void datosE() {
+    /*public void datosE() {
 
 
-        for (int i = 0; i < a.length(); i++) {
+            for (int i = 0; i < a.length(); i++) {
 
 
-            try {
-                LinearLayout llBotonera = (LinearLayout) findViewById(R.id.llBotonera);
-                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                Button button = new Button(this);
-                b = a.getJSONObject(i);
+                try {
+
+                    b = a.getJSONObject(i);
+                   // ArrayList<String> dat = new ArrayList<>();
+                    dat.add(b.getString("Nombre") + "," + b.getString("Apellido") + "," + b.getString("Telefono"));
+
+                    ArrayAdapter cvc = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, dat);
+                    spi.setAdapter(cvc);
+
+                    spi.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            String x = (String) spi.getAdapter().getItem(position);
+                            Toast.makeText(Intermedia.this, x, Toast.LENGTH_LONG).show();
+                        }
+                    });
 
 
-                //Asignamos propiedades de layout al boton
+                    //cv = b.getString("Nombre") + "," + b.getString("Apellido") + "," + b.getString("Telefono");
 
-                //Asignamos Texto al botón
-                cv = b.getString("Nombre") + "," + b.getString("Apellido") + "," + b.getString("Telefono");
-                button.setLayoutParams(lp);
-                button.setText(cv);
 
-                //Asignamose el Listener
-                //Añadimos el botón a la botonera
-                llBotonera.addView(button);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
 
 
         }
 
 
-    }
-
-    class ButtonsOnClickListener implements View.OnClickListener {
-        public ButtonsOnClickListener(Intermedia intermedia) {
-
-        }
-
-        @Override
-        public void onClick(View v) {
-
-
-            Toast.makeText(getApplicationContext(), "pedro", Toast.LENGTH_SHORT).show();
-
-        }
-
-    }
+    }*/
 
 
 }
