@@ -81,25 +81,38 @@ public class Intermedia extends AppCompatActivity {
                 String jsonString = miser.getJSONStringWithParam_POST(Common.SERVICE_API_URL, postParam);
                 JSONObject jsonObject = new JSONObject(jsonString);
                 a = jsonObject.getJSONArray("datos");
-                for (int i = 0; i < a.length(); i++) {
 
 
-                    b = a.getJSONObject(i);
-
-                    dat.add(b.getString("Nombre") + "," + b.getString("Apellido") + "," + b.getString("Telefono"));
-
-                    ArrayAdapter cvc = new ArrayAdapter(Intermedia.this, android.R.layout.simple_spinner_dropdown_item, dat);
-                    spi.setAdapter(cvc);
+                    for (int i = 0; i < a.length(); i++) {
 
 
-                    //cv = b.getString("Nombre") + "," + b.getString("Apellido") + "," + b.getString("Telefono");
-                }
+                        b = a.getJSONObject(i);
+
+
+                        dat.add(b.getString("Nombre") + "," + b.getString("Apellido") + "," + b.getString("Telefono"));
+                        ArrayAdapter cvc = new ArrayAdapter(Intermedia.this, android.R.layout.simple_spinner_dropdown_item, dat);
+                        spi.setAdapter(cvc);
+
+                    /*spi.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            String x = (String) spi.getAdapter().getItem(position);
+                            Toast.makeText(Intermedia.this, x, Toast.LENGTH_LONG).show();
+                        }
+                    });*/
+                        //cv = b.getString("Nombre") + "," + b.getString("Apellido") + "," + b.getString("Telefono");
+                    }
+
+
+                    return jsonObject.getInt("result");
+
 
                 //datosE();
                 //dat.add(b.getString("Nombre") + "," + b.getString("Apellido") + "," + b.getString("Telefono"));
 
+
                 //coge los datos que le pasa php
-                return jsonObject.getInt("result");
+
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -168,5 +181,12 @@ public class Intermedia extends AppCompatActivity {
 
     }*/
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent m = new Intent(this, DatosQuien.class);
+        m.putExtra("iduser", ids);
+        startActivity(m);
+        finish();
+    }
 }

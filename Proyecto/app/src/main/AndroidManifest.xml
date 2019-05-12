@@ -35,13 +35,21 @@
             android:name="com.google.android.actions"
             android:resource="@xml/network_security_config" />
 
-        <activity android:name=".Intermedia" />
-        <activity android:name=".Calendario" />
-        <activity android:name=".Historial" />
-        <activity android:name=".Permisos" />
-        <activity android:name=".IllData" />
-        <activity android:name=".UserData" />
-        <activity android:name=".DatosQuien" />
+        <activity android:name=".Intermedia"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Calendario"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Historial"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Permisos"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".IllData"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".UserData"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".DatosQuien"
+            android:screenOrientation="portrait"
+            />
         <activity
             android:name=".MenuUser"
             android:screenOrientation="portrait" />
