@@ -67,13 +67,14 @@ switch ($action) {
 				
 		$Encript= openssl_encrypt($data, 'aes128', 'Seguridad',0,'1234567812345678');
 
-		$telefono = ($idEnfermo * 1024)/4;
-		$telefono = decoct($telefono);
-		$telefono = openssl_encrypt($telefono, 'aes128', 'Seguridad',0,'1234567812345678');
+		$idEnfermo = ($idEnfermo * 1024)/4;
+		$idEnfermo = decoct($telefono);
+		$idEnfermo = openssl_encrypt($telefono, 'aes128', 'Seguridad',0,'1234567812345678');
+		
 		insertexterno($cnn, $id, $idEnfermo);
 		$result = RESULT_SUCCESS;
 
-		echo(json_encode(array('result' => $result , 'Encriptado' => $Encript, 'Telefono' => $telefono, )));
+		echo(json_encode(array('result' => $result , 'Encriptado' => $Encript, 'codigo' => $idEnfermo, )));
 
 		break;
 
@@ -164,12 +165,86 @@ switch ($action) {
 			echo(json_encode(array('result' => $result ,'datos' => $datos)));
 			break;
 
+		case "DatosUsuario":
+
+			$id = $_POST["id"];
+
+			$datos = array();
+
+			$temp = sacarUsuarios($cnn, $id);
+
+			array_push($datos, $temp);
+
+			$temp =sacarDatosUs($cnn, $id);
+
+			array_push($datos, $temp);
+
+			$result = RESULT_SUCCESS;
+
+			echo(json_encode(array('result' => $result ,'datos' => $datos)));
+
+			break;
+
+		case "ActualizarUs":
+
+			$id = $_POST["id"];
+			$Nombre = $_POST["Nombre"];
+			$Apellido = $_POST["Apellido"];
+			$Correo = $_POST["Correo"];
+			$Contrasenia= $_POST["Contrasenia"];
+			actuUsuarios($cnn, $id ,$Nombre,$Apellido);
+			actuDatosUs($cnn, $id ,$Correo, $Contrasenia);
+
+			$result = RESULT_SUCCESS;
+			echo(json_encode(array('result' => $result)));
+			break;
+
 }
 
 //Print result as json
 //echo(json_encode(array('result' => $result , 'id' => $id , 'Encriptado' => $Encript, 'Telefono' => $telefono, 'direccion' => $direccion)));
-
-
+function actuUsuarios($cnn, $Id ,$Nombre , $Apellido)
+{
+	$query = "UPDATE USUARIO SET NOMBRE=? , APELLIDO=? WHERE ID=?";
+	$stmt = $cnn->prepare($query);
+	$stmt->bind_param("ssi", $Nombre,$Apellido, $Id);
+	$stmt->execute();
+	$stmt->close();
+}
+function actuDatosUs($cnn, $Id ,$Correo, $Contrasenia)
+{
+	$query = "UPDATE CUENTA SET CORREO=? , CONTRASENIA=? WHERE ID_USUARIO=?";
+	$stmt = $cnn->prepare($query);
+	$stmt->bind_param("ssi",$Correo , $Contrasenia, $Id);
+	$stmt->execute();
+	$stmt->close();
+}
+function sacarUsuarios($cnn, $Id)
+{
+	$query = "SELECT NOMBRE , APELLIDO FROM USUARIO WHERE ID=?";
+	$stmt = $cnn->prepare($query);
+	$stmt->bind_param("i", $Id);
+	$stmt->bind_result($Nombre, $Apellido);
+	$stmt->execute();
+	$stmt->store_result();
+	$stmt->fetch();
+	$DatosUsuario = array('Nombre'=>$Nombre,'Apellido'=>$Apellido);
+	$stmt->close();
+	return $DatosUsuario;
+}
+function sacarDatosUs($cnn, $Id)
+{
+	$query = "SELECT CORREO , CONTRASENIA FROM CUENTA WHERE ID_USUARIO=?";
+	$stmt = $cnn->prepare($query);
+	$stmt->bind_param("i", $Id);
+	$stmt->bind_result($Correo, $Contrasenia);
+	$stmt->execute();
+	$stmt->store_result();
+	$stmt->fetch();
+	$DatosUsuario = array('Correo'=>$Correo,'Contrasenia'=>$Contrasenia);
+	$stmt->close();
+	return $DatosUsuario;
+}
 function insertLocalizacion($cnn, $id_enfermo, $length, $altitude, $imei)
 {
 
@@ -177,7 +252,7 @@ function insertLocalizacion($cnn, $id_enfermo, $length, $altitude, $imei)
 	$stmt = $cnn->prepare($query);
 	$stmt->bind_param("isss", $id_enfermo, $length, $altitude, $imei);
 	$stmt->execute();
-
+	$stmt->close();
 }
 
 function insertAnonimo($cnn, $id, $imei)
@@ -187,6 +262,7 @@ function insertAnonimo($cnn, $id, $imei)
 	$stmt = $cnn->prepare($query);
 	$stmt->bind_param("si", $imei, $id );
 	$stmt->execute();
+	$stmt->close();
 
 }
 function insertexterno($cnn, $id, $id_enfermo)
@@ -196,7 +272,7 @@ function insertexterno($cnn, $id, $id_enfermo)
 	$stmt = $cnn->prepare($query);
 	$stmt->bind_param("ii", $id_enfermo, $id );
 	$stmt->execute();
-
+	$stmt->close();
 }
 
 
@@ -208,6 +284,7 @@ function insertEnfermo($cnn, $id, $username ,$lastname, $phone, $adress )
 	$stmt = $cnn->prepare($query);
 	$stmt->bind_param("issis", $id, $username ,$lastname, $phone, $adress);
 	$stmt->execute();
+	$stmt->close();
 	return $cnn->insert_id;
 
 }
@@ -220,6 +297,7 @@ function insertCuenta($cnn, $mail, $pwd, $id)
 	$stmt = $cnn->prepare($query);
 	$stmt->bind_param("iss", $id, $mail, $pwd);
 	$stmt->execute();
+	$stmt->close();
 
 }
 function insertUser($cnn, $username, $lastname)
@@ -229,6 +307,7 @@ function insertUser($cnn, $username, $lastname)
 	$stmt = $cnn->prepare($query);
 	$stmt->bind_param("ss", $username, $lastname);
 	$stmt->execute();
+	$stmt->close();
 	return $cnn->insert_id;
 
 	
@@ -242,6 +321,7 @@ function isExistUser($cnn, $mail)
 	$stmt->execute();
 	$stmt->store_result();
 	$rowcount = $stmt->num_rows;
+	$stmt->close();
 
 	return $rowcount;
 }
@@ -254,6 +334,7 @@ function isExistEnfermo($cnn, $id, $username ,$lastname, $phone)
 	$stmt->execute();
 	$stmt->store_result();
 	$rowcount = $stmt->num_rows;
+	$stmt->close();
 
 	return $rowcount;
 }
@@ -266,6 +347,7 @@ function login($cnn, $mail, $pwd)
 	$stmt->execute();
 	$stmt->store_result();
 	$rowcount =$stmt->num_rows;
+	$stmt->close();
 	return $rowcount;
 
 }
@@ -279,7 +361,7 @@ function loginId($cnn, $mail, $pwd)
 	$stmt->execute();
 	$stmt->store_result();
 	$stmt->fetch();
-	
+	$stmt->close();
 	return $id;
 
 
@@ -293,7 +375,7 @@ function qrDireccion($cnn, $id)
 	$stmt->execute();
 	$stmt->store_result();
 	$stmt->fetch();
-	
+	$stmt->close();
 	return $direccion;
 
 
@@ -312,7 +394,7 @@ function IdEnfemoExt($cnn, $ID_USUARIO)
 	while ($stmt->fetch()) {
 		array_push($IdEnfemoExt, $Ext);
 	}
-	
+	$stmt->close();
 	return $IdEnfemoExt;
 }
 
@@ -326,6 +408,6 @@ function sacarDatosEnfermo($cnn, $Id)
 	$stmt->store_result();
 	$stmt->fetch();
 	$datosEnfermor = array('Nombre'=>$Nombre,'Apellido'=>$Apellido,'Telefono'=>$Telefono,'Direccion'=>$Direccion);
-	
+	$stmt->close();
 	return $datosEnfermor;
 }

@@ -17,12 +17,14 @@ import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class UserData extends AppCompatActivity {
     public static String ids, ide;
     public static String nom, ape, cor, con;
+ //   public static ArrayList<String> Prueba;
     EditText nombre, apellidos, contra;
     TextView correo;
     private Dialog midialogo;
@@ -70,6 +72,8 @@ public class UserData extends AppCompatActivity {
         correo.setText(cor);
         con = getIntent().getStringExtra("contraseña");
         contra.setText(con);
+       // Prueba =(ArrayList<String>) getIntent().getSerializableExtra("Prueba");
+
     }
 
     @Override

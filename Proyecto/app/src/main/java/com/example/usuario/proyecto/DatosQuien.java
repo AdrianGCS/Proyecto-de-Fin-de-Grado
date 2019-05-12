@@ -17,6 +17,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -53,7 +54,7 @@ public class DatosQuien extends AppCompatActivity {
                 startActivity(v);
                 break;
             case R.id.user:
-                new TaskRegister().execute(ids);
+                new TaskRegister().execute(ids,"0");
                 break;
         }
 
@@ -95,7 +96,6 @@ public class DatosQuien extends AppCompatActivity {
 
                 a = jsonObject.getJSONArray("datos");
                  b = a.getJSONObject(0);
-
                 nom=b.getString("Nombre");
                 ape=b.getString("Apellido");
                 c=a.getJSONObject(1);
@@ -118,6 +118,12 @@ public class DatosQuien extends AppCompatActivity {
             if (integer == Common.RESULT_SUCCESS) {
                 Toast.makeText(DatosQuien.this, "Leido  con exito", Toast.LENGTH_LONG).show();
                 Intent i = new Intent(getApplicationContext(), UserData.class);
+                //estructura para pasar Array
+                //ArrayList<String> Prueba =new ArrayList<>();
+                //Prueba.add("Hola");
+                //Prueba.add("Esto es una Prueba");
+
+                //i.putExtra("Prueba",Prueba);
                 i.putExtra("iduser",ids);
                 i.putExtra("nombre", nom);
                 i.putExtra("apellidos", ape);
