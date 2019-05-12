@@ -97,7 +97,7 @@ public class Intermedia extends AppCompatActivity {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                             String x = (String) spi.getAdapter().getItem(position);
-                            Toast.makeText(Intermedia.this, x, Toast.LENGTH_LONG).show();
+                            Toast.makeText(Intermedia.this, ""x, Toast.LENGTH_LONG).show();
                         }
                     });*/
                         //cv = b.getString("Nombre") + "," + b.getString("Apellido") + "," + b.getString("Telefono");

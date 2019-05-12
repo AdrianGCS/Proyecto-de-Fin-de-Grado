@@ -18,25 +18,26 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class IllData extends AppCompatActivity {
-    public static String  ids,nom,ape,cor,con;
-    TextView n,nombre,apellidos,telefono,direccion;
+    public static String ids, nom, ape, cor, con;
+    TextView n, nombre, apellidos, telefono, direccion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ill_data);
-        nombre=findViewById(R.id.nombre);
-        apellidos=findViewById(R.id.apellidos);
-        direccion=findViewById(R.id.direccion);
-        telefono=findViewById(R.id.telefono);
+        nombre = findViewById(R.id.nombre);
+        apellidos = findViewById(R.id.apellidos);
+        direccion = findViewById(R.id.direccion);
+        telefono = findViewById(R.id.telefono);
 
         coger();
     }
 
     public void coger() {
         ids = getIntent().getStringExtra("iduser");
-        n.setText(ids );
-
+        n.setText(ids);
+        nom = getIntent().getStringExtra("nombre");
+        nombre.setText(nom);
 
     }
 
