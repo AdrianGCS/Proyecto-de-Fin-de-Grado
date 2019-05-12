@@ -199,7 +199,7 @@ public class CreacionEnfermo extends AppCompatActivity {
         try {
             Geocoder geocoder = new Geocoder(this, Locale.getDefault());
             List<Address> list = geocoder.getFromLocationName(direccion + ",Madrid,España", 10);
-            if(post.length()<3){
+            if(post.length()<5){
               post.setText("28"+post.getText().toString());
 
             }else{

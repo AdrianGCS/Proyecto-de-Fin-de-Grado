@@ -108,7 +108,7 @@
         android:ems="10"
         android:hint="Codigo postal(opcional)"
         android:inputType="number"
-        android:maxLength="3"
+        android:maxLength="5"
         android:selectAllOnFocus="true"
         android:textColor="@color/zxing_status_text"
         android:textColorHint="#ffff"

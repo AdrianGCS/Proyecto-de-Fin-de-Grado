@@ -46,7 +46,7 @@ public class OpcionUser extends AppCompatActivity {
     }
 
     public void cogerDatos() {
-        id = getIntent().getStringExtra("id");
+        id = getIntent().getStringExtra("iduser");
         c.setText(id);
     }
 

@@ -120,7 +120,7 @@ private EditText apellidos;
                 i.putExtra("contraseña", contraseña.getText().toString());
                 i.putExtra("apellidos", apellidos.getText().toString());
                 i.putExtra("correo", correo.getText().toString());
-                i.putExtra("id",id);
+                i.putExtra("iduser",id);
                 setResult(1, i);
                 startActivity(i);
                 finish();
