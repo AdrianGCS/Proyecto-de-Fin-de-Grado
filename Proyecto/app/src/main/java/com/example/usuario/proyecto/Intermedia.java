@@ -83,25 +83,7 @@ public class Intermedia extends AppCompatActivity {
                 a = jsonObject.getJSONArray("datos");
 
 
-                    for (int i = 0; i < a.length(); i++) {
 
-
-                        b = a.getJSONObject(i);
-
-
-                        dat.add(b.getString("Nombre") + "," + b.getString("Apellido") + "," + b.getString("Telefono"));
-                        ArrayAdapter cvc = new ArrayAdapter(Intermedia.this, android.R.layout.simple_spinner_dropdown_item, dat);
-                        spi.setAdapter(cvc);
-
-                    /*spi.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            String x = (String) spi.getAdapter().getItem(position);
-                            Toast.makeText(Intermedia.this, ""x, Toast.LENGTH_LONG).show();
-                        }
-                    });*/
-                        //cv = b.getString("Nombre") + "," + b.getString("Apellido") + "," + b.getString("Telefono");
-                    }
 
 
                     return jsonObject.getInt("result");
@@ -135,7 +117,31 @@ public class Intermedia extends AppCompatActivity {
                 setResult(1, i);
                 startActivity(i);
                 finish();
+
 */
+                for (int i = 0; i < a.length(); i++) {
+
+                    try {
+                    b = a.getJSONObject(i);
+
+
+
+                        dat.add(b.getString("Nombre") + "," + b.getString("Apellido") + "," + b.getString("Telefono"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    ArrayAdapter cvc = new ArrayAdapter(Intermedia.this, android.R.layout.simple_spinner_dropdown_item, dat);
+                    spi.setAdapter(cvc);
+
+                    /*spi.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            String x = (String) spi.getAdapter().getItem(position);
+                            Toast.makeText(Intermedia.this, ""x, Toast.LENGTH_LONG).show();
+                        }
+                    });*/
+                    //cv = b.getString("Nombre") + "," + b.getString("Apellido") + "," + b.getString("Telefono");
+                }
             } else {
                 Toast.makeText(Intermedia.this, "Leido fallido", Toast.LENGTH_LONG).show();
             }
