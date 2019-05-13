@@ -202,16 +202,26 @@ public class Intermedia extends AppCompatActivity {
 
 
     }*/
-    public void onClick(View v) {
+
+ public void onClick(View view){
 
 
-            Intent i = new Intent(this, IllData.class);
-            i.putExtra("nombre", no);
-            i.putExtra("apellido", ap);
-            i.putExtra("telefono", te);
-            i.putExtra("direccion",di );
-            startActivity(i);
-            finish();
+
+     try {
+         Intent i = new Intent(getApplicationContext(), IllData.class);
+         i.putExtra("iduser",ids);
+         i.putExtra("nombre", b.getString("Nombre"));
+         i.putExtra("apellido", b.getString("Apellido"));
+         i.putExtra("telefono", b.getString("Telefono"));
+         i.putExtra("direccion",b.getString("Direccion") );
+         setResult(1, i);
+         startActivity(i);
+         finish();
+     } catch (JSONException e) {
+         e.printStackTrace();
+     }
+
+
 
 
         // Intent i=new Intent(Datos_Enfermo.this,MenuUser.class);
