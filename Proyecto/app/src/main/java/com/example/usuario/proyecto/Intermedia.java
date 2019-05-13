@@ -39,6 +39,7 @@ public class Intermedia extends AppCompatActivity {
     public static CharSequence z;
     public Spinner spi;
     public static ArrayList<String> dat = new ArrayList<>();
+    Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,7 @@ public class Intermedia extends AppCompatActivity {
         setContentView(R.layout.activity_intermedia);
         miser = new AccessServiceAPI();
         spi = findViewById(R.id.sp);
+        button = findViewById(R.id.button);
         coger();
 
         new TaskRegister().execute(ids);
@@ -58,6 +60,7 @@ public class Intermedia extends AppCompatActivity {
 
 
     }
+
 
     public class TaskRegister extends AsyncTask<String, Void, Integer> {
 
@@ -83,10 +86,7 @@ public class Intermedia extends AppCompatActivity {
                 a = jsonObject.getJSONArray("datos");
 
 
-
-
-
-                    return jsonObject.getInt("result");
+                return jsonObject.getInt("result");
 
 
                 //datosE();
@@ -119,29 +119,42 @@ public class Intermedia extends AppCompatActivity {
                 finish();
 
 */
+                spi.setSelection(0);
+                dat.clear();
                 for (int i = 0; i < a.length(); i++) {
 
                     try {
-                    b = a.getJSONObject(i);
-
+                        b = a.getJSONObject(i);
 
 
                         dat.add(b.getString("Nombre") + "," + b.getString("Apellido") + "," + b.getString("Telefono"));
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+
                     ArrayAdapter cvc = new ArrayAdapter(Intermedia.this, android.R.layout.simple_spinner_dropdown_item, dat);
                     spi.setAdapter(cvc);
 
-                    /*spi.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                   /*spi.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            String x = (String) spi.getAdapter().getItem(position);
-                            Toast.makeText(Intermedia.this, ""x, Toast.LENGTH_LONG).show();
+
+
+                                String x = (String) spi.getAdapter().getItem(position);
+                                Intent i = new Intent(getApplicationContext(), IllData.class);
+                                i.putExtra("nombre", no);
+
+                                setResult(1, i);
+                                startActivity(i);
+                             finish();
+
+
                         }
                     });*/
                     //cv = b.getString("Nombre") + "," + b.getString("Apellido") + "," + b.getString("Telefono");
                 }
+
             } else {
                 Toast.makeText(Intermedia.this, "Leido fallido", Toast.LENGTH_LONG).show();
             }
@@ -170,7 +183,10 @@ public class Intermedia extends AppCompatActivity {
                             Toast.makeText(Intermedia.this, x, Toast.LENGTH_LONG).show();
                         }
                     });
-
+                        no = b.getString("Nombre");
+                        ap = b.getString("Apellido");
+                        te = b.getString("Telefono");
+                        di = b.getString("Direccion");
 
                     //cv = b.getString("Nombre") + "," + b.getString("Apellido") + "," + b.getString("Telefono");
 
@@ -186,6 +202,21 @@ public class Intermedia extends AppCompatActivity {
 
 
     }*/
+    public void onClick(View v) {
+
+
+            Intent i = new Intent(this, IllData.class);
+            i.putExtra("nombre", no);
+            i.putExtra("apellido", ap);
+            i.putExtra("telefono", te);
+            i.putExtra("direccion",di );
+            startActivity(i);
+            finish();
+
+
+        // Intent i=new Intent(Datos_Enfermo.this,MenuUser.class);
+
+    }
 
     @Override
     public void onBackPressed() {
