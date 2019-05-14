@@ -43,44 +43,44 @@ private EditText apellidos;
     }
 
     public void onClick(View view){
-        Pattern pattern = Pattern
-                .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-                        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+            Pattern pattern = Pattern
+                    .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                            + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
 
-        if("".equals(nombre.getText().toString())) {
-                    nombre.setError("Se requiere Nombre");
-                    return;
-                }
-                if("".equals(contraseña.getText().toString())) {
-                    contraseña.setError("Se requiere contraseña");
-                    return;
-                }
-                if("".equals(correo.getText().toString())){
-                    correo.setError("Se requiere correo");
-                    return;
-                }
-                 Matcher mather = pattern.matcher(correo.getText());
-                if (mather.find()==false){
-                    correo.setError("Correo no valido ");
-                    return;
-                }
-                if("".equals(confirmarcontraseña.getText().toString())) {
-                    confirmarcontraseña.setError("Confirme la contraseña");
-                    return;
-                }
-                if(contraseña.getText().toString().equals(confirmarcontraseña.getText().toString())) {
-                    //exec task register
-                    new TaskRegister().execute(nombre.getText().toString(), contraseña.getText().toString(),correo.getText().toString(),apellidos.getText().toString());
-                } else {
-                    confirmarcontraseña.setError("La contraseñas no coinciden ");
-                }
-
-
+            if("".equals(nombre.getText().toString())) {
+                nombre.setError("Se requiere Nombre");
+                return;
+            }
+            if("".equals(contraseña.getText().toString())) {
+                contraseña.setError("Se requiere contraseña");
+                return;
+            }
+            if("".equals(correo.getText().toString())){
+                correo.setError("Se requiere correo");
+                return;
+            }
+            Matcher mather = pattern.matcher(correo.getText());
+            if (mather.find()==false){
+                correo.setError("Correo no valido ");
+                return;
+            }
+            if("".equals(confirmarcontraseña.getText().toString())) {
+                confirmarcontraseña.setError("Confirme la contraseña");
+                return;
+            }
+            if(contraseña.getText().toString().equals(confirmarcontraseña.getText().toString())) {
+                //exec task register
+                new TaskRegister().execute(nombre.getText().toString(), contraseña.getText().toString(),correo.getText().toString(),apellidos.getText().toString());
+            } else {
+                confirmarcontraseña.setError("La contraseñas no coinciden ");
+            }
 
 
 
 
-    }
+
+
+        }
     public class TaskRegister extends AsyncTask<String, Void, Integer> {
         @Override
         protected void onPreExecute() {

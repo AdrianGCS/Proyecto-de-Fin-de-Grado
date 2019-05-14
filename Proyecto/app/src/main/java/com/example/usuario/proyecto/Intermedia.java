@@ -78,8 +78,10 @@ public class Intermedia extends AppCompatActivity {
             postParam.put("action", "DatosEnfermo");
             postParam.put("id", params[0]);
             //llama al PHP y envia los datos
-
-
+          /*postParam.put("action", "qr");
+postParam.put("qr",params[1]);
+            postParam.put("action", "codigounion");
+            postParam.put("coduni",params[2]);*/
             try {
                 String jsonString = miser.getJSONStringWithParam_POST(Common.SERVICE_API_URL, postParam);
                 JSONObject jsonObject = new JSONObject(jsonString);
@@ -128,7 +130,7 @@ public class Intermedia extends AppCompatActivity {
 
 
                         dat.add(b.getString("Nombre") + "," + b.getString("Apellido") + "," + b.getString("Telefono"));
-
+                        //spi.getAdapter().getItem(i);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -208,15 +210,20 @@ public class Intermedia extends AppCompatActivity {
 
 
      try {
-         Intent i = new Intent(getApplicationContext(), IllData.class);
-         i.putExtra("iduser",ids);
-         i.putExtra("nombre", b.getString("Nombre"));
-         i.putExtra("apellido", b.getString("Apellido"));
-         i.putExtra("telefono", b.getString("Telefono"));
-         i.putExtra("direccion",b.getString("Direccion") );
-         setResult(1, i);
-         startActivity(i);
-         finish();
+        for(int s=0;s<a.length();s++) {
+            b = a.getJSONObject(s);
+            spi.getItemAtPosition(s);
+        }
+            Intent i = new Intent(getApplicationContext(), IllData.class);
+            i.putExtra("iduser", ids);
+            i.putExtra("nombre", b.getString("Nombre"));
+            i.putExtra("apellido", b.getString("Apellido"));
+            i.putExtra("telefono", b.getString("Telefono"));
+            i.putExtra("direccion", b.getString("Direccion"));
+            setResult(1, i);
+            startActivity(i);
+            finish();
+
      } catch (JSONException e) {
          e.printStackTrace();
      }
