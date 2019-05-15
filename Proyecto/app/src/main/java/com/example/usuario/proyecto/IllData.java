@@ -92,10 +92,10 @@ ImageView c;
         telefono.setText(tel);
         dir = getIntent().getStringExtra("direccion");
         direccion.setText(dir);
-        cdu = getIntent().getStringExtra("codigounion");
+       /* cdu = getIntent().getStringExtra("codigounion");
         codun.setText(cdu);
         Bitmap bitmap = (Bitmap) getIntent().getParcelableExtra("BitmapImage");
-        c.setImageBitmap(bitmap);
+        c.setImageBitmap(bitmap);*/
     }
 
     public class TaskRegister extends AsyncTask<String, Void, Integer> {

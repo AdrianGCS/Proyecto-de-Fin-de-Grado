@@ -93,8 +93,8 @@ public static Bitmap bitmap;
                 String jsonString = miser.getJSONStringWithParam_POST(Common.SERVICE_API_URL, postParam);
                 JSONObject jsonObject = new JSONObject(jsonString);
                 a = jsonObject.getJSONArray("datos");
-        cud=jsonObject.getString("codigo");
-            qr=jsonObject.getString("qr");
+        //cud=jsonObject.getString("codigo");
+          //  qr=jsonObject.getString("qr");
 
                 return jsonObject.getInt("result");
 
@@ -164,7 +164,7 @@ public static Bitmap bitmap;
                     });*/
                     //cv = b.getString("Nombre") + "," + b.getString("Apellido") + "," + b.getString("Telefono");
                 }
-
+               // qr();
             } else {
                 Toast.makeText(Intermedia.this, "Leido fallido", Toast.LENGTH_LONG).show();
             }
@@ -234,8 +234,9 @@ public  void qr(){
  public void onClick(View view){
 
 
-qr();
+
      try {
+
        int posicion =  spi.getSelectedItemPosition();
             b = a.getJSONObject(posicion);
 
@@ -247,8 +248,8 @@ qr();
             i.putExtra("apellido", b.getString("Apellido"));
             i.putExtra("telefono", b.getString("Telefono"));
             i.putExtra("direccion", b.getString("Direccion"));
-            i.putExtra("Bitmap",bitmap);
-            i.putExtra("codigounion",cud);
+            //i.putExtra("Bitmap",bitmap);
+            //i.putExtra("codigounion",cud);
             setResult(1, i);
             startActivity(i);
             finish();
