@@ -58,7 +58,7 @@ public static Bitmap bitmap;
         button = findViewById(R.id.button);
         coger();
 
-        new TaskRegister().execute(ids);
+        new TaskRegister().execute(ids,qr);
 
 
     }
@@ -86,16 +86,17 @@ public static Bitmap bitmap;
             postParam.put("action", "DatosEnfermo");
             postParam.put("id", params[0]);
             //llama al PHP y envia los datos
-          //postParam.put("action", "qr");
-            //postParam.put("qr",params[1]);
+          postParam.put("action", "enfermo");
+
 
             try {
                 String jsonString = miser.getJSONStringWithParam_POST(Common.SERVICE_API_URL, postParam);
                 JSONObject jsonObject = new JSONObject(jsonString);
                 a = jsonObject.getJSONArray("datos");
-        //cud=jsonObject.getString("codigo");
-          //  qr=jsonObject.getString("qr");
 
+         cud=jsonObject.getString("codigo");
+        qr=jsonObject.getString("Encriptado");
+//qr();
                 return jsonObject.getInt("result");
 
 
