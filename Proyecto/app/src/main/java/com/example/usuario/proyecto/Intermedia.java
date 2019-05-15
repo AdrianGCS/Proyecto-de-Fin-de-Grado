@@ -210,10 +210,10 @@ postParam.put("qr",params[1]);
 
 
      try {
-        for(int s=0;s<a.length();s++) {
-            b = a.getJSONObject(s);
-            spi.getItemAtPosition(s);
-        }
+       int posicion =  spi.getSelectedItemPosition();
+            b = a.getJSONObject(posicion);
+
+
             Intent i = new Intent(getApplicationContext(), IllData.class);
             i.putExtra("iduser", ids);
             i.putExtra("nombre", b.getString("Nombre"));
