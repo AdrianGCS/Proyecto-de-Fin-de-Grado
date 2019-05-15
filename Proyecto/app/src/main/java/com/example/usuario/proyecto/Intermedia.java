@@ -48,7 +48,7 @@ public class Intermedia extends AppCompatActivity {
     public Spinner spi;
     public static ArrayList<String> dat = new ArrayList<>();
     Button button;
-public static Bitmap bitmap;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +58,7 @@ public static Bitmap bitmap;
         button = findViewById(R.id.button);
         coger();
 
-        new TaskRegister().execute(ids,qr);
+        new TaskRegister().execute(ids);
 
 
     }
@@ -86,7 +86,7 @@ public static Bitmap bitmap;
             postParam.put("action", "DatosEnfermo");
             postParam.put("id", params[0]);
             //llama al PHP y envia los datos
-          postParam.put("action", "enfermo");
+
 
 
             try {
@@ -94,8 +94,7 @@ public static Bitmap bitmap;
                 JSONObject jsonObject = new JSONObject(jsonString);
                 a = jsonObject.getJSONArray("datos");
 
-         cud=jsonObject.getString("codigo");
-        qr=jsonObject.getString("Encriptado");
+
 //qr();
                 return jsonObject.getInt("result");
 
@@ -213,25 +212,7 @@ public static Bitmap bitmap;
 
 
     }*/
-public  void qr(){
-    MultiFormatWriter formaescribir = new MultiFormatWriter();//es una clase que forma el codigo qr
-    try {
-        BitMatrix codigo = formaescribir.encode(qr, BarcodeFormat.QR_CODE, 164, 196);
-        //indicas las medidas del codigoqr y con que lo vas a componer
 
-        BarcodeEncoder codigoqr = new BarcodeEncoder();
-        //aqui generas el codigo qr
-        bitmap = codigoqr.createBitmap(codigo);
-        //una funcion que crea el mapa de bits que es lo que compone el qr
-        // qr.setImageBitmap(bit);
-        //con esto sacaria en qr en una imagen
-    } catch (WriterException e) {
-        e.printStackTrace();
-    }
-    //indicas las medidas del codigoqr y con que lo vas a componer
-
-
-}
  public void onClick(View view){
 
 

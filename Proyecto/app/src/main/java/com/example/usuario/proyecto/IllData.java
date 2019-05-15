@@ -13,6 +13,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.journeyapps.barcodescanner.BarcodeEncoder;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -24,12 +30,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class IllData extends AppCompatActivity {
-    public static String use, nom, ape, dir, tel, enfermo, cdu;
+    public static String use, nom, ape, dir, tel, enfermo, cdu,qr;
     EditText n, nombre, apellidos, telefono, direccion;
     private AccessServiceAPI miservicio;
     private ProgressDialog dialogo;
     TextView codun;
 ImageView c;
+    public static Bitmap bitmap;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,12 +121,14 @@ ImageView c;
             postParam.put("apellido", params[2]);
             postParam.put("telefono", params[3]);
             postParam.put("direccion", params[3]);
-
+            //postParam.put("action", "enfermo");
             //llama al PHP
             try {
                 String jsonString = miservicio.getJSONStringWithParam_POST(Common.SERVICE_API_URL, postParam);
                 JSONObject jsonObject = new JSONObject(jsonString);
                 //id= jsonObject.getString("id");
+                //cud=jsonObject.getString("codigo");
+                //qr=jsonObject.getString("Encriptado");
                 return jsonObject.getInt("result");
             } catch (Exception e) {
                 e.printStackTrace();
@@ -146,6 +155,25 @@ ImageView c;
                 Toast.makeText(IllData.this, "Registro fallido", Toast.LENGTH_LONG).show();
             }
         }
+    }
+    public  void qr(){
+        MultiFormatWriter formaescribir = new MultiFormatWriter();//es una clase que forma el codigo qr
+        try {
+            BitMatrix codigo = formaescribir.encode(qr, BarcodeFormat.QR_CODE, 164, 196);
+            //indicas las medidas del codigoqr y con que lo vas a componer
+
+            BarcodeEncoder codigoqr = new BarcodeEncoder();
+            //aqui generas el codigo qr
+            bitmap = codigoqr.createBitmap(codigo);
+            //una funcion que crea el mapa de bits que es lo que compone el qr
+            // qr.setImageBitmap(bit);
+            //con esto sacaria en qr en una imagen
+        } catch (WriterException e) {
+            e.printStackTrace();
+        }
+        //indicas las medidas del codigoqr y con que lo vas a componer
+
+
     }
 
     @Override
