@@ -24,7 +24,7 @@ import java.util.Map;
 public class UserData extends AppCompatActivity {
     public static String ids, ide;
     public static String nom, ape, cor, con;
- //   public static ArrayList<String> Prueba;
+    //   public static ArrayList<String> Prueba;
     EditText nombre, apellidos, contra;
     TextView correo;
     private Dialog midialogo;
@@ -51,6 +51,20 @@ public class UserData extends AppCompatActivity {
         switch (view.getId()) {
 
             case R.id.save:
+                if ("".equals(nombre.getText().toString())) {
+                    nombre.setError("Se requiere Nombre");
+                    return;
+                }
+                if ("".equals(apellidos.getText().toString())) {
+                    apellidos.setError("Se requiere apellidos");
+                    return;
+                }
+
+
+                if ("".equals(contra.getText().toString())) {
+                    contra.setError("Mete la contraseña");
+                    return;
+                }
                 new TaskRegister().execute(ids, nombre.getText().toString(), apellidos.getText().toString(), correo.getText().toString(), contra.getText().toString());
                 break;
             case R.id.log:
@@ -72,7 +86,7 @@ public class UserData extends AppCompatActivity {
         correo.setText(cor);
         con = getIntent().getStringExtra("contraseña");
         contra.setText(con);
-       // Prueba =(ArrayList<String>) getIntent().getSerializableExtra("Prueba");
+        // Prueba =(ArrayList<String>) getIntent().getSerializableExtra("Prueba");
 
     }
 

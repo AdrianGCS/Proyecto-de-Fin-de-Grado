@@ -32,8 +32,8 @@ public class IllData extends AppCompatActivity {
         setContentView(R.layout.activity_ill_data);
         nombre = findViewById(R.id.nombre);
         apellidos = findViewById(R.id.apellidos);
-        direccion = findViewById(R.id.direccion);
-        telefono = findViewById(R.id.telefono);
+        direccion = findViewById(R.id.direccion2);
+        telefono = findViewById(R.id.telefono2);
         miservicio = new AccessServiceAPI();
         coger();
 
@@ -123,7 +123,7 @@ public class IllData extends AppCompatActivity {
             dialogo.dismiss();
             if (integer == Common.RESULT_SUCCESS) {
                 Toast.makeText(IllData.this, "Registrado con exito", Toast.LENGTH_LONG).show();
-                Intent i = new Intent(getApplicationContext(), OpcionUser.class);
+                Intent i = new Intent(getApplicationContext(), IllData.class);
                 i.putExtra("nombre", nombre.getText().toString());
                 i.putExtra("apellidos", apellidos.getText().toString());
                 i.putExtra("correo", telefono.getText().toString());

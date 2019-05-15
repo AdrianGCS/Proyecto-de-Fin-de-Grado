@@ -27,8 +27,8 @@
 
     <EditText
         android:id="@+id/nombre"
-        android:layout_width="138dp"
-        android:layout_height="33dp"
+        android:layout_width="210dp"
+        android:layout_height="38dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -41,17 +41,17 @@
         android:textColor="@color/mapbox_navigation_view_color_accent_dark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.706"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.104"
+        app:layout_constraintVertical_bias="0.106"
         tools:ignore="MissingConstraints"
         tools:text="Nombre" />
 
     <TextView
         android:id="@+id/nombre2"
-        android:layout_width="140dp"
-        android:layout_height="24dp"
+        android:layout_width="201dp"
+        android:layout_height="34dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -64,17 +64,17 @@
         android:textColor="@color/mapbox_navigation_route_layer_congestion_red"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.709"
+        app:layout_constraintHorizontal_bias="0.768"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.044"
+        app:layout_constraintVertical_bias="0.039"
         tools:ignore="MissingConstraints"
         tools:text="Nombre" />
 
     <EditText
         android:id="@+id/apellidos"
-        android:layout_width="143dp"
-        android:layout_height="26dp"
+        android:layout_width="215dp"
+        android:layout_height="44dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -87,17 +87,17 @@
         android:textColor="@color/mapbox_navigation_view_color_accent_dark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.706"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.246"
+        app:layout_constraintVertical_bias="0.239"
         tools:ignore="MissingConstraints"
         tools:text="Apellidos" />
 
     <TextView
         android:id="@+id/apellidos2"
-        android:layout_width="140dp"
-        android:layout_height="27dp"
+        android:layout_width="184dp"
+        android:layout_height="31dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -119,8 +119,8 @@
 
     <TextView
         android:id="@+id/telefono"
-        android:layout_width="150dp"
-        android:layout_height="22dp"
+        android:layout_width="262dp"
+        android:layout_height="26dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -133,17 +133,17 @@
         android:textColor="@color/mapbox_navigation_view_color_accent_dark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.257"
+        app:layout_constraintHorizontal_bias="0.067"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.48"
+        app:layout_constraintVertical_bias="0.41"
         tools:ignore="MissingConstraints"
         tools:text="Telefono" />
 
     <EditText
         android:id="@+id/telefono2"
-        android:layout_width="150dp"
-        android:layout_height="22dp"
+        android:layout_width="263dp"
+        android:layout_height="39dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -156,17 +156,17 @@
         android:textColor="@color/mapbox_navigation_route_layer_congestion_yellow"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.118"
+        app:layout_constraintHorizontal_bias="0.06"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.421"
+        app:layout_constraintVertical_bias="0.457"
         tools:ignore="MissingConstraints"
         tools:text="Telefono" />
 
     <TextView
         android:id="@+id/direccion"
-        android:layout_width="138dp"
-        android:layout_height="27dp"
+        android:layout_width="262dp"
+        android:layout_height="32dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -179,17 +179,17 @@
         android:textColor="@color/mapbox_navigation_view_color_accent_dark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.291"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.597"
+        app:layout_constraintVertical_bias="0.531"
         tools:ignore="MissingConstraints"
         tools:text="Direccion" />
 
     <EditText
         android:id="@+id/direccion2"
-        android:layout_width="138dp"
-        android:layout_height="27dp"
+        android:layout_width="247dp"
+        android:layout_height="40dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -202,10 +202,10 @@
         android:textColor="@color/common_google_signin_btn_text_dark_focused"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.112"
+        app:layout_constraintHorizontal_bias="0.06"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.534"
+        app:layout_constraintVertical_bias="0.6"
         tools:ignore="MissingConstraints"
         tools:text="Direccion" />
 
