@@ -3,10 +3,13 @@ package com.example.usuario.proyecto;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,11 +24,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class IllData extends AppCompatActivity {
-    public static String use, nom, ape, dir, tel, enfermo;
-    TextView n, nombre, apellidos, telefono, direccion;
+    public static String use, nom, ape, dir, tel, enfermo, cdu;
+    EditText n, nombre, apellidos, telefono, direccion;
     private AccessServiceAPI miservicio;
     private ProgressDialog dialogo;
-
+    TextView codun;
+ImageView c;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +38,9 @@ public class IllData extends AppCompatActivity {
         apellidos = findViewById(R.id.apellidos);
         direccion = findViewById(R.id.direccion2);
         telefono = findViewById(R.id.telefono2);
+        codun = findViewById(R.id.codigo);
         miservicio = new AccessServiceAPI();
+        c=findViewById(R.id.qr_enfermo);
         coger();
 
     }
@@ -86,7 +92,10 @@ public class IllData extends AppCompatActivity {
         telefono.setText(tel);
         dir = getIntent().getStringExtra("direccion");
         direccion.setText(dir);
-
+        cdu = getIntent().getStringExtra("codigounion");
+        codun.setText(cdu);
+        Bitmap bitmap = (Bitmap) getIntent().getParcelableExtra("BitmapImage");
+        c.setImageBitmap(bitmap);
     }
 
     public class TaskRegister extends AsyncTask<String, Void, Integer> {
@@ -125,14 +134,14 @@ public class IllData extends AppCompatActivity {
             dialogo.dismiss();
             if (integer == Common.RESULT_SUCCESS) {
                 Toast.makeText(IllData.this, "Registrado con exito", Toast.LENGTH_LONG).show();
-               // Intent i = new Intent(getApplicationContext(), IllData.class);
-               // i.putExtra("nombre", nombre.getText().toString());
-               // i.putExtra("apellidos", apellidos.getText().toString());
-               // i.putExtra("correo", telefono.getText().toString());
-               // i.putExtra("direccion", direccion.getText().toString());
-               // setResult(1, i);
-               // startActivity(i);
-               // finish();
+                // Intent i = new Intent(getApplicationContext(), IllData.class);
+                // i.putExtra("nombre", nombre.getText().toString());
+                // i.putExtra("apellidos", apellidos.getText().toString());
+                // i.putExtra("correo", telefono.getText().toString());
+                // i.putExtra("direccion", direccion.getText().toString());
+                // setResult(1, i);
+                // startActivity(i);
+                // finish();
             } else {
                 Toast.makeText(IllData.this, "Registro fallido", Toast.LENGTH_LONG).show();
             }

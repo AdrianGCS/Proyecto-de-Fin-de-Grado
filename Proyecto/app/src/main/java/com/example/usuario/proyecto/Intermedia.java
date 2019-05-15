@@ -3,6 +3,7 @@ package com.example.usuario.proyecto;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,12 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.journeyapps.barcodescanner.BarcodeEncoder;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,9 +36,10 @@ public class Intermedia extends AppCompatActivity {
     static int numBotones = 2;
     private Dialog midialogo;
     private AccessServiceAPI miser;
-    public static String no, ap, di, te, cv;
+    public static String no, ap, di, te, cv,qr;
     public static JSONArray a;
-    public static String ids;
+
+    public static String ids,cud;
     public static JSONObject b;
     public static JSONObject c;
     public static Parcelable y;
@@ -40,7 +48,7 @@ public class Intermedia extends AppCompatActivity {
     public Spinner spi;
     public static ArrayList<String> dat = new ArrayList<>();
     Button button;
-
+public static Bitmap bitmap;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,15 +86,15 @@ public class Intermedia extends AppCompatActivity {
             postParam.put("action", "DatosEnfermo");
             postParam.put("id", params[0]);
             //llama al PHP y envia los datos
-          /*postParam.put("action", "qr");
-postParam.put("qr",params[1]);
-            postParam.put("action", "codigounion");
-            postParam.put("coduni",params[2]);*/
+          //postParam.put("action", "qr");
+            //postParam.put("qr",params[1]);
+
             try {
                 String jsonString = miser.getJSONStringWithParam_POST(Common.SERVICE_API_URL, postParam);
                 JSONObject jsonObject = new JSONObject(jsonString);
                 a = jsonObject.getJSONArray("datos");
-
+        cud=jsonObject.getString("codigo");
+            qr=jsonObject.getString("qr");
 
                 return jsonObject.getInt("result");
 
@@ -204,11 +212,29 @@ postParam.put("qr",params[1]);
 
 
     }*/
+public  void qr(){
+    MultiFormatWriter formaescribir = new MultiFormatWriter();//es una clase que forma el codigo qr
+    try {
+        BitMatrix codigo = formaescribir.encode(qr, BarcodeFormat.QR_CODE, 164, 196);
+        //indicas las medidas del codigoqr y con que lo vas a componer
 
+        BarcodeEncoder codigoqr = new BarcodeEncoder();
+        //aqui generas el codigo qr
+        bitmap = codigoqr.createBitmap(codigo);
+        //una funcion que crea el mapa de bits que es lo que compone el qr
+        // qr.setImageBitmap(bit);
+        //con esto sacaria en qr en una imagen
+    } catch (WriterException e) {
+        e.printStackTrace();
+    }
+    //indicas las medidas del codigoqr y con que lo vas a componer
+
+
+}
  public void onClick(View view){
 
 
-
+qr();
      try {
        int posicion =  spi.getSelectedItemPosition();
             b = a.getJSONObject(posicion);
@@ -221,6 +247,8 @@ postParam.put("qr",params[1]);
             i.putExtra("apellido", b.getString("Apellido"));
             i.putExtra("telefono", b.getString("Telefono"));
             i.putExtra("direccion", b.getString("Direccion"));
+            i.putExtra("Bitmap",bitmap);
+            i.putExtra("codigounion",cud);
             setResult(1, i);
             startActivity(i);
             finish();
