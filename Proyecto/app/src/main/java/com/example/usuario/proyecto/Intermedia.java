@@ -216,6 +216,7 @@ postParam.put("qr",params[1]);
 
             Intent i = new Intent(getApplicationContext(), IllData.class);
             i.putExtra("iduser", ids);
+            i.putExtra("idEnfermo", b.getString("ID"));
             i.putExtra("nombre", b.getString("Nombre"));
             i.putExtra("apellido", b.getString("Apellido"));
             i.putExtra("telefono", b.getString("Telefono"));

@@ -21,7 +21,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class IllData extends AppCompatActivity {
-    public static String use, nom, ape, dir, tel;
+    public static String use, nom, ape, dir, tel, enfermo;
     TextView n, nombre, apellidos, telefono, direccion;
     private AccessServiceAPI miservicio;
     private ProgressDialog dialogo;
@@ -61,7 +61,7 @@ public class IllData extends AppCompatActivity {
                     direccion.setError("Mete la direccion");
                     return;
                 }
-                new TaskRegister().execute(use, nombre.getText().toString(), apellidos.getText().toString(), telefono.getText().toString(), direccion.getText().toString());
+                new TaskRegister().execute(enfermo, nombre.getText().toString(), apellidos.getText().toString(), telefono.getText().toString(), direccion.getText().toString());
                 break;
             case R.id.log:
                 startActivity(new Intent(IllData.this, DatosQuien.class));
@@ -77,6 +77,7 @@ public class IllData extends AppCompatActivity {
     public void coger() {
         use = getIntent().getStringExtra("iduser");
         //n.setText(ids);
+        enfermo = getIntent().getStringExtra("idEnfermo");
         nom = getIntent().getStringExtra("nombre");
         nombre.setText(nom);
         ape = getIntent().getStringExtra("apellido");
@@ -100,10 +101,11 @@ public class IllData extends AppCompatActivity {
             Map<String, String> postParam = new HashMap<>();
             postParam.put("action", "ActualizarEn");
             postParam.put("id", params[0]);
-            postParam.put("username", params[1]);
-            postParam.put("password", params[2]);
-            postParam.put("mail", params[3]);
-            postParam.put("lastname", params[4]);
+            postParam.put("nombre", params[1]);
+            postParam.put("apellido", params[2]);
+            postParam.put("telefono", params[3]);
+            postParam.put("direccion", params[3]);
+
             //llama al PHP
             try {
                 String jsonString = miservicio.getJSONStringWithParam_POST(Common.SERVICE_API_URL, postParam);
@@ -123,14 +125,14 @@ public class IllData extends AppCompatActivity {
             dialogo.dismiss();
             if (integer == Common.RESULT_SUCCESS) {
                 Toast.makeText(IllData.this, "Registrado con exito", Toast.LENGTH_LONG).show();
-                Intent i = new Intent(getApplicationContext(), IllData.class);
-                i.putExtra("nombre", nombre.getText().toString());
-                i.putExtra("apellidos", apellidos.getText().toString());
-                i.putExtra("correo", telefono.getText().toString());
-                i.putExtra("direccion", direccion.getText().toString());
-                setResult(1, i);
-                startActivity(i);
-                finish();
+               // Intent i = new Intent(getApplicationContext(), IllData.class);
+               // i.putExtra("nombre", nombre.getText().toString());
+               // i.putExtra("apellidos", apellidos.getText().toString());
+               // i.putExtra("correo", telefono.getText().toString());
+               // i.putExtra("direccion", direccion.getText().toString());
+               // setResult(1, i);
+               // startActivity(i);
+               // finish();
             } else {
                 Toast.makeText(IllData.this, "Registro fallido", Toast.LENGTH_LONG).show();
             }
