@@ -4,6 +4,8 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,9 +24,12 @@ import com.journeyapps.barcodescanner.BarcodeEncoder;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.security.PublicKey;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -43,7 +48,7 @@ ImageView c;
         setContentView(R.layout.activity_ill_data);
         nombre = findViewById(R.id.nombre);
         apellidos = findViewById(R.id.apellidos);
-        direccion = findViewById(R.id.direccion2);
+        direccion = findViewById(R.id.domicilio);
         telefono = findViewById(R.id.telefono2);
         codun = findViewById(R.id.codigo);
         miservicio = new AccessServiceAPI();
@@ -64,20 +69,23 @@ ImageView c;
                     apellidos.setError("Se requiere apellidos");
                     return;
                 }
-                if ("".equals(telefono.getText().toString())) {
+                if ("".equals(telefono.getText().toString())|| (telefono.getText().length()<9)) {
                     telefono.setError("Se requiere telefono");
                     return;
                 }
 
 
-                if ("".equals(direccion.getText().toString())) {
-                    direccion.setError("Mete la direccion");
+                if (!"".equals(direccion.getText().toString()) && validarDireccion(direccion.getText().toString()) == false) {
+                    direccion.setError("Añada una calle valida");
                     return;
                 }
                 new TaskRegister().execute(enfermo, nombre.getText().toString(), apellidos.getText().toString(), telefono.getText().toString(), direccion.getText().toString());
                 break;
-            case R.id.log:
-                startActivity(new Intent(IllData.this, DatosQuien.class));
+            case R.id.salir:
+                Intent i = new Intent(getApplicationContext(), DatosQuien.class);
+                i.putExtra("iduser", use);
+                startActivity(i);
+                finish();
                 break;
 
 
@@ -175,10 +183,28 @@ ImageView c;
 
 
     }
+    public boolean validarDireccion(String direccion) {
+        //Obtener la direccion de la calle a partir de la latitud y la longitud
+
+        try {
+            Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+            List<Address> list = geocoder.getFromLocationName(direccion + ",Madrid,España", 10);
+
+
+            if (!list.isEmpty() && !list.get(0).getFeatureName().equals("Madrid"))
+                return true;
+            else
+                return false;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 
     @Override
     public void onBackPressed() {
-        Intent i = new Intent(getApplicationContext(), MenuUser.class);
+        Intent i = new Intent(getApplicationContext(), DatosQuien.class);
         i.putExtra("iduser", use);
         startActivity(i);
         finish();

@@ -67,8 +67,11 @@ public class UserData extends AppCompatActivity {
                 }
                 new TaskRegister().execute(ids, nombre.getText().toString(), apellidos.getText().toString(), correo.getText().toString(), contra.getText().toString());
                 break;
-            case R.id.log:
-                startActivity(new Intent(UserData.this, DatosQuien.class));
+            case R.id.salir:
+                Intent i = new Intent(getApplicationContext(), DatosQuien.class);
+                i.putExtra("iduser", ids);
+                startActivity(i);
+                finish();
                 break;
 
 

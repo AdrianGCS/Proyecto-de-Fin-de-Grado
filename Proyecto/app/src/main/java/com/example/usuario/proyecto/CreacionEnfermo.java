@@ -96,7 +96,7 @@ public class CreacionEnfermo extends AppCompatActivity {
     }
 
     public void coger() {
-        idefami = getIntent().getStringExtra("id_familiar");
+        idefami = getIntent().getStringExtra("iduser");
         idsss.setText(idefami);
     }
 
@@ -214,5 +214,6 @@ public class CreacionEnfermo extends AppCompatActivity {
             return false;
         }
     }
+
 
 }

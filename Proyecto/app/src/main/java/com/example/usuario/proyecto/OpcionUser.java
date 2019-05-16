@@ -27,12 +27,14 @@ public class OpcionUser extends AppCompatActivity {
 
             case R.id.crear:
                 Intent i = new Intent(this, CreacionEnfermo.class);
-                i.putExtra("id_familiar", id);
+                i.putExtra("iduser", id);
                 startActivity(i);
 
                 break;
             case R.id.unirse:
-                startActivity(new Intent(this, UnirseEnfermo.class));
+                Intent j = new Intent(this, UnirseEnfermo.class);
+                j.putExtra("iduser", id);
+                startActivity(j);
                 break;
 
         }
@@ -40,8 +42,7 @@ public class OpcionUser extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        Toast.makeText(getApplicationContext(), "No puede ir atras", Toast.LENGTH_LONG).show();
+       Toast.makeText(getApplicationContext(), "No puede ir atras", Toast.LENGTH_LONG).show();
         //startActivity(new Intent(OpcionUser.this, OpcionUser.class));
     }
 

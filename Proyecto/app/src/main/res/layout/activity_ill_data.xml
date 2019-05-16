@@ -64,10 +64,10 @@
         android:textColor="@color/mapbox_navigation_route_layer_congestion_red"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.768"
+        app:layout_constraintHorizontal_bias="0.989"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.039"
+        app:layout_constraintVertical_bias="0.027"
         tools:ignore="MissingConstraints"
         tools:text="Nombre" />
 
@@ -107,13 +107,13 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Apellidos"
-        android:textColor="@color/colorAccent"
+        android:textColor="@color/mapbox_navigation_route_layer_congestion_red"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.701"
+        app:layout_constraintHorizontal_bias="0.857"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.178"
+        app:layout_constraintVertical_bias="0.172"
         tools:ignore="MissingConstraints"
         tools:text="Apellidos" />
 
@@ -153,6 +153,7 @@
         android:ems="10"
         android:inputType="phone"
         android:text="Telefono"
+        android:maxLength="9"
         android:textColor="@color/mapbox_navigation_route_layer_congestion_yellow"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -187,7 +188,7 @@
         tools:text="Direccion" />
 
     <EditText
-        android:id="@+id/direccion2"
+        android:id="@+id/domicilio"
         android:layout_width="247dp"
         android:layout_height="40dp"
         android:layout_marginStart="8dp"
