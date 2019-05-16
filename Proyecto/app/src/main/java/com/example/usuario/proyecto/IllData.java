@@ -54,7 +54,7 @@ ImageView c;
         miservicio = new AccessServiceAPI();
         c=findViewById(R.id.qr_enfermo);
         coger();
-
+        new TaskRegister().execute(enfermo, nombre.getText().toString(), apellidos.getText().toString(), telefono.getText().toString(), direccion.getText().toString(),"0");
     }
 
     public void onClick(View view) {
@@ -79,7 +79,7 @@ ImageView c;
                     direccion.setError("Añada una calle valida");
                     return;
                 }
-                new TaskRegister().execute(enfermo, nombre.getText().toString(), apellidos.getText().toString(), telefono.getText().toString(), direccion.getText().toString());
+                new TaskRegister().execute(enfermo, nombre.getText().toString(), apellidos.getText().toString(), telefono.getText().toString(), direccion.getText().toString(),"1");
                 break;
             case R.id.salir:
                 Intent i = new Intent(getApplicationContext(), DatosQuien.class);
@@ -122,22 +122,37 @@ ImageView c;
 
         @Override
         protected Integer doInBackground(String... params) {
+
             Map<String, String> postParam = new HashMap<>();
             postParam.put("action", "ActualizarEn");
             postParam.put("id", params[0]);
             postParam.put("nombre", params[1]);
             postParam.put("apellido", params[2]);
             postParam.put("telefono", params[3]);
-            postParam.put("direccion", params[3]);
+            postParam.put("direccion", params[4]);
+            JSONObject jsonObject = null;
             //postParam.put("action", "enfermo");
             //llama al PHP
             try {
-                String jsonString = miservicio.getJSONStringWithParam_POST(Common.SERVICE_API_URL, postParam);
-                JSONObject jsonObject = new JSONObject(jsonString);
-                //id= jsonObject.getString("id");
-                //cud=jsonObject.getString("codigo");
+                if (params[5].contains("1")) {
+                    String jsonString = miservicio.getJSONStringWithParam_POST(Common.SERVICE_API_URL, postParam);
+                    jsonObject = new JSONObject(jsonString);
+                }
+
+
+
+                postParam.put("action", "QRyUnion");
+                String jsonStringQR = miservicio.getJSONStringWithParam_POST(Common.SERVICE_API_URL, postParam);
+                JSONObject jsonObjectQR = new JSONObject(jsonStringQR);
+
+
+                cdu = jsonObjectQR.getString("Union");
                 //qr=jsonObject.getString("Encriptado");
+                if(params[5].contains("1")){
                 return jsonObject.getInt("result");
+                } else{
+                    return 10;
+                }
             } catch (Exception e) {
                 e.printStackTrace();
                 return Common.RESULT_ERROR;
@@ -159,7 +174,16 @@ ImageView c;
                 // setResult(1, i);
                 // startActivity(i);
                 // finish();
+                codun.setText(cdu);
             } else {
+                if(integer==10){
+                    if(cdu!=null)
+                    {
+                        codun.setText(cdu);
+
+                    }
+                    return;
+                }else
                 Toast.makeText(IllData.this, "Registro fallido", Toast.LENGTH_LONG).show();
             }
         }
