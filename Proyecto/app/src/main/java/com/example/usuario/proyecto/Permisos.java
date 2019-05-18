@@ -22,8 +22,10 @@ public class Permisos extends AppCompatActivity {
     TextView cid;
     private AccessServiceAPI miservicio;
     private ProgressDialog midialogo;
-    Switch lo,mo;
-    public static int cero,uno;
+    Switch lo, mo;
+    public static int cero = 0, uno = 1;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,8 +33,8 @@ public class Permisos extends AppCompatActivity {
         cid = findViewById(R.id.iduse);
         miservicio = new AccessServiceAPI();
         coger();
-      lo=findViewById(R.id.localix);
-      mo=findViewById(R.id.escritura);
+        lo = findViewById(R.id.localix);
+        mo = findViewById(R.id.escritura);
     }
 
     public void coger() {

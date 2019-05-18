@@ -35,13 +35,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class IllData extends AppCompatActivity {
-    public static String use, nom, ape, dir, tel, enfermo, cdu,qr;
+    public static String use, nom, ape, dir, tel, enfermo, cdu, qr;
     EditText n, nombre, apellidos, telefono, direccion;
     private AccessServiceAPI miservicio;
     private ProgressDialog dialogo;
     TextView codun;
-ImageView c;
+    ImageView c;
     public static Bitmap bitmap;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,10 +52,12 @@ ImageView c;
         direccion = findViewById(R.id.domicilio);
         telefono = findViewById(R.id.telefono2);
         codun = findViewById(R.id.codigo);
+        c = findViewById(R.id.qr_enfermo);
         miservicio = new AccessServiceAPI();
-        c=findViewById(R.id.qr_enfermo);
+
         coger();
-        new TaskRegister().execute(enfermo, nombre.getText().toString(), apellidos.getText().toString(), telefono.getText().toString(), direccion.getText().toString(),"0");
+        new TaskRegister().execute(enfermo, nombre.getText().toString(), apellidos.getText().toString(), telefono.getText().toString(), direccion.getText().toString(), "0");
+
     }
 
     public void onClick(View view) {
@@ -69,7 +72,7 @@ ImageView c;
                     apellidos.setError("Se requiere apellidos");
                     return;
                 }
-                if ("".equals(telefono.getText().toString())|| (telefono.getText().length()<9)) {
+                if ("".equals(telefono.getText().toString()) || (telefono.getText().length() < 9)) {
                     telefono.setError("Se requiere telefono");
                     return;
                 }
@@ -79,7 +82,10 @@ ImageView c;
                     direccion.setError("Añada una calle valida");
                     return;
                 }
-                new TaskRegister().execute(enfermo, nombre.getText().toString(), apellidos.getText().toString(), telefono.getText().toString(), direccion.getText().toString(),"1");
+                new TaskRegister().execute(enfermo, nombre.getText().toString(), apellidos.getText().toString(), telefono.getText().toString(), direccion.getText().toString(), "1");
+                codun.setText(cdu);
+                QR(qr);
+                c.setImageBitmap(bitmap);
                 break;
             case R.id.salir:
                 Intent i = new Intent(getApplicationContext(), DatosQuien.class);
@@ -140,17 +146,20 @@ ImageView c;
                 }
 
 
-
                 postParam.put("action", "QRyUnion");
                 String jsonStringQR = miservicio.getJSONStringWithParam_POST(Common.SERVICE_API_URL, postParam);
                 JSONObject jsonObjectQR = new JSONObject(jsonStringQR);
 
 
                 cdu = jsonObjectQR.getString("Union");
+                //  codun.setText(cdu);
+                qr = jsonObjectQR.getString("Qr");
+                QR(qr);
+                c.setImageBitmap(bitmap);
                 //qr=jsonObject.getString("Encriptado");
-                if(params[5].contains("1")){
-                return jsonObject.getInt("result");
-                } else{
+                if (params[5].contains("1")) {
+                    return jsonObject.getInt("result");
+                } else {
                     return 10;
                 }
             } catch (Exception e) {
@@ -175,20 +184,22 @@ ImageView c;
                 // startActivity(i);
                 // finish();
                 codun.setText(cdu);
+
+
             } else {
-                if(integer==10){
-                    if(cdu!=null)
-                    {
+                if (integer == 10) {
+                    if (cdu != null) {
                         codun.setText(cdu);
 
                     }
                     return;
-                }else
-                Toast.makeText(IllData.this, "Registro fallido", Toast.LENGTH_LONG).show();
+                } else
+                    Toast.makeText(IllData.this, "Registro fallido", Toast.LENGTH_LONG).show();
             }
         }
     }
-    public  void qr(){
+
+    public void QR(String v) {
         MultiFormatWriter formaescribir = new MultiFormatWriter();//es una clase que forma el codigo qr
         try {
             BitMatrix codigo = formaescribir.encode(qr, BarcodeFormat.QR_CODE, 164, 196);
@@ -207,6 +218,7 @@ ImageView c;
 
 
     }
+
     public boolean validarDireccion(String direccion) {
         //Obtener la direccion de la calle a partir de la latitud y la longitud
 

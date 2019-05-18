@@ -5,14 +5,15 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fon"
     tools:context=".Login">
+    //android:background="@drawable/cerebro"
+
+
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/fon"
         android:gravity="center"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp">
@@ -29,6 +30,18 @@
             tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="52dp" />
+
+        <CalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="14dp"
+            tools:layout_editor_absoluteY="222dp"
+            android:weekDayTextAppearance="@color/mapboxWhite"
+            android:weekNumberColor="@color/mapboxWhite"
+            android:weekSeparatorLineColor="@color/mapboxWhite"/>
 
 
     </android.support.constraint.ConstraintLayout>

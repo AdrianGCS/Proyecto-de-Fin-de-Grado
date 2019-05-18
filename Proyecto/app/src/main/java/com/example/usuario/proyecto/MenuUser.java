@@ -40,7 +40,7 @@ public class MenuUser extends AppCompatActivity {
                 finish();
                 break;
             case R.id.calendario:
-                Intent b = new Intent(this, Permisos.class);
+                Intent b = new Intent(this, Calendario.class);
                 b.putExtra("iduser", iduser);
                 // p.putExtra("id_enfermo", id);
                 startActivity(b);

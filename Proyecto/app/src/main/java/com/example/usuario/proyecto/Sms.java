@@ -280,6 +280,9 @@ public class Sms extends AppCompatActivity {
         i.putExtra("telefono", n);
         i.putExtra("id_enfermo", idess);
         i.putExtra("imei", imei);
+        i.putExtra("calle",calle.getText());
+        i.putExtra("longitud",lo.getText());
+        i.putExtra("latitud",la.getText());
         startActivity(i);
 
     }

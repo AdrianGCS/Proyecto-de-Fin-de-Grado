@@ -52,9 +52,11 @@ public class UnirseEnfermo extends AppCompatActivity {
         new TaskRegister().execute(nombre.getText().toString(), apellidos.getText().toString(), codigoU.getText().toString(), idefami);
 
     }
-public void c(){
-        idefami=getIntent().getStringExtra("iduser");
-}
+
+    public void c() {
+        idefami = getIntent().getStringExtra("iduser");
+    }
+
     public class TaskRegister extends AsyncTask<String, Void, Integer> {
 
         @Override
@@ -102,10 +104,7 @@ public void c(){
             midialogo.dismiss();
             if (integer == Common.RESULT_SUCCESS) {
                 Toast.makeText(UnirseEnfermo.this, "Registrado con exito", Toast.LENGTH_LONG).show();
-                Intent i = new Intent(getApplicationContext(), Datos_Enfermo.class);
-                i.putExtra("nombre", nombre.getText() + "");
-                i.putExtra("apellidos", apellidos.getText() + "");
-                i.putExtra("codigounion", codigoU.getText() + "");
+                Intent i = new Intent(getApplicationContext(), MenuUser.class);
                 i.putExtra("iduser", idefami);
                 setResult(1, i);
                 startActivity(i);
@@ -118,6 +117,7 @@ public void c(){
 
         }
     }
+
     @Override
     public void onBackPressed() {
         Intent j = new Intent(this, OpcionUser.class);

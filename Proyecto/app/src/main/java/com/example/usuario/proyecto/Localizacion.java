@@ -118,6 +118,7 @@ public class Localizacion extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     @SuppressWarnings("MissingPermission")
     public void onConnected() {
+
         locationEngine.requestLocationUpdates();
     }
 
@@ -226,10 +227,10 @@ public class Localizacion extends AppCompatActivity implements OnMapReadyCallbac
                     @Override
                     public void onResponse(Call<DirectionsResponse> call, Response<DirectionsResponse> response) {
                         if (response.body() == null) {
-                            Log.e(TAG, "NO RUTA");
+                            Log.e(TAG, "NO HAY  RUTA");
                             return;
                         } else if (response.body().routes().size() == 0) {
-                            Log.e(TAG, "NO RUTA ");
+                            Log.e(TAG, "NO HAY RUTA ");
                             return;
                         }
                         DirectionsRoute currentRoute = response.body().routes().get(0);

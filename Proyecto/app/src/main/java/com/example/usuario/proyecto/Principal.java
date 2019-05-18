@@ -10,7 +10,7 @@ import android.widget.TextView;
 public class Principal extends AppCompatActivity {
     Bundle datos;
     public static String telefono = "";
-    public static String fone = "";
+    public static String fone = "",calle,longitud,latitud;
     TextView phon, hy, u;
     public static String ids = "";
     public static String imei = "";
@@ -64,6 +64,9 @@ public class Principal extends AppCompatActivity {
         ids = getIntent().getStringExtra("id_enfermo");
         imei = getIntent().getStringExtra("imei");
         direccion = getIntent().getStringExtra("direccion");
+        calle=getIntent().getStringExtra("calle");
+        longitud=getIntent().getStringExtra("longitd");
+        latitud=getIntent().getStringExtra("latitud");
      if ("".equals(direccion) || direccion == null) {
 
          lo.setEnabled(false);
