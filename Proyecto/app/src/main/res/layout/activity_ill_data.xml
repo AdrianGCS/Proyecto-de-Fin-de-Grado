@@ -221,6 +221,7 @@
         android:ems="10"
         android:inputType="textPostalAddress"
         android:text="Codigo union "
+        android:textIsSelectable="true"
         android:textColor="@color/common_google_signin_btn_text_dark_focused"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

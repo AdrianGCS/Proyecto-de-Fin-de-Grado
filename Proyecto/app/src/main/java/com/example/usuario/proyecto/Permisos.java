@@ -48,25 +48,30 @@ public class Permisos extends AppCompatActivity {
 
     public void onClick(View view) {
 
-        if (lo.isChecked())
+        if (lo.isChecked()) {
             lo.setChecked(true);
             uno = "1";
-            Toast.makeText(Permisos.this,  lo.getTextOn().toString() + uno, Toast.LENGTH_LONG).show();
-          if(mo.isChecked()) {
-              mo.setChecked(true);
-              uno = "1";
-              Toast.makeText(Permisos.this, mo.getTextOn().toString() + uno, Toast.LENGTH_LONG).show();
-          }else {
+            Toast.makeText(Permisos.this, lo.getTextOn().toString() + uno, Toast.LENGTH_LONG).show();
+        } else {
             lo.setChecked(false);
+            cero = "0";
+        }
+
+        if (mo.isChecked()) {
+            mo.setChecked(true);
+            uno = "1";
+            Toast.makeText(Permisos.this, mo.getTextOn().toString() + uno, Toast.LENGTH_LONG).show();
+        } else {
+
             mo.setChecked(false);
             cero = "0";
 
-            Toast.makeText(Permisos.this, "Esta apagado" + mo.getTextOff().toString()+cero, Toast.LENGTH_LONG).show();
+            Toast.makeText(Permisos.this, "Esta apagado" + mo.getTextOff().toString() + cero, Toast.LENGTH_LONG).show();
         }
 
 
         //exec task register
-       new TaskRegister().execute(cero, uno, ids);
+        new TaskRegister().execute(cero, uno, ids);
 
 
     }
@@ -83,7 +88,7 @@ public class Permisos extends AppCompatActivity {
         @Override
         protected Integer doInBackground(String... params) {
             Map<String, String> postParam = new HashMap<>();
-            postParam.put("action", "union");
+            postParam.put("action", "permisos");
             postParam.put("localizacion", params[0]);
             postParam.put("modificacion", params[1]);
             postParam.put("id", ids);

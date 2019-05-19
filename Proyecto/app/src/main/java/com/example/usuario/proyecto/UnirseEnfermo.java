@@ -81,9 +81,7 @@ public class UnirseEnfermo extends AppCompatActivity {
             try {
                 String jsonString = miservicio.getJSONStringWithParam_POST(Common.SERVICE_API_URL, postParam);
                 JSONObject jsonObject = new JSONObject(jsonString);
-                idefami = jsonObject.getString("id");
-                codigo = jsonObject.getString("codigo");
-                // id_enfermo = jsonObject.getString("id");
+         
 
 
                 return jsonObject.getInt("result");
