@@ -67,14 +67,14 @@ switch ($action) {
 				
 		$Encript= openssl_encrypt($data, 'aes128', 'Seguridad',0,'1234567812345678');
 
-		$idEnfermo = ($idEnfermo * 1024)/4;
-		$idEnfermo = decoct($telefono);
-		$idEnfermo = openssl_encrypt($telefono, 'aes128', 'Seguridad',0,'1234567812345678');
+		$codigo = ($idEnfermo * 1024)/4;
+		$codigo = decoct($codigo);
+		$codigo = openssl_encrypt($codigo, 'aes128', 'Seguridad',0,'1234567812345678');
 		
 		insertexterno($cnn, $id, $idEnfermo);
 		$result = RESULT_SUCCESS;
 
-		echo(json_encode(array('result' => $result , 'Encriptado' => $Encript, 'codigo' => $idEnfermo, )));
+		echo(json_encode(array('result' => $result , 'Encriptado' => $Encript, 'codigo' => $codigo )));
 
 		break;
 
@@ -155,11 +155,12 @@ switch ($action) {
 			$idEnfermoExt=IdEnfemoExt($cnn, $id);
 
 			$datos = array();
-			
+			$i=0;
 			foreach ($idEnfermoExt as $val) {
 
-			$temp = sacarDatosEnfermo($cnn, $idEnfermoExt[0]);
+			$temp = sacarDatosEnfermo($cnn, $idEnfermoExt[$i]);
 			array_push($datos, $temp);
+			$i=$i+1;
 			}
 			$result = RESULT_SUCCESS;
 			echo(json_encode(array('result' => $result ,'datos' => $datos)));
@@ -188,21 +189,111 @@ switch ($action) {
 		case "ActualizarUs":
 
 			$id = $_POST["id"];
-			$Nombre = $_POST["Nombre"];
-			$Apellido = $_POST["Apellido"];
-			$Correo = $_POST["Correo"];
-			$Contrasenia= $_POST["Contrasenia"];
+			$Nombre = $_POST["username"];
+			$Apellido = $_POST["lastname"];
+			$Correo = $_POST["mail"];
+			$Contrasenia= $_POST["password"];
 			actuUsuarios($cnn, $id ,$Nombre,$Apellido);
 			actuDatosUs($cnn, $id ,$Correo, $Contrasenia);
 
 			$result = RESULT_SUCCESS;
 			echo(json_encode(array('result' => $result)));
 			break;
+		case "ActualizarEn":
+
+			$id = $_POST["id"];
+			$Nombre = $_POST["nombre"];
+			$Apellido = $_POST["apellido"];
+			$Telefono = $_POST["telefono"];
+			$Direccion= $_POST["direccion"];
+			actuEnfermo($cnn, $id ,$Nombre , $Apellido, $Telefono, $Direccion);
+			$result = RESULT_SUCCESS;
+
+			echo(json_encode(array('result' => $result)));
+
+		break;
+				case "QRyUnion":
+
+			$id = $_POST["id"];
+			$Nombre = $_POST["nombre"];
+			$Apellido = $_POST["apellido"];
+			$Telefono = $_POST["telefono"];
+			$Direccion= $_POST["direccion"];
+
+			$data = $id .'/'. $Nombre.'/'. $Apellido .'/'. $Telefono;
+				
+			$Encript= openssl_encrypt($data, 'aes128', 'Seguridad',0,'1234567812345678');
+
+			$codigo = ($id * 1024)/4;
+			$codigo = decoct($codigo);
+			$codigo = openssl_encrypt($codigo, 'aes128', 'Seguridad',0,'1234567812345678');
+
+			$result = RESULT_SUCCESS;
+
+			echo(json_encode(array('result' => $result, 'Qr'=>$Encript,'Union'=>$codigo )));
+
+		break;
+				case "union":
+
+			$Nombre = $_POST["username"];
+			$Apellido = $_POST["lastname"];
+			$codigo = $_POST["code"];
+			$id = $_POST["id"];
+
+			$codigo=openssl_decrypt($codigo, 'aes128', 'Seguridad',0,'1234567812345678');
+			$codigo=octdec($codigo);
+			$codigo=($codigo*4)/1024;
+
+			if (existEnfermo($cnn,$codigo,$Nombre,$Apellido)==1) {
+
+				unirExterno($cnn, $codigo, $id);
+				$result = RESULT_SUCCESS;
+			}
+			else{
+				$result = RESULT_ERROR;
+			}
+
+
+			echo(json_encode(array('result' => $result,'codigo'=>$codigo)));
+			
+
+		break;
+
 
 }
 
 //Print result as json
 //echo(json_encode(array('result' => $result , 'id' => $id , 'Encriptado' => $Encript, 'Telefono' => $telefono, 'direccion' => $direccion)));
+function unirExterno($cnn, $id_enfermo, $id_usuario)
+{
+
+	$query = "INSERT INTO EXTERNO(ID_ENFERMO , ID_USUARIO) VALUES(?, ?)";
+	$stmt = $cnn->prepare($query);
+	$stmt->bind_param("ss", $id_enfermo, $id_usuario);
+	$stmt->execute();
+	$stmt->close();
+}
+
+function existEnfermo($cnn, $id, $username ,$lastname)
+{
+	$query = "SELECT * FROM ENFERMO WHERE ID =? AND NOMBRE = ? AND APELLIDO = ?";
+	$stmt = $cnn->prepare($query);
+	$stmt->bind_param("iss", $id, $username ,$lastname );
+	$stmt->execute();
+	$stmt->store_result();
+	$rowcount = $stmt->num_rows;
+	$stmt->close();
+
+	return $rowcount;
+}
+function actuEnfermo($cnn, $Id ,$Nombre , $Apellido, $Telefono, $Direccion)
+{
+	$query = "UPDATE ENFERMO SET NOMBRE=? , APELLIDO=?, TELEFONO_CONTACTO=?, Direccion=? WHERE ID=?";
+	$stmt = $cnn->prepare($query);
+	$stmt->bind_param("ssisi", $Nombre,$Apellido,$Telefono,$Direccion ,$Id);
+	$stmt->execute();
+	$stmt->close();
+}
 function actuUsuarios($cnn, $Id ,$Nombre , $Apellido)
 {
 	$query = "UPDATE USUARIO SET NOMBRE=? , APELLIDO=? WHERE ID=?";
@@ -407,7 +498,7 @@ function sacarDatosEnfermo($cnn, $Id)
 	$stmt->execute();
 	$stmt->store_result();
 	$stmt->fetch();
-	$datosEnfermor = array('Nombre'=>$Nombre,'Apellido'=>$Apellido,'Telefono'=>$Telefono,'Direccion'=>$Direccion);
+	$datosEnfermor = array('Nombre'=>$Nombre,'Apellido'=>$Apellido,'Telefono'=>$Telefono,'Direccion'=>$Direccion, 'ID'=> $Id);
 	$stmt->close();
 	return $datosEnfermor;
 }

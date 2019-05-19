@@ -198,7 +198,10 @@ public class CreacionEnfermo extends AppCompatActivity {
 
         try {
             Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+            //obtiene la geocoordenadas del telefono
             List<Address> list = geocoder.getFromLocationName(direccion + ",Madrid,España", 10);
+            //Realizamos una lista que coge las direcciones que hay en la librería
+            // y esta tiene que estar en Madrid ya que es una app que funciona en Madrid.
             if(post.length()<5){
               post.setText("28"+post.getText().toString());
 
@@ -206,6 +209,8 @@ public class CreacionEnfermo extends AppCompatActivity {
                 post.setError("MAL");
             }
             if (!list.isEmpty() && !list.get(0).getFeatureName().equals("Madrid"))
+                //Valida que el encuentre minimo un resultado en Madrid,
+                // si este es es caso se asume que la direccion es correcta
                 return true;
             else
                 return false;

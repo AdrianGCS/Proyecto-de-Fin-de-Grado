@@ -15,7 +15,7 @@ public class Condiciones extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_condiciones);
 
-        button=findViewById(R.id.acceptar);
+        button=findViewById(R.id.aceptar);
         end=findViewById(R.id.Salir);
 
         button.setOnClickListener(this::onClick);
@@ -25,13 +25,15 @@ public class Condiciones extends AppCompatActivity {
 
         switch (v.getId()){
 
-            case R.id.acceptar:
+            case R.id.aceptar:
                 startActivity(new Intent(Condiciones.this, MainActivity.class));
-
+                //Empieza a cargar la proxima interfaz
                 SharedPreferences prefs =
                         getSharedPreferences("MisPreferencias",Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor=prefs.edit();
                 editor.putInt("Estado",1);
+                //Crea un archivo al que solo tendra acceso la aplicacion
+                // y donde guardara el cambio de estado
 
                 editor.commit();
                 break;
