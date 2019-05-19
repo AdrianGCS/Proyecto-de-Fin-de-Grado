@@ -150,13 +150,9 @@ public class IllData extends AppCompatActivity {
                 String jsonStringQR = miservicio.getJSONStringWithParam_POST(Common.SERVICE_API_URL, postParam);
                 JSONObject jsonObjectQR = new JSONObject(jsonStringQR);
 
-
                 cdu = jsonObjectQR.getString("Union");
-                //  codun.setText(cdu);
                 qr = jsonObjectQR.getString("Qr");
-                QR(qr);
-                c.setImageBitmap(bitmap);
-                //qr=jsonObject.getString("Encriptado");
+
                 if (params[5].contains("1")) {
                     return jsonObject.getInt("result");
                 } else {
@@ -184,13 +180,15 @@ public class IllData extends AppCompatActivity {
                 // startActivity(i);
                 // finish();
                 codun.setText(cdu);
-
+                QR(qr);
+                c.setImageBitmap(bitmap);
 
             } else {
                 if (integer == 10) {
                     if (cdu != null) {
                         codun.setText(cdu);
-
+                        QR(qr);
+                        c.setImageBitmap(bitmap);
                     }
                     return;
                 } else
