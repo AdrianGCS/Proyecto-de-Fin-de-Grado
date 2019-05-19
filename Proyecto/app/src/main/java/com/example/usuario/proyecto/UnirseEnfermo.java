@@ -103,7 +103,7 @@ public class UnirseEnfermo extends AppCompatActivity {
             super.onPostExecute(integer);
             midialogo.dismiss();
             if (integer == Common.RESULT_SUCCESS) {
-                Toast.makeText(UnirseEnfermo.this, "Registrado con exito", Toast.LENGTH_LONG).show();
+                Toast.makeText(UnirseEnfermo.this, "Union  con exito", Toast.LENGTH_LONG).show();
                 Intent i = new Intent(getApplicationContext(), MenuUser.class);
                 i.putExtra("iduser", idefami);
                 setResult(1, i);

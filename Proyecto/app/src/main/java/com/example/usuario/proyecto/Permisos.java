@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,8 +24,8 @@ public class Permisos extends AppCompatActivity {
     private AccessServiceAPI miservicio;
     private ProgressDialog midialogo;
     Switch lo, mo;
-    public static int cero = 0, uno = 1;
-
+    public static String cero = "0", uno = "1";
+    Button bu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +33,11 @@ public class Permisos extends AppCompatActivity {
         setContentView(R.layout.activity_permisos);
         cid = findViewById(R.id.iduse);
         miservicio = new AccessServiceAPI();
-        coger();
         lo = findViewById(R.id.localix);
         mo = findViewById(R.id.escritura);
+        bu = findViewById(R.id.guar);
+        coger();
+
     }
 
     public void coger() {
@@ -42,20 +45,31 @@ public class Permisos extends AppCompatActivity {
         cid.setText(ids);
 
     }
-    /*public void onClick(View view){
+
+    public void onClick(View view) {
+
+        if (lo.isChecked())
+            lo.setChecked(true);
+            uno = "1";
+            Toast.makeText(Permisos.this,  lo.getTextOn().toString() + uno, Toast.LENGTH_LONG).show();
+          if(mo.isChecked()) {
+              mo.setChecked(true);
+              uno = "1";
+              Toast.makeText(Permisos.this, mo.getTextOn().toString() + uno, Toast.LENGTH_LONG).show();
+          }else {
+            lo.setChecked(false);
+            mo.setChecked(false);
+            cero = "0";
+
+            Toast.makeText(Permisos.this, "Esta apagado" + mo.getTextOff().toString()+cero, Toast.LENGTH_LONG).show();
+        }
 
 
+        //exec task register
+       new TaskRegister().execute(cero, uno, ids);
 
 
-            //exec task register
-            new TaskRegister().execute(cero,uno,ids);
-
-
-
-
-
-
-    }*/
+    }
 
     public class TaskRegister extends AsyncTask<String, Void, Integer> {
 

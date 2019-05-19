@@ -170,7 +170,7 @@ public class IllData extends AppCompatActivity {
             super.onPostExecute(integer);
             dialogo.dismiss();
             if (integer == Common.RESULT_SUCCESS) {
-                Toast.makeText(IllData.this, "Registrado con exito", Toast.LENGTH_LONG).show();
+                Toast.makeText(IllData.this, "Guardado con exito", Toast.LENGTH_LONG).show();
                 // Intent i = new Intent(getApplicationContext(), IllData.class);
                 // i.putExtra("nombre", nombre.getText().toString());
                 // i.putExtra("apellidos", apellidos.getText().toString());

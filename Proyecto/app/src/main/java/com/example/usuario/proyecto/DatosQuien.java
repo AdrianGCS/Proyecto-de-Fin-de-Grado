@@ -116,7 +116,7 @@ public class DatosQuien extends AppCompatActivity {
             super.onPostExecute(integer);
             midialogo.dismiss();
             if (integer == Common.RESULT_SUCCESS) {
-                Toast.makeText(DatosQuien.this, "Leido  con exito", Toast.LENGTH_LONG).show();
+                Toast.makeText(DatosQuien.this, "Cargados   con exito", Toast.LENGTH_LONG).show();
                 Intent i = new Intent(getApplicationContext(), UserData.class);
                 //estructura para pasar Array
                 //ArrayList<String> Prueba =new ArrayList<>();
@@ -134,7 +134,7 @@ public class DatosQuien extends AppCompatActivity {
                 finish();
 
             } else {
-                Toast.makeText(DatosQuien.this, "Leido fallido", Toast.LENGTH_LONG).show();
+                Toast.makeText(DatosQuien.this, "ERROR", Toast.LENGTH_LONG).show();
             }
         }
     }
