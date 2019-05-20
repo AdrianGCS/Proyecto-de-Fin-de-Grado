@@ -26,7 +26,7 @@ public class Permisos extends AppCompatActivity {
     private AccessServiceAPI miservicio;
     private ProgressDialog midialogo;
     Switch lo, mo;
-    public static String cero = "0", uno = "1";
+    public static String modificacion = "0",localizacion = "1";
     Button bu;
 
     @Override
@@ -52,29 +52,29 @@ public class Permisos extends AppCompatActivity {
 
         if (lo.isChecked()) {
             lo.setChecked(true);
-            uno = "1";
-            Toast.makeText(Permisos.this, "El permiso de localizacion esta activo:"+lo.getTextOn().toString() + uno, Toast.LENGTH_LONG).show();
+            localizacion = "1";
+            Toast.makeText(Permisos.this, "El permiso de localizacion esta activo:"+lo.getTextOn().toString() + localizacion , Toast.LENGTH_LONG).show();
         } else {
             lo.setChecked(false);
-            cero = "0";
-            Toast.makeText(Permisos.this, "El permiso de localizacion esta desactivo: "+lo.getTextOff().toString() + cero, Toast.LENGTH_LONG).show();
+            localizacion = "0";
+            Toast.makeText(Permisos.this, "El permiso de localizacion esta desactivo: "+lo.getTextOff().toString() + localizacion , Toast.LENGTH_LONG).show();
         }
 
         if (mo.isChecked()) {
             mo.setChecked(true);
-            uno = "1";
-            Toast.makeText(Permisos.this, "El permiso de modificacion esta activo"+mo.getTextOn().toString() + uno, Toast.LENGTH_LONG).show();
+            modificacion= "1";
+            Toast.makeText(Permisos.this, "El permiso de modificacion esta activo"+mo.getTextOn().toString() + modificacion, Toast.LENGTH_LONG).show();
         } else {
 
             mo.setChecked(false);
-            cero = "0";
+            modificacion = "0";
 
-            Toast.makeText(Permisos.this, "El permiso de localizacion esta desactivo" + mo.getTextOff().toString() + cero, Toast.LENGTH_LONG).show();
+            Toast.makeText(Permisos.this, "El permiso de localizacion esta desactivo" + mo.getTextOff().toString() + modificacion, Toast.LENGTH_LONG).show();
         }
 
 
         //exec task register
-        new TaskRegister().execute(cero, uno, ids);
+        new TaskRegister().execute(localizacion, modificacion, ids);
 
 
     }
