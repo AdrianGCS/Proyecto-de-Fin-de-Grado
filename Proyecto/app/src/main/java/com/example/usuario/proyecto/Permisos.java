@@ -1,7 +1,9 @@
 package com.example.usuario.proyecto;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.pdf.PdfDocument;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -51,22 +53,23 @@ public class Permisos extends AppCompatActivity {
         if (lo.isChecked()) {
             lo.setChecked(true);
             uno = "1";
-            Toast.makeText(Permisos.this, lo.getTextOn().toString() + uno, Toast.LENGTH_LONG).show();
+            Toast.makeText(Permisos.this, "El permiso de localizacion esta activo:"+lo.getTextOn().toString() + uno, Toast.LENGTH_LONG).show();
         } else {
             lo.setChecked(false);
             cero = "0";
+            Toast.makeText(Permisos.this, "El permiso de localizacion esta desactivo: "+lo.getTextOff().toString() + cero, Toast.LENGTH_LONG).show();
         }
 
         if (mo.isChecked()) {
             mo.setChecked(true);
             uno = "1";
-            Toast.makeText(Permisos.this, mo.getTextOn().toString() + uno, Toast.LENGTH_LONG).show();
+            Toast.makeText(Permisos.this, "El permiso de modificacion esta activo"+mo.getTextOn().toString() + uno, Toast.LENGTH_LONG).show();
         } else {
 
             mo.setChecked(false);
             cero = "0";
 
-            Toast.makeText(Permisos.this, "Esta apagado" + mo.getTextOff().toString() + cero, Toast.LENGTH_LONG).show();
+            Toast.makeText(Permisos.this, "El permiso de localizacion esta desactivo" + mo.getTextOff().toString() + cero, Toast.LENGTH_LONG).show();
         }
 
 
@@ -117,9 +120,9 @@ public class Permisos extends AppCompatActivity {
         protected void onPostExecute(Integer integer) {
             super.onPostExecute(integer);
             midialogo.dismiss();
-            /*if (integer == Common.RESULT_SUCCESS) {
-                Toast.makeText(UnirseEnfermo.this, "Registrado con exito", Toast.LENGTH_LONG).show();
-                Intent i = new Intent(getApplicationContext(), Datos_Enfermo.class);
+            if (integer == Common.RESULT_SUCCESS) {
+                Toast.makeText(Permisos.this, "Registrado con exito", Toast.LENGTH_LONG).show();
+            /*Intent i = new Intent(getApplicationContext(), Datos_Enfermo.class);
                 i.putExtra("nombre", nombre.getText() + "");
                 i.putExtra("apellidos", apellidos.getText() + "");
                 i.putExtra("codigounion", codigoU.getText() + "");
@@ -128,10 +131,10 @@ public class Permisos extends AppCompatActivity {
                 startActivity(i);
 
                 finish();
-
+*/
             } else {
                 Toast.makeText(Permisos.this, "Union  fallida", Toast.LENGTH_LONG).show();
-            }*/
+            }
 
         }
     }

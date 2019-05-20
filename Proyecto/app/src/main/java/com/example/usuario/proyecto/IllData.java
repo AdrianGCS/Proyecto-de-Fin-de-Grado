@@ -1,12 +1,21 @@
 package com.example.usuario.proyecto;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.pdf.PdfDocument;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.AsyncTask;
+import android.os.Environment;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -24,6 +33,9 @@ import com.journeyapps.barcodescanner.BarcodeEncoder;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.security.PublicKey;
@@ -86,6 +98,7 @@ public class IllData extends AppCompatActivity {
                 codun.setText(cdu);
                 QR(qr);
                 c.setImageBitmap(bitmap);
+                pdf();
                 break;
             case R.id.salir:
                 Intent i = new Intent(getApplicationContext(), DatosQuien.class);
@@ -235,6 +248,46 @@ public class IllData extends AppCompatActivity {
         }
     }
 
+
+    @SuppressLint("NewApi")
+    public void pdf() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,}, 1000);
+            return;
+        } else {
+
+
+               PdfDocument pdfDocument = new PdfDocument();
+                PdfDocument.PageInfo pi = new PdfDocument.PageInfo.Builder(bitmap.getWidth(), bitmap.getHeight(), 1).create();
+                PdfDocument.Page page = pdfDocument.startPage(pi);
+                Canvas canvas = new Canvas();
+                Paint paint = new Paint();
+                paint.setColor(Color.parseColor("#0000FF"));
+                canvas.drawPaint(paint);
+                bitmap = Bitmap.createScaledBitmap(bitmap, bitmap.getWidth(), bitmap.getHeight(), true);
+                paint.setColor(Color.BLUE);
+                canvas.drawBitmap(bitmap, 0, 0, null);
+                pdfDocument.finishPage(page);
+
+                File carpeta=new File(Environment.getExternalStorageDirectory(),"Pdfs alzheimer");
+                if (!carpeta.exists()){
+                    carpeta.mkdir();
+                }
+                File file=new File(carpeta,"qr.pdf");
+                try {
+                    FileOutputStream fileOutputStream=new FileOutputStream(file);
+                    pdfDocument.writeTo(fileOutputStream);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                pdfDocument.close();
+
+
+        }
+
+    }
 
     @Override
     public void onBackPressed() {
