@@ -34,18 +34,28 @@ public class Permisos extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_permisos);
         cid = findViewById(R.id.iduse);
-        miservicio = new AccessServiceAPI();
         lo = findViewById(R.id.localix);
         mo = findViewById(R.id.escritura);
         bu = findViewById(R.id.guar);
         coger();
-
+        miservicio = new AccessServiceAPI();
     }
 
     public void coger() {
         ids = getIntent().getStringExtra("iduser");
         cid.setText(ids);
-
+       /* modificacion=getIntent().getStringExtra("modificacion");
+        localizacion=getIntent().getStringExtra("localizacion");
+        if(modificacion.equals("1")){
+            mo.setChecked(true);
+        }else{
+            mo.setChecked(false);
+        }
+        if (localizacion.equals("1")){
+            lo.setChecked(true);
+        }else{
+            lo.setChecked(false);
+        }*/
     }
 
     public void onClick(View view) {

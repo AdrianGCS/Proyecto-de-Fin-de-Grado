@@ -2,7 +2,6 @@ package com.example.usuario.proyecto;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -14,10 +13,10 @@ import android.graphics.pdf.PdfDocument;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -30,21 +29,16 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.security.PublicKey;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class IllData extends AppCompatActivity {
     public static String use, nom, ape, dir, tel, enfermo, cdu, qr;
@@ -257,32 +251,37 @@ public class IllData extends AppCompatActivity {
         } else {
 
 
-               PdfDocument pdfDocument = new PdfDocument();
-                PdfDocument.PageInfo pi = new PdfDocument.PageInfo.Builder(bitmap.getWidth(), bitmap.getHeight(), 1).create();
-                PdfDocument.Page page = pdfDocument.startPage(pi);
-                Canvas canvas = new Canvas();
-                Paint paint = new Paint();
-                paint.setColor(Color.parseColor("#0000FF"));
-                canvas.drawPaint(paint);
-                bitmap = Bitmap.createScaledBitmap(bitmap, bitmap.getWidth(), bitmap.getHeight(), true);
-                paint.setColor(Color.BLUE);
-                canvas.drawBitmap(bitmap, 0, 0, null);
-                pdfDocument.finishPage(page);
+            PdfDocument pdfDocument = new PdfDocument();
+            PdfDocument.PageInfo pi = new PdfDocument.PageInfo.Builder(bitmap.getWidth(), bitmap.getHeight(), 1).create();
+            PdfDocument.Page page = pdfDocument.startPage(pi);
+            Canvas canvas = page.getCanvas();
+            Paint paint = new Paint();
+            paint.setColor(Color.parseColor("#FFFFFF"));
+            canvas.drawPaint(paint);
 
-                File carpeta=new File(Environment.getExternalStorageDirectory(),"Pdfs alzheimer");
-                if (!carpeta.exists()){
-                    carpeta.mkdir();
-                }
-                File file=new File(carpeta,"qr.pdf");
-                try {
-                    FileOutputStream fileOutputStream=new FileOutputStream(file);
-                    pdfDocument.writeTo(fileOutputStream);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                pdfDocument.close();
+
+            //canvas.drawText("QR DE"+nombre.getText()+apellidos.getText(),0,0,paint);
+            bitmap = Bitmap.createScaledBitmap(bitmap, bitmap.getWidth(), bitmap.getHeight(), true);
+            paint.setColor(Color.parseColor("#FFFFFF"));
+            canvas.drawBitmap(bitmap, 0, 0, null);
+            paint.setTextSize(100);
+            canvas.drawText(""+nombre.getText(), 150, 180, paint);
+            pdfDocument.finishPage(page);
+
+            File carpeta = new File(Environment.getExternalStorageDirectory(), "Pdfs alzheimer");
+            if (!carpeta.exists()) {
+                carpeta.mkdir();
+            }
+            File file = new File(carpeta, "qr" + nombre.getText() + apellidos.getText() + ".pdf");
+            try {
+                FileOutputStream fileOutputStream = new FileOutputStream(file);
+                pdfDocument.writeTo(fileOutputStream);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            pdfDocument.close();
 
 
         }
