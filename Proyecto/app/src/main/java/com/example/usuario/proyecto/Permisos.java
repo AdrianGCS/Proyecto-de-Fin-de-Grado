@@ -37,14 +37,15 @@ public class Permisos extends AppCompatActivity {
         lo = findViewById(R.id.localix);
         mo = findViewById(R.id.escritura);
         bu = findViewById(R.id.guar);
-        coger();
         miservicio = new AccessServiceAPI();
+        coger();
+
     }
 
     public void coger() {
         ids = getIntent().getStringExtra("iduser");
         cid.setText(ids);
-       /* modificacion=getIntent().getStringExtra("modificacion");
+      /*modificacion=getIntent().getStringExtra("modificacion");
         localizacion=getIntent().getStringExtra("localizacion");
         if(modificacion.equals("1")){
             mo.setChecked(true);

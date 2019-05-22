@@ -66,11 +66,13 @@ public class LLamar extends AppCompatActivity {
                 callIntent.setData(Uri.parse("tel:" + phone));
                 startActivity(callIntent);
                 finish();
+                tls.setText(phone);
             } else {
-                Intent callIntent = new Intent(Intent.ACTION_CALL);
+               /* Intent callIntent = new Intent(Intent.ACTION_CALL);
                 callIntent.setData(Uri.parse("tel:" + phone));
                 startActivity(callIntent);
-                finish();
+
+                finish();*/
             }
         } catch (Exception ex) {
             ex.printStackTrace();

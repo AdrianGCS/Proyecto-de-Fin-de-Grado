@@ -260,12 +260,11 @@ public class IllData extends AppCompatActivity {
             canvas.drawPaint(paint);
 
 
-            //canvas.drawText("QR DE"+nombre.getText()+apellidos.getText(),0,0,paint);
+
             bitmap = Bitmap.createScaledBitmap(bitmap, bitmap.getWidth(), bitmap.getHeight(), true);
             paint.setColor(Color.parseColor("#FFFFFF"));
             canvas.drawBitmap(bitmap, 0, 0, null);
-            paint.setTextSize(100);
-            canvas.drawText(""+nombre.getText(), 150, 180, paint);
+
             pdfDocument.finishPage(page);
 
             File carpeta = new File(Environment.getExternalStorageDirectory(), "Pdfs alzheimer");

@@ -10,6 +10,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,14 +30,15 @@ public class DatosQuien extends AppCompatActivity {
     public static JSONArray a;
     public static JSONObject b;
     public static JSONObject c;
-    public  static String nom,ape,con,cor;
-
+    public  static String nom,ape,con,cor,modi;
+Button cs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_datos_quien);
         cid = findViewById(R.id.iduse);
+        cs=findViewById(R.id.ill);
         miser = new AccessServiceAPI();
         coger();
 
@@ -48,6 +50,7 @@ public class DatosQuien extends AppCompatActivity {
         */
         switch (view.getId()) {
             case R.id.ill:
+
                 Intent v = new Intent(this, Intermedia.class);
                 v.putExtra("iduser", ids);
                 //v.putExtra("datos", a);
@@ -63,6 +66,10 @@ public class DatosQuien extends AppCompatActivity {
     public void coger() {
         ids = getIntent().getStringExtra("iduser");
         cid.setText(ids);
+       /* modi=getIntent().getStringExtra("modificacion");
+        if(modi.equals(0)){
+            cs.setEnabled(false);
+        }*/
 
     }
 @Override

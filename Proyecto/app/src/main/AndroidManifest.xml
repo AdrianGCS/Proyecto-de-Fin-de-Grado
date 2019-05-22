@@ -32,25 +32,33 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Localizaciones"></activity>
+
         <meta-data
             android:name="com.google.android.actions"
             android:resource="@xml/network_security_config" />
 
-        <activity android:name=".Intermedia"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Calendario"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Historial"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Permisos"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".IllData"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".UserData"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".DatosQuien"
-            android:screenOrientation="portrait"
-            />
+        <activity
+            android:name=".Intermedia"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Calendario"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Historial"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Permisos"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".IllData"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".UserData"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DatosQuien"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MenuUser"
             android:screenOrientation="portrait" />
