@@ -45,7 +45,7 @@ public class Permisos extends AppCompatActivity {
     public void coger() {
         ids = getIntent().getStringExtra("iduser");
         cid.setText(ids);
-      /*modificacion=getIntent().getStringExtra("modificacion");
+      modificacion=getIntent().getStringExtra("modificacion");
         localizacion=getIntent().getStringExtra("localizacion");
         if(modificacion.equals("1")){
             mo.setChecked(true);
@@ -56,7 +56,7 @@ public class Permisos extends AppCompatActivity {
             lo.setChecked(true);
         }else{
             lo.setChecked(false);
-        }*/
+        }
     }
 
     public void onClick(View view) {

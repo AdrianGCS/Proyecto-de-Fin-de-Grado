@@ -53,8 +53,6 @@ public class MenuUser extends AppCompatActivity {
             case R.id.permisos:
 
                 new TaskRegister().execute(iduser);
-               p = new Intent(this, Permisos.class);
-
                 break;
             case R.id.calendario:
                 Intent b = new Intent(this, Calendario.class);

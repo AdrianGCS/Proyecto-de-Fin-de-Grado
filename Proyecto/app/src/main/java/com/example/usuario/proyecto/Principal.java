@@ -40,7 +40,7 @@ public class Principal extends AppCompatActivity {
     public static String imei = "";
     public static String direccion = "";
     Button lo;
-    public static JSONArray a;
+    public static JSONObject a;
     public static JSONObject localizacion;
     public static JSONObject modificacion;
     public static String mod,lati,longi;
@@ -170,12 +170,12 @@ public class Principal extends AppCompatActivity {
                 String jsonString = miservicio.getJSONStringWithParam_POST(Common.SERVICE_API_URL, postParam);
                 JSONObject jsonObject = new JSONObject(jsonString);
                 if(params[1]==null) {
-                    a = jsonObject.getJSONArray("Permisos");
+                    a = jsonObject.getJSONObject("permisos");
 
-                    localizacion = a.getJSONObject(0);
-                    loc = localizacion.getString("Localizacion");
-                    modificacion = a.getJSONObject(1);
-                    mod = modificacion.getString("Modificacion");
+
+                    loc=a.getString("Localizacion");
+
+                    mod=a.getString("Modificacion");
 
                     if ("".equals(direccion) || direccion == null || loc.equals(0)) {
 

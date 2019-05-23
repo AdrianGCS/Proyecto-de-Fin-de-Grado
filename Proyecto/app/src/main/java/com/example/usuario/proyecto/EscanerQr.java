@@ -164,7 +164,7 @@ public class EscanerQr extends AppCompatActivity {
                                 btnAction.setText("AÑADE");
                             } else {
                                 isEmail = false;
-                                btnAction.setText("Coge la URL");
+                                btnAction.setText("LEER QR");
                                 intentData = barcodes.valueAt(0).displayValue;
                                 texto.setText(intentData);
 
