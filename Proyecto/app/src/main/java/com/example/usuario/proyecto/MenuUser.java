@@ -25,7 +25,8 @@ public class MenuUser extends AppCompatActivity {
     TextView ids, bnd;
     private AccessServiceAPI miservicio;
     private ProgressDialog midialogo;
-    public static JSONArray a;
+    public static JSONObject a;
+    public static Intent p;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,20 +51,10 @@ public class MenuUser extends AppCompatActivity {
                 finish();
                 break;
             case R.id.permisos:
-                Intent p = new Intent(this, Permisos.class);
-                p.putExtra("iduser", iduser);
-                //i.putExtra("id_enfermo", id);
-                startActivity(p);
-                finish();
-              /*new TaskRegister().execute(iduser);
-                Intent  = new Intent(getApplicationContext(), Permisos.class);
-                i.putExtra("localizacion", loc);
-                i.putExtra("modificacion", mod);
-                i.putExtra("iduser", iduser);
-                setResult(1, i);
-                startActivity(i);
 
-                finish();*/
+                new TaskRegister().execute(iduser);
+               p = new Intent(this, Permisos.class);
+
                 break;
             case R.id.calendario:
                 Intent b = new Intent(this, Calendario.class);
@@ -115,12 +106,12 @@ public class MenuUser extends AppCompatActivity {
             try {
                 String jsonString = miservicio.getJSONStringWithParam_POST(Common.SERVICE_API_URL, postParam);
                 JSONObject jsonObject = new JSONObject(jsonString);
-                a = jsonObject.getJSONArray("Permisos");
+                a = jsonObject.getJSONObject("permisos");
 
-                localizacion = a.getJSONObject(0);
-                loc=localizacion.getString("Localizacion");
-               modificacion = a.getJSONObject(1);
-                mod=modificacion.getString("Modificacion");
+
+                loc=a.getString("Localizacion");
+
+                mod=a.getString("Modificacion");
                 return jsonObject.getInt("result");
 
 
@@ -135,6 +126,11 @@ public class MenuUser extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Integer integer) {
+            p.putExtra("iduser", iduser);
+            p.putExtra("localizacion", loc);
+            p.putExtra("modificacion", mod);
+            startActivity(p);
+            finish();
             super.onPostExecute(integer);
             midialogo.dismiss();
             if (integer == Common.RESULT_SUCCESS) {
