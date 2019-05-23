@@ -51,7 +51,6 @@ public class MenuUser extends AppCompatActivity {
                 finish();
                 break;
             case R.id.permisos:
-
                 new TaskRegister().execute(iduser);
                 break;
             case R.id.calendario:
@@ -129,6 +128,7 @@ public class MenuUser extends AppCompatActivity {
             midialogo.dismiss();
             if (integer == Common.RESULT_SUCCESS) {
                 Toast.makeText(MenuUser.this, "Registrado con exito", Toast.LENGTH_LONG).show();
+                Intent p=new Intent(getApplicationContext(),Permisos.class);
                 p.putExtra("localizacion", loc);
                 p.putExtra("modificacion", mod);
                 startActivity(p);
