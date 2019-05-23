@@ -152,7 +152,8 @@ public class Permisos extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent i = new Intent(getApplicationContext(), MenuUser.class);
+        super.onBackPressed();
+        Intent i = new Intent(this, MenuUser.class);
         i.putExtra("iduser", ids);
         startActivity(i);
         finish();

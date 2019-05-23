@@ -129,6 +129,7 @@ public class MenuUser extends AppCompatActivity {
             if (integer == Common.RESULT_SUCCESS) {
                 Toast.makeText(MenuUser.this, "Registrado con exito", Toast.LENGTH_LONG).show();
                 Intent p=new Intent(getApplicationContext(),Permisos.class);
+                p.putExtra("iduser",iduser);
                 p.putExtra("localizacion", loc);
                 p.putExtra("modificacion", mod);
                 startActivity(p);
