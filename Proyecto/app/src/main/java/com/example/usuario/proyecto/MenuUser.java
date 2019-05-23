@@ -124,16 +124,15 @@ public class MenuUser extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Integer integer) {
-            p.putExtra("iduser", iduser);
-            p.putExtra("localizacion", loc);
-            p.putExtra("modificacion", mod);
-            startActivity(p);
-            finish();
+
             super.onPostExecute(integer);
             midialogo.dismiss();
             if (integer == Common.RESULT_SUCCESS) {
                 Toast.makeText(MenuUser.this, "Registrado con exito", Toast.LENGTH_LONG).show();
-
+                p.putExtra("localizacion", loc);
+                p.putExtra("modificacion", mod);
+                startActivity(p);
+                finish();
 
             } else {
                 Toast.makeText(MenuUser.this, "Union  fallida", Toast.LENGTH_LONG).show();
