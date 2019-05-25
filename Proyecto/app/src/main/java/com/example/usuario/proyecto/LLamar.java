@@ -20,7 +20,7 @@ public class LLamar extends AppCompatActivity {
     private Button boto;
     public static String phone = "";
     public static String ideess = "";
-    public static String imie = "";
+    public static String imie = "",dir;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +52,7 @@ public class LLamar extends AppCompatActivity {
         tls.setText(phone);
         ideess = getIntent().getStringExtra("id_enfermo");
         imie = getIntent().getStringExtra("imei");
+        dir=getIntent().getStringExtra("direccion");
     }
 
     public void llamartelefono() {
@@ -65,8 +66,9 @@ public class LLamar extends AppCompatActivity {
                 Intent callIntent = new Intent(Intent.ACTION_CALL);
                 callIntent.setData(Uri.parse("tel:" + phone));
                 startActivity(callIntent);
-                finish();
-                tls.setText(phone);
+                finishActivity(0);
+                //tls.setText(phone);
+
             } else {
                /* Intent callIntent = new Intent(Intent.ACTION_CALL);
                 callIntent.setData(Uri.parse("tel:" + phone));
@@ -82,10 +84,11 @@ public class LLamar extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent i = new Intent(getApplicationContext(), Principal.class);
+        Intent i = new Intent(this, Principal.class);
         i.putExtra("telefono", phone);
         i.putExtra("id_enfermo", ideess);
         i.putExtra("imei", imie);
+        i.putExtra("direccion",dir);
         startActivity(i);
         // finish();
 

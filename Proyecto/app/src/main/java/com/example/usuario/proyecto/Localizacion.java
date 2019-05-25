@@ -98,7 +98,7 @@ public class Localizacion extends AppCompatActivity implements OnMapReadyCallbac
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
         te = findViewById(R.id.loca);
-       // cogerCalle();
+       cogerCalle();
         getCoordenadas();
         te.setText(direccion);
         boto.setOnClickListener(new View.OnClickListener() {

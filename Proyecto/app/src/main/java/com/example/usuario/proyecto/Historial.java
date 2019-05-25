@@ -65,6 +65,7 @@ public class Historial extends AppCompatActivity {
 
     public void coger() {
         ids = getIntent().getStringExtra("iduser");
+cv=getIntent().getStringExtra("idEnfermo");
 
 
     }
@@ -171,48 +172,6 @@ public class Historial extends AppCompatActivity {
         }
     }
 
-    /*public void datosE() {
-
-
-            for (int i = 0; i < a.length(); i++) {
-
-
-                try {
-
-                    b = a.getJSONObject(i);
-                   // ArrayList<String> dat = new ArrayList<>();
-                    dat.add(b.getString("Nombre") + "," + b.getString("Apellido") + "," + b.getString("Telefono"));
-
-                    ArrayAdapter cvc = new ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, dat);
-                    spi.setAdapter(cvc);
-
-                    spi.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            String x = (String) spi.getAdapter().getItem(position);
-                            Toast.makeText(Intermedia.this, x, Toast.LENGTH_LONG).show();
-                        }
-                    });
-                        no = b.getString("Nombre");
-                        ap = b.getString("Apellido");
-                        te = b.getString("Telefono");
-                        di = b.getString("Direccion");
-
-                    //cv = b.getString("Nombre") + "," + b.getString("Apellido") + "," + b.getString("Telefono");
-
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-
-
-
-        }
-
-
-    }*/
-
     public void onClick(View view){
 
 
@@ -250,7 +209,7 @@ public class Historial extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent m = new Intent(this, DatosQuien.class);
+        Intent m = new Intent(this, MenuUser.class);
         m.putExtra("iduser", ids);
         startActivity(m);
         finish();

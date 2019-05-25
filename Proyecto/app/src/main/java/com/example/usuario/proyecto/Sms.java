@@ -40,7 +40,7 @@ public class Sms extends AppCompatActivity {
     TextView lo, calle;
     public static String n;
     public static String Text;
-    public static String longi;
+    public static String longi,dir;
     public static String idess;
     public static String imei;
     private AccessServiceAPI miser;
@@ -100,6 +100,7 @@ public class Sms extends AppCompatActivity {
         ide.setText(idess);
         imei = getIntent().getStringExtra("imei");
         imai.setText(imei);
+        dir=getIntent().getStringExtra("direccion");
     }
 
 
@@ -280,6 +281,7 @@ public class Sms extends AppCompatActivity {
         i.putExtra("telefono", n);
         i.putExtra("id_enfermo", idess);
         i.putExtra("imei", imei);
+        i.putExtra("direccion",dir);
         i.putExtra("calle",calle.getText());
         i.putExtra("longitud",lo.getText());
         i.putExtra("latitud",la.getText());

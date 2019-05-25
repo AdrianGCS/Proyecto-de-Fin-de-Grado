@@ -66,8 +66,6 @@ public class Principal extends AppCompatActivity {
 
 
                     //locationStart();
-
-
         }
     }
 
@@ -79,15 +77,15 @@ public class Principal extends AppCompatActivity {
         switch (view.getId()) {
 
             case R.id.envio:
-                startActivity(new Intent(this, Sms.class));
+                //startActivity(new Intent(this, Sms.class));
                 enviarDatoss();
                 break;
             case R.id.llamada:
-                startActivity(new Intent(this, LLamar.class));
+                //startActivity(new Intent(this, LLamar.class));
                 enviarDatos();
                 break;
             case R.id.loca:
-                Intent i = new Intent(getApplicationContext(), Localizacion.class);
+                Intent i = new Intent(this, Localizacion.class);
                 i.putExtra("direccion", direccion);
                 i.putExtra("telefono", telefono);
                 i.putExtra("id_enfermo", ids);
@@ -107,9 +105,10 @@ public class Principal extends AppCompatActivity {
         ids = getIntent().getStringExtra("id_enfermo");
         imei = getIntent().getStringExtra("imei");
         direccion = getIntent().getStringExtra("direccion");
+        /*
         calle=getIntent().getStringExtra("calle");
         longitud=getIntent().getStringExtra("longitd");
-        latitud=getIntent().getStringExtra("latitud");
+        latitud=getIntent().getStringExtra("latitud");*/
      if ("".equals(direccion) || direccion == null ) {
 
          lo.setEnabled(false);
@@ -127,7 +126,7 @@ public class Principal extends AppCompatActivity {
         i.putExtra("telefono", telefono);
         i.putExtra("id_enfermo", ids);
         i.putExtra("imei", imei);
-
+        i.putExtra("direccion", direccion);
 
         startActivity(i);
         finish();
@@ -140,6 +139,7 @@ public class Principal extends AppCompatActivity {
         i.putExtra("telefono", telefono);
         i.putExtra("id_enfermo", ids);
         i.putExtra("imei", imei);
+        i.putExtra("direccion", direccion);
         startActivity(i);
         finish();
     }

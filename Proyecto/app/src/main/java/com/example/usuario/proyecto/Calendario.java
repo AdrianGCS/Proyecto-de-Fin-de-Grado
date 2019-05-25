@@ -22,7 +22,7 @@ public class Calendario extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        Intent i = new Intent(getApplicationContext(), DatosQuien.class);
+        Intent i = new Intent(getApplicationContext(), MenuUser.class);
         i.putExtra("iduser", ids);
         startActivity(i);
         finish();
