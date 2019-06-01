@@ -79,7 +79,7 @@ public class EscanerQr extends AppCompatActivity {
 
     private void initialiseDetectorsAndSources() {
 
-        Toast.makeText(getApplicationContext(), "LECTOR EMPEZADO", Toast.LENGTH_SHORT).show();
+
 
         barcodeDetector = new BarcodeDetector.Builder(this)
                 .setBarcodeFormats(Barcode.ALL_FORMATS)
@@ -138,7 +138,7 @@ public class EscanerQr extends AppCompatActivity {
         barcodeDetector.setProcessor(new Detector.Processor<Barcode>() {
             @Override
             public void release() {
-                Toast.makeText(getApplicationContext(), "DETENIDO EL USO DE MEMORIA DEL TELEFONO", Toast.LENGTH_SHORT).show();
+
             }
 
             @Override

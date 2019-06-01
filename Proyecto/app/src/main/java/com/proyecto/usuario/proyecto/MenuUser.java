@@ -33,6 +33,7 @@ public class MenuUser extends AppCompatActivity {
         ids = findViewById(R.id.idenfermo);
         miservicio = new AccessServiceAPI();
         cogerDatos();
+
     }
 
     public void onClick(View view) {
@@ -95,7 +96,7 @@ public class MenuUser extends AppCompatActivity {
         @Override
         protected Integer doInBackground(String... params) {
             Map<String, String> postParam = new HashMap<>();
-            postParam.put("action", "pedirpermisos");
+            postParam.put("action", "verificar"); 
             postParam.put("id", iduser);
             //llama al PHP
 

@@ -47,8 +47,8 @@ private EditText apellidos;
                 nombre.setError("Se requiere Nombre");
                 return;
             }
-            if("".equals(contraseña.getText().toString())) {
-                contraseña.setError("Se requiere contraseña");
+            if("".equals(contraseña.getText().toString()) || contraseña.getText().length()<6) {
+                contraseña.setError("Se requiere contraseña o demasiado corta");
                 return;
             }
             if("".equals(correo.getText().toString())){

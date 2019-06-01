@@ -21,7 +21,7 @@ import java.util.Map;
 public class Principal extends AppCompatActivity {
     Bundle datos;
     public static String telefono = "";
-    public static String fone = "",calle,longitud,latitud;
+    public static String fone = "", calle, longitud, latitud;
     TextView phon, hy, u;
     public static String ids = "";
     public static String imei = "";
@@ -30,11 +30,12 @@ public class Principal extends AppCompatActivity {
     public static JSONObject a;
     public static JSONObject localizacion;
     public static JSONObject modificacion;
-    public static String mod,lati,longi;
+    public static String mod, lati, longi;
     public static String loc;
 
     private AccessServiceAPI miservicio;
     private ProgressDialog midialogo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +45,8 @@ public class Principal extends AppCompatActivity {
         u = findViewById(R.id.imeiee);
         lo = findViewById(R.id.loca);
         miservicio = new AccessServiceAPI();
+        Toast.makeText(Principal.this, "Para que funcione la localizacion hay que poner el GPS", Toast.LENGTH_LONG).show();
+
         cogerDatos();
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -52,15 +55,16 @@ public class Principal extends AppCompatActivity {
         } else {
 
 
-                    //locationStart();
+            //locationStart();
         }
+        new TaskRegister().execute(ids);
     }
 
     public void onClick(View view) {
         /*Intent intento= new Intent(Principal.this,Login.class);
         startActivity(intento);
         */
-       // new TaskRegister().execute(ids,lati,longi,imei);
+        // new TaskRegister().execute(ids,lati,longi,imei);
         switch (view.getId()) {
 
             case R.id.envio:
@@ -96,11 +100,11 @@ public class Principal extends AppCompatActivity {
         calle=getIntent().getStringExtra("calle");
         longitud=getIntent().getStringExtra("longitd");
         latitud=getIntent().getStringExtra("latitud");*/
-     if ("".equals(direccion) || direccion == null ) {
+        if ("".equals(direccion) || direccion == null) {
 
-         lo.setEnabled(false);
+            lo.setEnabled(false);
         } else {
-         lo.setEnabled(true);
+            lo.setEnabled(true);
         }
         hy.setText(ids);
         phon.setText(telefono);
@@ -130,6 +134,7 @@ public class Principal extends AppCompatActivity {
         startActivity(i);
         finish();
     }
+
     public class TaskRegister extends AsyncTask<String, Void, Integer> {
 
         @Override
@@ -142,35 +147,38 @@ public class Principal extends AppCompatActivity {
         @Override
         protected Integer doInBackground(String... params) {
             Map<String, String> postParam = new HashMap<>();
-            if (params[1]==null) {
-                postParam.put("action", "verificar");//semana que viene
-                postParam.put("id", params[0]);
-                //llama al PHP
-            }else{
-                postParam.put("action", "Local");
+
+            postParam.put("action", "verificar");//semana que viene
+            postParam.put("id", params[0]);
+            //llama al PHP
+
+              /*  postParam.put("action", "Local");
                 postParam.put("id_enfermo", params[0]);
                 postParam.put("altitude", params[1]);
                 postParam.put("length", params[2]);
                 postParam.put("imei", params[3]);
-            }
+            }*/
             try {
                 String jsonString = miservicio.getJSONStringWithParam_POST(Common.SERVICE_API_URL, postParam);
                 JSONObject jsonObject = new JSONObject(jsonString);
-                if(params[1]==null) {
-                    a = jsonObject.getJSONObject("permisos");
+
+                a = jsonObject.getJSONObject("permisos");
 
 
-                    loc=a.getString("Localizacion");
+                loc = a.getString("Localizacion");
 
-                    mod=a.getString("Modificacion");
-
-                    if ("".equals(direccion) || direccion == null || loc.equals(0)) {
-
-                        lo.setEnabled(false);
-                    } else {
-                        lo.setEnabled(true);
-                    }
+                mod = a.getString("Modificacion");
+                if (loc.equals("0")){
+                    lo.setEnabled(false);
+                } else {
+                    lo.setEnabled(true);
                 }
+                if ("".equals(direccion) || direccion == null) {
+                    lo.setEnabled(false);
+                } else {
+                    lo.setEnabled(true);
+                }
+
                 return jsonObject.getInt("result");
 
 
@@ -188,7 +196,7 @@ public class Principal extends AppCompatActivity {
             super.onPostExecute(integer);
             midialogo.dismiss();
             if (integer == Common.RESULT_SUCCESS) {
-                Toast.makeText(Principal.this, "Registrado con exito", Toast.LENGTH_LONG).show();
+                Toast.makeText(Principal.this, "Cargados con exito", Toast.LENGTH_LONG).show();
                 /*Intent i = new Intent(getApplicationContext(), Permisos.class);
                 i.putExtra("localizacion", loc);
                 i.putExtra("modificacion", mod);
@@ -199,79 +207,12 @@ public class Principal extends AppCompatActivity {
                 finish();
 */
             } else {
-                Toast.makeText(Principal.this, "Union  fallida", Toast.LENGTH_LONG).show();
+                Toast.makeText(Principal.this, "Cargados sin exito", Toast.LENGTH_LONG).show();
             }
 
         }
     }
- /*   private void locationStart() {
-        LocationManager mlocManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        Localizacion Local = new Localizacion();
-        Local.setMainActivity(this);
-        final boolean gpsEnabled = mlocManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        if (!gpsEnabled) {
-            Intent settingsIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-            startActivity(settingsIntent);
-        }
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION,}, 1000);
-            return;
-        }
-        mlocManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, (LocationListener) Local);
-        mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, (LocationListener) Local);
 
-    }
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        if (requestCode == 1000) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                locationStart();
-                return;
-            }
-        }
-    }
-    /* Aqui empieza la Clase Localizacion */
-    /*public class Localizacion implements LocationListener {
-        Principal mainActivity;
-        public Principal getMainActivity() {
-            return mainActivity;
-        }
-        public void setMainActivity(Principal mainActivity) {
-            this.mainActivity = mainActivity;
-        }
-        @Override
-        public void onLocationChanged(Location loc) {
-            // Este metodo se ejecuta cada vez que el GPS recibe nuevas coordenadas
-            // debido a la deteccion de un cambio de ubicacion
-            longi= String.valueOf(loc.getLatitude());
-            lati= String.valueOf(loc.getLongitude());
-
-
-        }*/
-       /* @Override
-        public void onProviderDisabled(String provider) {
-            // Este metodo se ejecuta cuando el GPS es desactivado
-
-        }
-        @Override
-        public void onProviderEnabled(String provider) {
-            // Este metodo se ejecuta cuando el GPS es activado
-
-        }*/
-       // @Override
-        //public void onStatusChanged(String provider, int status, Bundle extras) {
-         //   switch (status) {
-           //     case LocationProvider.AVAILABLE:
-               //     Log.d("debug", "LocationProvider.AVAILABLE");
-             //       break;
-              //  case LocationProvider.OUT_OF_SERVICE:
-             //       Log.d("debug", "LocationProvider.OUT_OF_SERVICE");
-             //       break;
-             //   case LocationProvider.TEMPORARILY_UNAVAILABLE:
-               //     Log.d("debug", "LocationProvider.TEMPORARILY_UNAVAILABLE");
-              //      break;
-          //  }
-        //}
-  //  }
 }
 
 

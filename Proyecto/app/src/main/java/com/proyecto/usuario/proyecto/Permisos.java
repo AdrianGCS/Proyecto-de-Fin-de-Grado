@@ -128,7 +128,7 @@ public class Permisos extends AppCompatActivity {
             super.onPostExecute(integer);
             midialogo.dismiss();
             if (integer == Common.RESULT_SUCCESS) {
-                Toast.makeText(Permisos.this, "Registrado con exito", Toast.LENGTH_LONG).show();
+                Toast.makeText(Permisos.this, "Guardado  con exito", Toast.LENGTH_LONG).show();
             /*Intent i = new Intent(getApplicationContext(), Datos_Enfermo.class);
                 i.putExtra("nombre", nombre.getText() + "");
                 i.putExtra("apellidos", apellidos.getText() + "");
@@ -140,7 +140,7 @@ public class Permisos extends AppCompatActivity {
                 finish();
 */
             } else {
-                Toast.makeText(Permisos.this, "Union  fallida", Toast.LENGTH_LONG).show();
+                Toast.makeText(Permisos.this, "Guardado sin exito ", Toast.LENGTH_LONG).show();
             }
 
         }
