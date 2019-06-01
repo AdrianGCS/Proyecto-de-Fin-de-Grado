@@ -42,6 +42,7 @@ public class OpcionUser extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+
        Toast.makeText(getApplicationContext(), "No puede ir atras", Toast.LENGTH_LONG).show();
         //startActivity(new Intent(OpcionUser.this, OpcionUser.class));
     }

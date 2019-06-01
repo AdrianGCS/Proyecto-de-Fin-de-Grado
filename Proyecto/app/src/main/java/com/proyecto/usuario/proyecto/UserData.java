@@ -59,8 +59,8 @@ public class UserData extends AppCompatActivity {
                 }
 
 
-                if ("".equals(contra.getText().toString())) {
-                    contra.setError("Mete la contraseña ");
+                if ("".equals(contra.getText().toString()) || contra.getText().length()<6) {
+                    contra.setError("Mete la contraseña o corta");
                     return;
                 }
                 new TaskRegister().execute(ids, nombre.getText().toString(), apellidos.getText().toString(), correo.getText().toString(), contra.getText().toString());
