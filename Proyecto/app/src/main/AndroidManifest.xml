@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.usuario.proyecto">
+    package="com.proyecto.usuario.proyecto">
 
     <meta-data
         android:name="com.google.android.gms.vision.DEPENDENCIES"
@@ -32,77 +32,77 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Localizaciones"></activity>
+        <activity android:name="com.proyecto.usuario.proyecto.Localizaciones"></activity>
 
         <meta-data
             android:name="com.google.android.actions"
             android:resource="@xml/network_security_config" />
 
         <activity
-            android:name=".Intermedia"
+            android:name="com.proyecto.usuario.proyecto.Intermedia"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Calendario"
+            android:name="com.proyecto.usuario.proyecto.Calendario"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Historial"
+            android:name="com.proyecto.usuario.proyecto.Historial"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Permisos"
+            android:name="com.proyecto.usuario.proyecto.Permisos"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".IllData"
+            android:name="com.proyecto.usuario.proyecto.IllData"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".UserData"
+            android:name="com.proyecto.usuario.proyecto.UserData"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".DatosQuien"
+            android:name="com.proyecto.usuario.proyecto.DatosQuien"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".MenuUser"
+            android:name="com.proyecto.usuario.proyecto.MenuUser"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Datos_Enfermo"
+            android:name="com.proyecto.usuario.proyecto.Datos_Enfermo"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".UnirseEnfermo"
+            android:name="com.proyecto.usuario.proyecto.UnirseEnfermo"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".CreacionEnfermo"
+            android:name="com.proyecto.usuario.proyecto.CreacionEnfermo"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".OpcionUser"
+            android:name="com.proyecto.usuario.proyecto.OpcionUser"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Localizacion"
+            android:name="com.proyecto.usuario.proyecto.Localizacion"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Sms"
+            android:name="com.proyecto.usuario.proyecto.Sms"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".LLamar"
+            android:name="com.proyecto.usuario.proyecto.LLamar"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Principal"
+            android:name="com.proyecto.usuario.proyecto.Principal"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Registro"
+            android:name="com.proyecto.usuario.proyecto.Registro"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Login"
+            android:name="com.proyecto.usuario.proyecto.Login"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".EscanerQr"
+            android:name="com.proyecto.usuario.proyecto.EscanerQr"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.proyecto.usuario.proyecto.MainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Condiciones"
+            android:name="com.proyecto.usuario.proyecto.Condiciones"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Splah"
+            android:name="com.proyecto.usuario.proyecto.Splah"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

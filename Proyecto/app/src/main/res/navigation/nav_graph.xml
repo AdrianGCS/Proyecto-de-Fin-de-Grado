@@ -6,7 +6,7 @@
     app:startDestination="@id/splah2">
     <fragment
         android:id="@+id/splah2"
-        android:name="com.example.usuario.proyecto.Splah"
+        android:name="com.proyecto.usuario.proyecto.Splah"
         android:label="activity_splah"
         tools:layout="@layout/activity_splah" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/mainActivity2"
-        android:name="com.example.usuario.proyecto.MainActivity"
+        android:name="com.proyecto.usuario.proyecto.MainActivity"
         android:label="activity_main"
         tools:layout="@layout/activity_main" />
 </navigation>
