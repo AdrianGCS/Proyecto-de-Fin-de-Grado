@@ -127,7 +127,30 @@ public class CreacionEnfermo extends AppCompatActivity {
                 JSONObject jsonObject = new JSONObject(jsonString);
                 a = jsonObject.getString("Encriptado");
                 codigo = jsonObject.getString("codigo");
-               // id_enfermo = jsonObject.getString("id");
+
+                id_enfermo = jsonObject.getString("idEnfermo");
+                postParam.put("id_enfermo", id_enfermo);
+                postParam.put("qr", codigo);
+                JSONObject jsonObjects;
+                int Resultado=1;
+                do {
+                    postParam.put("action", "validarQr");
+                    String jsonStrings = miser.getJSONStringWithParam_POST(Common.SERVICE_API_URL, postParam);
+                    jsonObjects = new JSONObject(jsonStrings);
+                    Resultado=jsonObjects.getInt("result");
+
+                    if (Resultado==1){
+                        postParam.put("action", "QR");
+
+                        String json = miser.getJSONStringWithParam_POST(Common.SERVICE_API_URL, postParam);
+                        JSONObject jsonOb = new JSONObject(json);
+                        a = jsonOb.getString("Qr");
+                        postParam.put("qr", a);
+
+                    }
+
+                }while (Resultado!=0);
+
 
                 if (!a.equals("8")) {
                     darle(a);
