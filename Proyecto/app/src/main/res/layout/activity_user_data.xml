@@ -75,7 +75,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.341" />
+        app:layout_constraintVertical_bias="0.377" />
 
     <EditText
         android:id="@+id/apellidos"
@@ -102,7 +102,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.427" />
+        app:layout_constraintVertical_bias="0.48" />
 
     <TextView
         android:id="@+id/correo"
@@ -122,6 +122,7 @@
         android:selectAllOnFocus="true"
         android:textColor="@color/common_google_signin_btn_text_dark_pressed"
         android:textColorHint="#000"
+        android:textSize="14sp"
         android:textStyle="bold"
         android:typeface="normal"
         android:visibility="visible"
@@ -129,7 +130,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.523" />
+        app:layout_constraintVertical_bias="0.584" />
 
     <EditText
         android:id="@+id/contaseña"
@@ -155,8 +156,7 @@
         app:layout_constraintHorizontal_bias="0.512"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.618" />
-
+        app:layout_constraintVertical_bias="0.693" />
 
 
     <ImageView
@@ -174,7 +174,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.034"
+        app:layout_constraintVertical_bias="0.075"
         app:srcCompat="@drawable/a" />
 
 

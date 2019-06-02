@@ -192,12 +192,11 @@ public class IllData extends AppCompatActivity {
         protected void onPostExecute(Integer integer) {
             super.onPostExecute(integer);
             dialogo.dismiss();
-            if (editar.equals("0")){
+            if (editar.equals("0") || editar.equals("null")){
                 nombre.setEnabled(false);
                 apellidos.setEnabled(false);
                 direccion.setEnabled(false);
                 telefono.setEnabled(false);
-                codun.setEnabled(false);
                 c.setEnabled(false);
                 boto.setEnabled(false);
             }
@@ -206,7 +205,6 @@ public class IllData extends AppCompatActivity {
                 apellidos.setEnabled(true);
                 direccion.setEnabled(true);
                 telefono.setEnabled(true);
-                codun.setEnabled(true);
                 c.setEnabled(true);
                 boto.setEnabled(true);
             }
