@@ -100,12 +100,12 @@ public class Principal extends AppCompatActivity {
         calle=getIntent().getStringExtra("calle");
         longitud=getIntent().getStringExtra("longitd");
         latitud=getIntent().getStringExtra("latitud");*/
-        if ("".equals(direccion) || direccion == null) {
+        /*if ("".equals(direccion) || direccion == null) {
 
             lo.setEnabled(false);
         } else {
             lo.setEnabled(true);
-        }
+        }*/
         hy.setText(ids);
         phon.setText(telefono);
         u.setText(imei);
@@ -173,7 +173,7 @@ public class Principal extends AppCompatActivity {
                 } else {
                     lo.setEnabled(true);
                 }
-                if ("".equals(direccion) || direccion == null) {
+                if ("".equals(direccion) || direccion == null || loc.equals("0")) {
                     lo.setEnabled(false);
                 } else {
                     lo.setEnabled(true);
