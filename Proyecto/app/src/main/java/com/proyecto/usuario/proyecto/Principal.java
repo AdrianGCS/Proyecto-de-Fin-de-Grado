@@ -168,16 +168,6 @@ public class Principal extends AppCompatActivity {
                 loc = a.getString("Localizacion");
 
                 mod = a.getString("Modificacion");
-                if (loc.equals("0")){
-                    lo.setEnabled(false);
-                } else {
-                    lo.setEnabled(true);
-                }
-                if ("".equals(direccion) || direccion == null || loc.equals("0")) {
-                    lo.setEnabled(false);
-                } else {
-                    lo.setEnabled(true);
-                }
 
                 return jsonObject.getInt("result");
 
@@ -197,15 +187,16 @@ public class Principal extends AppCompatActivity {
             midialogo.dismiss();
             if (integer == Common.RESULT_SUCCESS) {
                 Toast.makeText(Principal.this, "Cargados con exito", Toast.LENGTH_LONG).show();
-                /*Intent i = new Intent(getApplicationContext(), Permisos.class);
-                i.putExtra("localizacion", loc);
-                i.putExtra("modificacion", mod);
-                i.putExtra("iduser", ids);
-                setResult(1, i);
-                startActivity(i);
-
-                finish();
-*/
+                if (loc.equals("0")){
+                    lo.setEnabled(false);
+                } else {
+                    lo.setEnabled(true);
+                }
+                if ("".equals(direccion) || direccion == null || loc.equals("0")) {
+                    lo.setEnabled(false);
+                } else {
+                    lo.setEnabled(true);
+                }
             } else {
                 Toast.makeText(Principal.this, "Cargados sin exito", Toast.LENGTH_LONG).show();
             }
