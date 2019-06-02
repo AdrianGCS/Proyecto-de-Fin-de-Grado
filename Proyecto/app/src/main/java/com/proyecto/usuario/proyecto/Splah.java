@@ -39,7 +39,7 @@ public class Splah extends AppCompatActivity {
             }
         }
 
-        ,2000);
+        ,500);
     }
 
     }
