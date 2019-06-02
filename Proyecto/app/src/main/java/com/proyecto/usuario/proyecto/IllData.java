@@ -18,6 +18,7 @@ import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -29,6 +30,7 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -41,10 +43,13 @@ import java.util.Locale;
 import java.util.Map;
 
 public class IllData extends AppCompatActivity {
-    public static String use, nom, ape, dir, tel, enfermo, cdu, qr;
+    public static String use, nom, ape, dir, tel, enfermo, cdu, qr , editar;
     EditText n, nombre, apellidos, telefono, direccion;
     private AccessServiceAPI miservicio;
     private ProgressDialog dialogo;
+    public static JSONArray a;
+    public static JSONObject b;
+    private Button boto;
     TextView codun;
     ImageView c;
     public static Bitmap bitmap;
@@ -59,6 +64,7 @@ public class IllData extends AppCompatActivity {
         telefono = findViewById(R.id.telefono2);
         codun = findViewById(R.id.codigo);
         c = findViewById(R.id.qr_enfermo);
+        boto = findViewById(R.id.guardar);
         miservicio = new AccessServiceAPI();
 
         coger();
@@ -160,6 +166,16 @@ public class IllData extends AppCompatActivity {
                 cdu = jsonObjectQR.getString("Union");
                 qr = jsonObjectQR.getString("Qr");
 
+                postParam.put("usuario", use);
+                postParam.put("action", "perEnfermo");
+
+                String jsonString = miservicio.getJSONStringWithParam_POST(Common.SERVICE_API_URL, postParam);
+                JSONObject jsonObjectD = new JSONObject(jsonString);
+
+                editar = jsonObjectD.getString("Modificacion");
+
+
+
                 if (params[5].contains("1")) {
                     return jsonObject.getInt("result");
                 } else {
@@ -176,6 +192,24 @@ public class IllData extends AppCompatActivity {
         protected void onPostExecute(Integer integer) {
             super.onPostExecute(integer);
             dialogo.dismiss();
+            if (editar.equals("0")){
+                nombre.setEnabled(false);
+                apellidos.setEnabled(false);
+                direccion.setEnabled(false);
+                telefono.setEnabled(false);
+                codun.setEnabled(false);
+                c.setEnabled(false);
+                boto.setEnabled(false);
+            }
+            else {
+                nombre.setEnabled(true);
+                apellidos.setEnabled(true);
+                direccion.setEnabled(true);
+                telefono.setEnabled(true);
+                codun.setEnabled(true);
+                c.setEnabled(true);
+                boto.setEnabled(true);
+            }
             if (integer == Common.RESULT_SUCCESS) {
                 Toast.makeText(IllData.this, "Guardado con exito", Toast.LENGTH_LONG).show();
                 // Intent i = new Intent(getApplicationContext(), IllData.class);
@@ -186,6 +220,7 @@ public class IllData extends AppCompatActivity {
                 // setResult(1, i);
                 // startActivity(i);
                 // finish();
+
                 codun.setText(cdu);
                 QR(qr);
                 c.setImageBitmap(bitmap);

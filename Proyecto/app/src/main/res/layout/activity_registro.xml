@@ -42,8 +42,8 @@
 
     <EditText
         android:id="@+id/nombre"
-        android:layout_width="225dp"
-        android:layout_height="39dp"
+        android:layout_width="235dp"
+        android:layout_height="38dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -123,8 +123,8 @@
     <EditText
         android:id="@+id/contaseña"
         style="@style/Widget.AppCompat.EditText"
-        android:layout_width="225dp"
-        android:layout_height="39dp"
+        android:layout_width="235dp"
+        android:layout_height="41dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -149,8 +149,8 @@
     <EditText
         android:id="@+id/confirmacontraseña"
         style="@style/Widget.AppCompat.EditText"
-        android:layout_width="225dp"
-        android:layout_height="39dp"
+        android:layout_width="232dp"
+        android:layout_height="44dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
